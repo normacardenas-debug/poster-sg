@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller: Cómo diseñar un póster académico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;700&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
+<style>
+  :root{
+    --azul:#0055B7;--azul-osc:#003d85;--azul-claro:#e9f2fb;--celeste:#8FC6E8;
+    --morado:#9F26B4;--morado-claro:#f6ebf8;--verde:#3FAE29;--verde-texto:#2E7D1F;--verde-claro:#eafbe6;
+    --rojo:#b0392b;--rojo-claro:#fdeeee;--ambar-texto:#7a5d12;--ambar-claro:#fff8e6;
+    --tinta:#0d1b2a;--texto:#1a232b;--texto-2:#3a4551;--texto-3:#55606b;--borde:#e2e6ea;--fondo-alt:#f9fafb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:'Open Sans',sans-serif;color:var(--texto);line-height:1.6;overflow-x:hidden}
+  a{color:var(--azul)}
+  h1,h2,h3,h4{font-family:'Roboto Condensed',sans-serif;margin:0;line-height:1.15;color:var(--tinta)}
+  button{font-family:inherit}
+  html{scroll-behavior:smooth}
+  :focus-visible{outline:3px solid var(--azul);outline-offset:2px}
+  .skip-link{position:absolute;left:-999px;top:0;background:var(--azul);color:#fff;padding:10px 18px;z-index:200;border-radius:0 0 6px 0}
+  .skip-link:focus{left:0}
+  section[id]{scroll-margin-top:70px}
+  main > section{padding:64px clamp(20px,6vw,56px)}
+  main > section > div{width:min(100%,1080px);margin:0 auto}
+  .alt{background:var(--fondo-alt)}
+  .eyebrow{display:inline-block;font:700 12px 'Open Sans',sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:6px 12px;border-radius:20px;margin-bottom:18px}
+  .ey-ambar{background:#fff;color:var(--ambar-texto);border:1px solid #f0dca6}
+  .ey-azul{background:var(--azul-claro);color:var(--azul)}
+  .ey-morado{background:var(--morado-claro);color:var(--morado)}
+  .ey-verde{background:var(--verde-claro);color:var(--verde-texto)}
+  .h2{font-size:clamp(26px,3.2vw,36px);margin-bottom:10px}
+  .h3{font-size:20px;margin:0 0 8px}
+  .lead{font-size:17px;line-height:1.7;color:var(--texto-3);margin:0 0 26px}
+  .card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 22px}
+  .card p{font-size:16px;line-height:1.65;color:var(--texto-2);margin:0}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
+  .small{font-size:14px;color:var(--texto-3)}
+  .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* Botones */
+  .primary-btn{cursor:pointer;border:none;background:var(--azul);color:#fff;font:700 14px 'Open Sans',sans-serif;padding:12px 20px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;min-height:44px}
+  .primary-btn:hover{background:var(--azul-osc)}
+  .sec-btn{cursor:pointer;border:1.5px solid var(--azul);background:#fff;color:var(--azul);font:700 14px 'Open Sans',sans-serif;padding:11px 18px;border-radius:8px;min-height:44px}
+  .sec-btn:hover{background:var(--azul-claro)}
+  .sec-btn[aria-pressed="true"]{background:var(--azul-claro)}
+  .ghost-btn{cursor:pointer;border:1.5px dashed #b7c2cc;background:transparent;color:var(--texto-3);font:700 13px 'Open Sans',sans-serif;padding:11px 18px;border-radius:8px;min-height:44px}
+  .ghost-btn:hover{border-color:var(--azul);color:var(--azul)}
+  .del-btn{cursor:pointer;border:none;background:transparent;color:var(--rojo);font:600 13px 'Open Sans',sans-serif;padding:8px 10px;border-radius:6px;min-height:44px}
+  .del-btn:hover{background:var(--rojo-claro)}
+
+  /* Navegación */
+  .nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--borde);box-shadow:0 2px 8px rgba(0,0,0,.04)}
+  .nav-row{display:flex;gap:4px;overflow-x:auto;padding:0 clamp(20px,6vw,56px)}
+  .navLink{flex:none;padding:14px 13px;font:600 13.5px 'Open Sans',sans-serif;color:var(--texto);text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap}
+  .navLink:hover{color:var(--azul)}
+  .navLink[aria-current="true"]{color:var(--azul);border-bottom-color:var(--azul)}
+
+  /* Tabla */
+  .tabla{width:100%;border-collapse:collapse;font-size:15px}
+  .tabla th{background:var(--tinta);color:#fff;text-align:left;padding:11px 14px;font:700 13.5px 'Open Sans',sans-serif;vertical-align:top}
+  .tabla td{padding:11px 14px;border-top:1px solid #eef1f4;vertical-align:top;line-height:1.55;color:var(--texto-2);background:#fff}
+  .scroll-x{overflow-x:auto;border-radius:10px;border:1px solid var(--borde)}
+  .lista-simple{margin:0;padding-left:20px;font-size:16px;line-height:1.7;color:var(--texto-2)}
+  .lista-simple li{margin-bottom:6px}
+
+  /* El póster en cifras */
+  .cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px}
+  .antes-grid{grid-template-columns:1fr}
+  .antes-grid .lista-simple{columns:2 300px;column-gap:36px}
+  .antes-grid .lista-simple li{break-inside:avoid}
+  .antes-grid .cifras{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:12px}
+  @media(min-width:600px){.antes-grid .cifras{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media(min-width:1000px){.antes-grid .cifras{grid-template-columns:repeat(6,minmax(0,1fr))}}
+  .antes-grid .cifra{background:var(--fondo-alt)}
+  .cifra{background:#fff;border:1px solid var(--borde);border-bottom:4px solid var(--azul);border-radius:10px;padding:16px 16px 14px;text-align:center}
+  .cifra .n{display:block;font:700 34px/1.05 'Roboto Condensed',sans-serif;color:var(--azul);margin-bottom:6px}
+  .cifra .d{font-size:14.5px;line-height:1.45;color:var(--texto-2)}
+
+  /* Video */
+  .video{position:relative;aspect-ratio:16/9;width:100%;border-radius:10px;overflow:hidden;background:var(--tinta)}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-facade{position:absolute;inset:0;display:block;color:#fff;text-decoration:none}
+  .video-facade img{width:100%;height:100%;object-fit:cover;display:block}
+  .video-facade .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;gap:10px;background:rgba(13,27,42,.88);color:#fff;font:700 15px 'Open Sans',sans-serif;padding:12px 18px;border-radius:30px;white-space:nowrap}
+  .video-facade:hover .play,.video-facade:focus-visible .play{background:var(--azul)}
+
+  /* Estructura */
+  .pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-bottom:24px}
+  .paso{border-radius:12px;padding:22px 24px;background:#fff;border:1px solid var(--borde);border-top:5px solid var(--c);display:flex;flex-direction:column}
+  .paso .num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--c);color:#fff;font:700 15px 'Roboto Condensed',sans-serif;margin-bottom:12px}
+  .paso h3{font-size:19px;margin-bottom:6px;color:var(--c)}
+  .paso .sale{font:600 13px 'Open Sans',sans-serif;color:var(--texto-3);margin:0 0 10px}
+  .paso > p{font-size:15.5px;line-height:1.6;color:var(--texto-2);margin:0 0 12px}
+  .paso details{margin-top:auto;border-top:1px solid var(--borde);padding-top:10px}
+  .paso summary{cursor:pointer;font:700 13.5px 'Open Sans',sans-serif;color:var(--azul);min-height:44px;display:flex;align-items:center}
+  .vanova{font-size:14.5px;line-height:1.55;color:var(--texto-2);margin:6px 0 0}
+  .vanova strong{display:block;margin:8px 0 4px;color:var(--tinta)}
+  .vanova ul{margin:0;padding-left:18px}
+  .vanova li{margin-bottom:4px}
+  .aviso{display:flex;gap:14px;align-items:flex-start;background:var(--azul-claro);border-left:5px solid var(--azul);border-radius:0 10px 10px 0;padding:18px 20px}
+  .aviso p{margin:0;font-size:16px;line-height:1.65;color:var(--tinta)}
+  .pasos-qr{margin:0;padding-left:22px;font-size:15.5px;line-height:1.7;color:var(--texto-2)}
+  .pasos-qr li{margin-bottom:8px}
+
+  /* Esquemas del póster */
+  .esp-grid{display:grid;gap:24px;grid-template-columns:1fr;align-items:start;margin-bottom:28px}
+  @media(min-width:900px){.esp-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}}
+  .esp-grid h3{font-size:18px;margin:0 0 10px;text-align:center}
+  .mock{border:2px solid var(--tinta);border-radius:6px;background:#fff;padding:10px;display:grid;gap:8px;margin:0 auto}
+  .mock.v{max-width:440px}
+  .mock .cab{display:flex;gap:8px;align-items:stretch}
+  .mock .blq{min-width:0;overflow-wrap:break-word;hyphens:auto;border-radius:6px;padding:9px 10px;font:600 13.5px/1.35 'Open Sans',sans-serif;color:var(--tinta);display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+  .mock .t{flex-direction:row;align-items:center}
+  .mock .blq b{flex:none;display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--tinta);color:#fff;font:700 12.5px 'Roboto Condensed',sans-serif}
+  .mock .t{background:var(--azul);color:#fff;flex:1;min-height:64px}
+  .mock .t b{background:#fff;color:var(--azul)}
+  .mock .logo{background:#f4f6f8;border:1px dashed #8a96a3;width:30%;font-weight:400;font-size:13px;color:var(--texto-2);align-items:center;justify-content:center;text-align:center}
+  .mock .cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .mock.h .cols{grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr)}
+  .mock .col{display:grid;gap:8px;align-content:start;min-width:0}
+  .mock .s{background:var(--azul-claro);min-height:96px}
+  .mock.v .s{min-height:130px}
+  .mock .r{background:var(--morado-claro);flex-direction:column;min-height:200px}
+  .mock.v .r{min-height:268px}
+  .mock .figs{display:grid;gap:8px;width:100%;flex:1}
+  .mock.h .figs{grid-template-columns:1fr 1fr}
+  .mock .fig{border:1px dashed var(--morado);border-radius:4px;display:flex;align-items:center;justify-content:center;text-align:center;font:400 12.5px/1.3 'Open Sans',sans-serif;color:var(--texto-2);min-height:70px;padding:4px}
+  .mock .d{background:var(--morado-claro);min-height:80px}
+  .mock.v .d{min-height:110px}
+  .mock .c{background:var(--verde-claro);min-height:80px}
+  .mock.v .c{min-height:100px}
+  .mock .qr{background:#f4f6f8;min-height:70px;font-weight:400}
+  @media(max-width:520px){.mock .blq{font-size:12px;padding:7px} .mock .blq b{width:20px;height:20px}}
+
+  /* Muestras de tipografía */
+  .fuentes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 14px}
+  @media(min-width:820px){.fuentes{grid-template-columns:repeat(4,minmax(0,1fr))}}
+  @media(max-width:400px){.fuente-m .ej{font-size:20px}}
+  .fuente-m{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:14px 16px}
+  .fuente-m .nom{display:block;font:700 13px 'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:.04em;color:var(--texto-3);margin-bottom:6px}
+  .fuente-m .ej{display:block;font-size:24px;line-height:1.25;color:var(--tinta)}
+
+  /* Plegables */
+  details.plegable{background:#fff;border:1px dashed #b6c6d6;border-radius:10px;padding:0 18px;margin:16px 0}
+  details.plegable > summary{cursor:pointer;padding:14px 0;font:700 14px 'Open Sans',sans-serif;color:var(--azul);min-height:44px}
+  details.plegable[open]{padding-bottom:16px}
+
+  /* Criterios de accesibilidad */
+  .crit{background:#fff;border:1px solid var(--borde);border-left:5px solid var(--azul);border-radius:0 10px 10px 0;padding:16px 18px}
+  .crit h3{font-size:17.5px;margin:0 0 6px}
+  .crit p{font-size:15px;line-height:1.6;color:var(--texto-2);margin:0 0 6px}
+  .crit .fuente{font-size:13px;color:var(--texto-3);margin:6px 0 0}
+
+  /* Verificador de contraste */
+  .contraste{display:grid;gap:18px;grid-template-columns:1fr}
+  @media(min-width:820px){.contraste{grid-template-columns:1fr 1fr}}
+  .color-campo{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .color-campo label{font:700 13px 'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:.04em;color:var(--tinta);width:100%}
+  .color-campo input[type=color]{width:52px;height:44px;border:1.5px solid #d7dee5;border-radius:8px;padding:2px;background:#fff;cursor:pointer}
+  .color-campo input[type=text]{width:130px;border-radius:8px;border:1.5px solid #d7dee5;padding:10px 12px;font:15px 'Open Sans',sans-serif;min-height:44px}
+  .muestra{border-radius:10px;padding:22px;border:1px solid var(--borde)}
+  .card .muestra p{color:inherit}
+  .card .muestra .m-t{font:700 30px/1.15 'Roboto Condensed',sans-serif;margin:0 0 8px}
+  .card .muestra .m-c{font-size:16px;line-height:1.6;margin:0}
+  .card .ratio{font:700 34px 'Roboto Condensed',sans-serif;color:var(--tinta);margin:0}
+  .veredicto{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+  .veredicto li{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.5;padding:10px 12px;border-radius:8px}
+  .veredicto li.ok{background:var(--verde-claro)} .veredicto li.no{background:var(--rojo-claro)}
+  .veredicto .ic{font-weight:700;flex:none}
+  .presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+
+  /* Quiz */
+  .quiz-prog{margin:0 0 8px;font-weight:600}
+  .quiz-p:focus{outline:none}
+  .quiz{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 22px;margin-bottom:14px}
+  .quiz-p{font:700 16px 'Roboto Condensed',sans-serif;color:var(--tinta);margin:0 0 12px;line-height:1.4}
+  .quiz-ops{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
+  .opcion{min-height:44px;padding:11px 14px;border-radius:8px;font:600 14px 'Open Sans',sans-serif;cursor:pointer;text-align:left;background:#fff;border:1.5px solid #d7dee5;color:var(--texto)}
+  .opcion:hover{border-color:var(--azul)}
+  .opcion[aria-pressed="true"].ok{border-color:var(--verde-texto);background:var(--verde-claro)}
+  .opcion[aria-pressed="true"].no{border-color:var(--rojo);background:var(--rojo-claro)}
+  .fb{margin-top:14px;padding:14px 16px;border-radius:8px;font-size:14.5px;line-height:1.6;color:var(--texto-2)}
+  .fb:empty{display:none}
+  .fb.ok{background:var(--verde-claro)} .fb.no{background:var(--ambar-claro)}
+  .fb strong{display:block;margin-bottom:2px;color:var(--tinta)}
+
+  /* Plantilla */
+  .tpl{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px 24px;margin-bottom:18px;border-left:5px solid var(--c)}
+  .tpl-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .tpl-head h3{font-size:20px;color:var(--c)}
+  .tpl-fuente{font-size:14px;color:var(--texto-3);margin:0 0 16px}
+  .sub{background:var(--fondo-alt);border:1px solid var(--borde);border-radius:10px;padding:16px 18px;margin-bottom:12px}
+  .sub-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .sub-head h4{font-size:16px;color:var(--tinta)}
+  .campo{margin-bottom:16px}
+  .campo > label,.campo > legend{display:block;font:700 13px 'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;color:var(--tinta);padding:0}
+  .campo .ayuda{font-size:14px;color:var(--texto-3);margin:0 0 8px}
+  .campo textarea,.campo input[type=text],.campo select{width:100%;border-radius:8px;border:1.5px solid #d7dee5;padding:12px 14px;font:15px/1.55 'Open Sans',sans-serif;color:var(--texto);background:#fff}
+  .campo select{min-height:48px}
+  .campo textarea{min-height:96px;resize:vertical}
+  .campo textarea:focus,.campo input[type=text]:focus,.campo select:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 3px rgba(0,85,183,.18)}
+  fieldset.campo{border:0;margin:0 0 16px;padding:0;min-width:0}
+  .grid-campos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:0 16px}
+  .logro{display:flex;gap:8px;flex-wrap:wrap}
+  .logro label{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1.5px solid #d7dee5;border-radius:8px;cursor:pointer;font-size:14.5px}
+  .logro input{width:18px;height:18px;accent-color:var(--azul)}
+  .logro label:has(input:checked){border-color:var(--azul);background:var(--azul-claro);font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chipBtn{cursor:pointer;border:1px solid #c9d3db;background:#f4f6f8;color:var(--texto-2);font:600 13px 'Open Sans',sans-serif;padding:8px 12px;border-radius:14px;text-align:left;min-height:36px}
+  .chipBtn:hover{background:var(--azul-claro);border-color:var(--azul);color:var(--azul)}
+  .contador{font-size:13px;color:var(--texto-3);margin:6px 0 0}
+  .senales{background:var(--ambar-claro);border:1px solid #f0dca6;border-radius:8px;padding:14px 18px;margin-top:12px;font-size:14.5px;line-height:1.6;color:var(--tinta)}
+  .senales ul{margin:6px 0 0;padding-left:18px}
+  .nota{font-size:14px;color:var(--texto-3)}
+  .acciones{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+  .aviso-guardado{background:var(--ambar-claro);border:1px solid #f0dca6;border-radius:10px;padding:14px 18px;font-size:15px;line-height:1.6;color:var(--tinta);margin:0 0 22px}
+
+  /* Vista previa del póster */
+  .pp-wrap{margin-top:16px}
+  .pp{background:#fff;border:2px solid var(--tinta);border-radius:6px;overflow:hidden;margin:0 auto;font-size:13px;line-height:1.5;color:var(--texto)}
+  .pp.v{max-width:760px} .pp.h{max-width:1000px}
+  .pp.gris{filter:grayscale(1)}
+  .pp-cab{background:var(--azul);color:#fff;padding:16px 18px;display:flex;gap:12px;align-items:flex-start;justify-content:space-between}
+  .pp-cab h3{color:#fff;font-size:22px;line-height:1.15;margin:0 0 6px}
+  .pp-cab img{flex:none;width:110px;height:auto}
+  .pp-cuerpo{display:grid;gap:14px;padding:16px 18px;grid-template-columns:1fr}
+  @media(min-width:640px){.pp-cuerpo.v{grid-template-columns:repeat(3,minmax(0,1fr))} .pp-cuerpo.h{grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr)} .pp-cuerpo.h .pp-figs{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}}
+  .pp-col{display:grid;gap:14px;align-content:start;min-width:0}
+  .pp-sec h4{font:700 15px 'Roboto Condensed',sans-serif;color:var(--azul);border-bottom:2px solid var(--azul);padding-bottom:3px;margin:0 0 6px}
+  .pp-sec ol{margin:0;padding-left:18px}
+  .pp-fig{border:1px dashed #8a96a3;background:#f4f6f8;border-radius:4px;padding:18px 10px;margin:6px 0 0;font-size:12.5px;color:var(--texto-2);text-align:center;font-weight:700}
+  .pp-vacio{color:var(--texto-3);font-style:italic}
+  .pp-qr{display:flex;gap:10px;align-items:center}
+  .pp-qr .cuadro{flex:none;width:56px;height:56px;border:2px solid var(--tinta);border-radius:3px;display:flex;align-items:center;justify-content:center;font:700 12px 'Open Sans',sans-serif}
+  /* La vista previa vive dentro de .card: estas reglas evitan que herede el tamaño y color de .card p */
+  .card .pp-cab p{font-size:13px;color:#e9f2fb;margin:0}
+  .card .pp-sec p{font-size:13px;line-height:1.5;color:var(--texto);margin:0 0 6px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .card .pp p.pp-cap{font-size:12px;color:var(--texto-2);margin:4px 0 8px}
+  .card .pp-qr p{font-size:12.5px;line-height:1.4;color:var(--texto);margin:0}
+  .extension{margin-top:14px}
+  .extension td,.extension th{font-size:14px}
+
+  /* Errores y lista */
+  .errores{display:grid;grid-template-columns:1fr;gap:14px;align-items:start}
+  @media(min-width:600px){.errores{grid-template-columns:repeat(2,1fr)} .errores .err:last-child:nth-child(odd){grid-column:1 / -1}}
+  @media(min-width:960px){.errores{grid-template-columns:repeat(4,1fr)} .errores .err:last-child:nth-child(odd){grid-column:auto}}
+  .err{background:#fff;border:1px solid var(--borde);border-top:4px solid var(--rojo);border-radius:10px;padding:16px 18px}
+  .err .n{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--rojo-claro);color:var(--rojo);align-items:center;justify-content:center;font:700 13px 'Roboto Condensed',sans-serif;margin-bottom:8px}
+  .err h3{font-size:17px;margin:0 0 8px}
+  .err .mal{font-size:14.5px;line-height:1.55;color:var(--texto-2);font-style:italic;margin:0}
+  .err summary{cursor:pointer;font:700 13.5px 'Open Sans',sans-serif;color:var(--azul);min-height:44px;display:flex;align-items:center;margin-top:6px}
+  .err .bien{font-size:14.5px;line-height:1.6;color:var(--texto-2);margin:0;background:var(--verde-claro);border-radius:8px;padding:10px 12px}
+  .check{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--borde);border-radius:10px;padding:14px 16px;cursor:pointer;min-height:44px;font-size:15.5px;line-height:1.5;color:var(--texto-2)}
+  .check input{width:19px;height:19px;flex:none;margin-top:2px;accent-color:var(--verde-texto)}
+  .check:has(input:checked){border-color:var(--verde-texto);background:var(--verde-claro)}
+  .refs p{font-size:14.5px;line-height:1.6;color:var(--texto-2);margin:0 0 10px;padding-left:28px;text-indent:-28px;overflow-wrap:anywhere}
+
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  @media print{.nav,.acciones,.chips,.del-btn,.ghost-btn,.skip-link,.video,#contrasteCard{display:none!important} details.plegable{border:0} main > section{padding:24px 0}}
+</style>
+</head>
+<body>
+
+<a href="#contenido-principal" class="skip-link">Saltar al contenido principal</a>
+
+<header style="background:var(--azul);color:#fff;padding:42px clamp(20px,6vw,56px) 34px;display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+  <div style="flex:1;min-width:260px">
+    <p style="margin:0 0 6px;font:600 12px/1.4 'Open Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#cfe4f6">Seminario de Grado · SEM2-2026</p>
+    <h1 style="font-size:clamp(32px,5vw,52px);line-height:1.05;color:#fff">Póster académico</h1>
+    <p style="margin:12px 0 0;font-size:18px;line-height:1.5;color:#fff">Recurso para presentar tu investigación en un póster claro, legible y accesible.</p>
+    <p style="margin:10px 0 0;font-size:16px;line-height:1.5;color:#e9f2fb">Carreras Pedagógicas · ULagos</p>
+  </div>
+  <img src="logoula.png" alt="Universidad de Los Lagos" width="220" height="96" style="flex:none;width:min(220px,60vw);height:auto">
+</header>
+
+<nav class="nav" aria-label="Fases del taller">
+  <div class="nav-row" id="navRow"></div>
+</nav>
+
+<main id="contenido-principal">
+
+<!-- FASE 1 · ACTIVA -->
+<section id="antes" style="background:var(--ambar-claro)">
+  <div>
+    <span class="eyebrow ey-ambar">Fase 1 · Activa lo que sabes</span>
+    <h2 class="h2">Un póster no es el informe en tamaño grande</h2>
+    <p class="lead">El póster académico comunica una investigación terminada combinando texto breve con gráficos, tablas, diagramas e imágenes. Se diseña para que alguien que pasa frente a él entienda en pocos minutos qué estudiaste, cómo lo hiciste y qué encontraste, y para que luego converse contigo. Por eso no se escribe desde cero: sale de tus informes, pero seleccionando y resumiendo.</p>
+    <div class="grid2 antes-grid">
+      <div class="card">
+        <h3 class="h3">Lo que necesitas tener a mano</h3>
+        <ul class="lista-simple">
+          <li><strong>Tu pregunta de investigación y tus objetivos</strong>, en su versión final.</li>
+          <li><strong>Tu capítulo metodológico</strong>: enfoque, participantes, instrumento y forma de análisis.</li>
+          <li><strong>Tus resultados</strong>, con las tablas, gráficos o citas que mejor muestran cada categoría o dimensión.</li>
+          <li><strong>Tu discusión</strong>, con los autores que usaste para interpretar tus resultados.</li>
+          <li><strong>Tus conclusiones</strong> y las referencias que vas a citar en el póster.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="h3">El póster en cifras</h3>
+        <div class="cifras">
+          <div class="cifra"><span class="n">10 min</span><span class="d">o menos para recorrerlo completo</span></div>
+          <div class="cifra"><span class="n">2 a 3 m</span><span class="d">distancia desde la que se lee el título</span></div>
+          <div class="cifra"><span class="n">300 a 800</span><span class="d">palabras en total</span></div>
+          <div class="cifra"><span class="n">15</span><span class="d">palabras como máximo en el título</span></div>
+          <div class="cifra"><span class="n">40 a 50&nbsp;%</span><span class="d">del espacio para gráficos, tablas e imágenes</span></div>
+          <div class="cifra"><span class="n">1</span><span class="d">pregunta de investigación, bien destacada</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="video" style="background:var(--ambar-claro);padding-top:0">
+  <div>
+    <h2 class="h2">Mira el video y responde</h2>
+    <p class="lead">Dura cuatro minutos y explica qué textos lleva un póster, cuánto espacio dar a cada cosa y cómo cuidar el color, las imágenes y los gráficos. Tiene subtítulos que puedes activar en el reproductor. Después responde las preguntas: si te equivocas, recibes una pista y puedes intentarlo otra vez.</p>
+    <div class="grid2" style="align-items:start">
+      <div>
+        <div class="video" id="videoBox">
+          <a class="video-facade" id="videoLink" href="https://www.youtube.com/watch?v=xDfs3BFK7_k" target="_blank" rel="noopener">
+            <img src="https://i.ytimg.com/vi/xDfs3BFK7_k/hqdefault.jpg" alt="" width="480" height="360" loading="lazy">
+            <span class="play"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Reproducir video (4 min)</span>
+            <span class="visually-hidden"> Cómo hacer un póster científico, de Bibliotecas USIL</span>
+          </a>
+        </div>
+        <p class="small" style="margin:8px 0 0">Bibliotecas USIL (2020). <a href="https://www.youtube.com/watch?v=xDfs3BFK7_k" target="_blank" rel="noopener">Abrir el video en YouTube<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>.</p>
+      </div>
+      <div id="quizVideo"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 2 · MODELO -->
+<section id="estructura">
+  <div>
+    <span class="eyebrow ey-azul">Fase 2 · El modelo</span>
+    <h2 class="h2">Las partes de un póster científico</h2>
+    <p class="lead">Cada parte de un póster se desprende de lo que ya has escrito en tus informes. Abre cada tarjeta para ver más detalles.</p>
+    <div class="pasos" id="pasos"></div>
+    <details class="plegable">
+      <summary>Paso a paso: crea el QR de tus referencias</summary>
+      <ol class="pasos-qr">
+        <li>Crea un documento en Google Drive con el título de tu póster, todas las referencias que citaste en APA 7 y, si quieres, tus agradecimientos.</li>
+        <li>Presiona <strong>Compartir</strong> y, en "Acceso general", elige <strong>Cualquier persona con el enlace</strong> como lector. Copia el enlace.</li>
+        <li>Pega el enlace en <a href="https://www.qrcode-monkey.com/es/" target="_blank" rel="noopener">QR Code Monkey<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>, un generador gratuito de códigos QR, y descarga la imagen en PNG. No le cambies los colores ni le agregues un logo al centro: en negro sobre blanco se escanea mejor.</li>
+        <li>Inserta el QR en el póster en negro sobre blanco, de al menos 5 × 5 cm, con un texto que diga qué abre, por ejemplo "Escanea para ver las referencias".</li>
+        <li>Antes de imprimir, escanéalo con el celular de otra persona para comprobar que el documento se abre.</li>
+      </ol>
+    </details>
+    <div class="aviso">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <p><strong>Antes de diseñar, responde tres preguntas.</strong> ¿Cuál es el hallazgo más importante de tu investigación? ¿Qué gráfico, tabla o diagrama lo muestra mejor? ¿Qué vas a contar en voz alta que no necesita estar escrito en el póster? Lo que respondas en la primera pregunta debe verse desde lejos.</p>
+    </div>
+  </div>
+</section>
+
+<section id="diseno" class="alt">
+  <div>
+    <span class="eyebrow ey-azul">Fase 2 · El modelo</span>
+    <h2 class="h2">Cómo se organiza el espacio</h2>
+    <p class="lead">Quien mira un póster lo recorre de arriba hacia abajo y de izquierda a derecha. Por eso el contenido se ordena en columnas, en el mismo orden en que se lee una investigación. Puedes elegir un póster vertical o uno horizontal: el orden de lectura es el mismo, cambia el ancho de las columnas. Haz primero un boceto en papel y recién después abre el programa de diseño.</p>
+    <div class="esp-grid">
+      <div>
+        <h3>Vertical · 90 × 120 cm</h3>
+        <div class="mock v" role="group" aria-label="Esquema de un póster vertical en tres columnas iguales, con el orden de lectura numerado del 1 al 7">
+          <div class="cab">
+            <div class="blq t"><b>1</b><span>Título, autoría, carrera</span></div>
+            <div class="blq logo">Logo institucional</div>
+          </div>
+          <div class="cols">
+            <div class="col">
+              <div class="blq s"><b>2</b><span>Introducción y pregunta</span></div>
+              <div class="blq s"><b>3</b><span>Metodología en diagrama</span></div>
+            </div>
+            <div class="col">
+              <div class="blq r"><span style="display:flex;gap:8px"><b>4</b><span>Resultados</span></span><span class="figs"><span class="fig">Figura 1</span><span class="fig">Figura 2</span></span></div>
+            </div>
+            <div class="col">
+              <div class="blq d"><b>5</b><span>Discusión</span></div>
+              <div class="blq c"><b>6</b><span>Conclusiones</span></div>
+              <div class="blq qr"><b>7</b><span>QR con referencias</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="small" style="text-align:center;margin:10px 0 0">Tres columnas del mismo ancho. Es el formato más habitual en ferias y congresos.</p>
+      </div>
+      <div>
+        <h3>Horizontal · 120 × 90 cm</h3>
+        <div class="mock h" role="group" aria-label="Esquema de un póster horizontal en tres columnas, con la columna central del doble de ancho para los resultados, y el orden de lectura numerado del 1 al 7">
+          <div class="cab">
+            <div class="blq t"><b>1</b><span>Título, autoría, carrera</span></div>
+            <div class="blq logo" style="width:22%">Logo institucional</div>
+          </div>
+          <div class="cols">
+            <div class="col">
+              <div class="blq s"><b>2</b><span>Introducción y pregunta</span></div>
+              <div class="blq s"><b>3</b><span>Metodología en diagrama</span></div>
+            </div>
+            <div class="col">
+              <div class="blq r"><span style="display:flex;gap:8px"><b>4</b><span>Resultados</span></span><span class="figs"><span class="fig">Figura 1</span><span class="fig">Figura 2</span></span></div>
+            </div>
+            <div class="col">
+              <div class="blq d"><b>5</b><span>Discusión</span></div>
+              <div class="blq c"><b>6</b><span>Conclusiones</span></div>
+              <div class="blq qr"><b>7</b><span>QR con referencias</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="small" style="text-align:center;margin:10px 0 0">La columna de resultados es el doble de ancha, lo que permite poner dos figuras lado a lado. Conviene si tus resultados tienen varios gráficos.</p>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h3 class="h3">Proporciones</h3>
+        <p>Las fuentes sugieren que entre un 40 % y un 50 % del póster sea visual (gráficos, tablas, diagramas, imágenes) y que una parte importante quede como espacio en blanco. El espacio libre separa los bloques y hace que el póster se lea sin esfuerzo.</p>
+      </div>
+      <div class="card">
+        <h3 class="h3">Tamaño</h3>
+        <p>Configura el tamaño en el programa <strong>antes</strong> de empezar (90 × 120 cm si es vertical, 120 × 90 cm si es horizontal), para que las letras y las imágenes no se deformen al cambiarlo después.</p>
+      </div>
+      <div class="card">
+        <h3 class="h3">Programas</h3>
+        <p><a href="https://www.canva.com/es_mx/crear/posters/academicos/" target="_blank" rel="noopener">Canva<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a> tiene plantillas de póster académico. <a href="https://docs.google.com/presentation/" target="_blank" rel="noopener">Google Slides<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a> y PowerPoint también sirven y permiten trabajar en equipo. Al final de este recurso puedes descargar una base en PowerPoint con tu contenido ya ubicado.</p>
+      </div>
+      <div class="card" style="grid-column:1 / -1">
+        <h3 class="h3">Logos y kit gráfico</h3>
+        <p>Descarga el logo de la universidad desde el <a href="https://icorporativa.ulagos.cl/" target="_blank" rel="noopener">kit gráfico ULagos<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>. Ahí están las versiones del logo para fondo claro y oscuro, y otros documentos útiles. No lo copies desde una búsqueda de imágenes, porque suele verse pixelado al imprimir.</p>
+      </div>
+    </div>
+
+    <h3 class="h3" style="margin:34px 0 8px">Tipografía: sencilla y sin serifa</h3>
+    <p class="small" style="font-size:16px;line-height:1.65;color:var(--texto-2);margin:0 0 14px">Para que el póster lo pueda leer la mayor cantidad de personas, incluidas quienes tienen baja visión o dislexia, usa una de estas cuatro fuentes. Tienen letras claras y espaciado parejo, y vienen instaladas en la mayoría de los computadores o están disponibles en Canva y Google Slides. Usa como máximo dos en todo el póster (puede ser la misma para títulos y cuerpo) y evita las tipografías decorativas o manuscritas (Adobe Express, 2026).</p>
+    <div class="fuentes">
+      <div class="fuente-m"><span class="nom">Arial</span><span class="ej" style="font-family:Arial,sans-serif">Convivencia escolar 2026</span></div>
+      <div class="fuente-m"><span class="nom">Calibri</span><span class="ej" style="font-family:Calibri,Carlito,sans-serif">Convivencia escolar 2026</span></div>
+      <div class="fuente-m"><span class="nom">Roboto</span><span class="ej" style="font-family:Roboto,sans-serif">Convivencia escolar 2026</span></div>
+      <div class="fuente-m"><span class="nom">Tahoma</span><span class="ej" style="font-family:Tahoma,Verdana,sans-serif">Convivencia escolar 2026</span></div>
+    </div>
+    <p class="small" style="margin:0">Si una muestra se ve igual a otra, es porque esa fuente no está instalada en este equipo.</p>
+
+    <h3 class="h3" style="margin:34px 0 12px">Tamaños de letra para un póster de 90 × 120 cm</h3>
+    <div class="scroll-x">
+      <table class="tabla">
+        <caption class="visually-hidden">Tamaños de letra sugeridos por tipo de texto</caption>
+        <thead><tr><th scope="col">Texto</th><th scope="col">Tamaño</th><th scope="col">Para qué</th></tr></thead>
+        <tbody>
+          <tr><td>Título</td><td>72 a 96 pt, en negrita</td><td>Se lee a más de tres metros.</td></tr>
+          <tr><td>Autoría y carrera</td><td>36 a 48 pt</td><td>Identifica a quienes presentan.</td></tr>
+          <tr><td>Títulos de sección</td><td>40 a 45 pt</td><td>Ordenan el recorrido.</td></tr>
+          <tr><td>Cuerpo del texto</td><td>24 a 30 pt</td><td>Se lee a uno o dos metros.</td></tr>
+          <tr><td>Leyendas de figuras y tablas</td><td>18 a 22 pt</td><td>Explican cada figura.</td></tr>
+          <tr><td>Texto junto al QR</td><td>18 a 22 pt</td><td>Dice qué abre el código.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="small" style="margin:10px 0 0">Valen para el póster vertical y el horizontal. Una forma de comprobarlo: imprime una parte en hoja carta al 25 % y léela con el brazo estirado.</p>
+  </div>
+</section>
+
+<section id="accesible">
+  <div>
+    <span class="eyebrow ey-azul">Fase 2 · El modelo</span>
+    <h2 class="h2">Criterios de accesibilidad del póster</h2>
+    <p class="lead">Un póster accesible es uno que puede leer la mayor cantidad de personas posible: quien tiene baja visión, quien no distingue algunos colores o quien lo mira desde lejos. Estos seis criterios se pueden revisar antes de imprimir.</p>
+    <div class="grid2" id="criterios"></div>
+
+    <div class="card" id="contrasteCard" style="margin-top:28px">
+      <h3 class="h3">Verifica el contraste de tus colores</h3>
+      <p style="margin-bottom:18px">Elige el color del texto y el color del fondo que piensas usar. La herramienta calcula la razón de contraste y te dice si cumple. Puedes partir de los colores institucionales.</p>
+      <div class="contraste">
+        <div>
+          <div class="color-campo">
+            <label for="colorTextoHex">Color del texto</label>
+            <input type="color" id="colorTexto" value="#0055b7" aria-label="Selector del color del texto">
+            <input type="text" id="colorTextoHex" value="#0055B7" maxlength="7" spellcheck="false" aria-describedby="hexAyuda">
+          </div>
+          <div class="color-campo">
+            <label for="colorFondoHex">Color del fondo</label>
+            <input type="color" id="colorFondo" value="#ffffff" aria-label="Selector del color del fondo">
+            <input type="text" id="colorFondoHex" value="#FFFFFF" maxlength="7" spellcheck="false" aria-describedby="hexAyuda">
+          </div>
+          <p class="nota" id="hexAyuda" style="margin:0 0 10px">Escribe el código con el formato #RRGGBB, por ejemplo #0055B7.</p>
+          <p class="nota" style="margin:0 0 4px">Probar combinaciones institucionales:</p>
+          <div class="presets" id="presets"></div>
+        </div>
+        <div>
+          <div class="muestra" id="muestra">
+            <p class="m-t">Título de sección</p>
+            <p class="m-c">Así se vería el cuerpo del texto con esta combinación de colores.</p>
+          </div>
+          <div aria-live="polite" style="margin-top:14px">
+            <p class="ratio" id="ratio"></p>
+            <ul class="veredicto" id="veredicto"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 3 · PRÁCTICA -->
+<section id="practica" class="alt">
+  <div>
+    <span class="eyebrow ey-morado">Fase 3 · Práctica guiada</span>
+    <h2 class="h2">Elige la mejor decisión de diseño</h2>
+    <p class="lead">Tres decisiones que vas a tomar al armar tu póster. Elige la opción que comunica mejor y que más personas pueden leer.</p>
+    <div id="quizPractica"></div>
+  </div>
+</section>
+
+<!-- FASE 4 · ESCRIBE -->
+<section id="plantilla" style="background:#eef5fc">
+  <div>
+    <span class="eyebrow ey-azul">Fase 4 · Escribe y descarga</span>
+    <h2 class="h2">Prepara el contenido de tu póster</h2>
+    <p class="lead">Completa cada parte resumiendo lo que ya está en tus informes. Con "Ver mi póster" revisas cómo se distribuye el contenido y cuántas palabras lleva cada sección. Al terminar, descarga el contenido en Word (incluye tus referencias para el documento de Drive) o una base en PowerPoint con tu texto ya ubicado, para terminar el diseño ahí o en Canva.</p>
+    <p class="aviso-guardado"><strong>Lo que escribas se guarda solo en este navegador y en este computador.</strong> Si cambias de equipo o borras el historial, se pierde. Descarga el Word cada vez que termines.</p>
+
+    <div id="tplCampos"></div>
+
+    <div class="card" style="margin-top:8px">
+      <h3 class="h3">Revisa y descarga</h3>
+      <fieldset class="campo" style="margin-bottom:10px">
+        <legend>Orientación del póster</legend>
+        <div class="logro" id="orientacionOps"></div>
+      </fieldset>
+      <div class="acciones">
+        <button type="button" class="sec-btn" id="verPosterBtn" aria-expanded="false" aria-controls="vistaWrap">Ver mi póster</button>
+        <button type="button" class="primary-btn" id="wordBtn">Descargar en Word (.docx)</button>
+        <button type="button" class="sec-btn" id="pptBtn">Descargar base en PowerPoint (.pptx)</button>
+        <button type="button" class="del-btn" id="borrarBtn">Borrar mi borrador</button>
+      </div>
+      <p class="nota" id="estadoGuardado" aria-live="polite" style="margin:10px 0 0"></p>
+      <div id="vistaWrap" class="pp-wrap" hidden>
+        <div id="senales" class="senales" aria-live="polite"></div>
+        <div class="acciones" style="margin:14px 0">
+          <button type="button" class="sec-btn" id="grisBtn" aria-pressed="false">Ver en escala de grises</button>
+          <span class="nota">Si en gris todo se sigue distinguiendo, el póster no depende solo del color.</span>
+        </div>
+        <div id="vistaPoster"></div>
+        <div class="scroll-x extension">
+          <table class="tabla">
+            <caption class="visually-hidden">Extensión de cada sección del póster</caption>
+            <thead><tr><th scope="col">Sección</th><th scope="col">Palabras</th><th scope="col">Sugerido</th></tr></thead>
+            <tbody id="tablaExtension"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FASE 5 · REVISA -->
+<section id="errores">
+  <div>
+    <span class="eyebrow ey-verde">Fase 5 · Revisa</span>
+    <h2 class="h2">Lo que debilita un póster</h2>
+    <p class="lead">Siete problemas frecuentes. Se muestra primero el error. Abre cada tarjeta cuando quieras ver cómo se arregla.</p>
+    <div class="errores" id="listaErrores"></div>
+  </div>
+</section>
+
+<section id="autoeval" class="alt">
+  <div>
+    <span class="eyebrow ey-verde">Fase 5 · Revisa</span>
+    <h2 class="h2">Lista de verificación final</h2>
+    <p class="lead">El primer bloque revisa el contenido, el segundo el diseño y el tercero la accesibilidad. Lo que quede sin marcar es el trabajo que falta antes de imprimir.</p>
+    <p class="nota" id="contadorCheck" aria-live="polite" style="margin:-10px 0 14px"></p>
+    <div id="listaCheck"></div>
+    <details class="plegable refs" style="margin-top:28px">
+      <summary>Fuentes de esta guía</summary>
+      <p>Adobe Express. (2026, 29 de mayo). <em>What are the best fonts for classroom instruction? A beginner-friendly guide for educators</em>. Adobe. https://www.adobe.com/express/learn/blog/best-fonts-for-classroom-instruction</p>
+      <p>Bibliotecas USIL. (2020). <em>Cómo hacer un póster científico</em> [Video]. YouTube. https://www.youtube.com/watch?v=xDfs3BFK7_k</p>
+      <p>Blanco, E., y Bernardo, A. B. (2025). <em>Elaboración de un póster científico: Pautas y herramientas</em> [Material docente]. Universidad de Oviedo. https://digibuo.uniovi.es/dspace/bitstream/handle/10651/79122/Material%20docente_%20P%C3%B3ster%20cient%C3%ADfico.pdf?sequence=1</p>
+      <p>Corral Robles, S. (s.f.). <em>Diseño de póster científico</em> [Diapositivas de seminario]. Facultad de Educación y Humanidades de Melilla, Universidad de Granada.</p>
+      <p>Maturana, C. L., Lobato Concha, P., Sánchez Gibbons, V., Ruiz, R., y Urrejola, K. (s.f.). <em>¿Cuáles son las características multimodales del póster o afiche académico?</em> [Recurso de autoestudio]. Pontificia Universidad Católica de Chile. https://comunicacionacademica.uc.cl/images/nuevos_recursos/espanol/escritura/disciplinares/RE_-Cmo-planificar-la-estructura-del-Pster-o-Afiche-Acadmico.pdf</p>
+      <p>New York University Libraries. (s.f.). <em>How to create a research poster: Poster basics</em>. https://guides.nyu.edu/posters</p>
+      <p>World Wide Web Consortium. (2023). <em>Web Content Accessibility Guidelines (WCAG) 2.2</em>. https://www.w3.org/TR/WCAG22/</p>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<footer style="background:var(--tinta);color:#e9f2fb;padding:36px clamp(20px,6vw,56px);text-align:center">
+  <p style="margin:0 0 10px"><strong>Universidad de Los Lagos</strong> · Departamento de Educación · Seminario de Grado</p>
+  <small style="display:block;line-height:1.5">Esta obra de <strong>Jesús Sánchez Alvarado</strong> está bajo una <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" style="color:inherit">Licencia Creative Commons Atribución-NoComercial 4.0 Internacional</a>.</small>
+</footer>
+
+<script>
+const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const $ = s => document.querySelector(s);
+
+// ---------- NAVEGACIÓN ----------
+const NAV = [
+  ['antes','1 · Antes de empezar'], ['video','1 · Video'], ['estructura','2 · Partes'], ['diseno','2 · Espacio'],
+  ['accesible','2 · Accesibilidad'], ['practica','3 · Práctica'], ['plantilla','4 · Escribe'], ['errores','5 · Errores'], ['autoeval','5 · Verificación']
+];
+$('#navRow').innerHTML = NAV.map(([id, t]) => `<a class="navLink" href="#${id}" data-target="${id}">${t}</a>`).join('');
+const navLinks = [...document.querySelectorAll('.navLink')];
+if ('IntersectionObserver' in window) {
+  const visibles = new Set();
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting ? visibles.add(e.target.id) : visibles.delete(e.target.id));
+    const actual = NAV.map(n => n[0]).find(id => visibles.has(id));
+    if (actual) navLinks.forEach(a => a.dataset.target === actual ? a.setAttribute('aria-current','true') : a.removeAttribute('aria-current'));
+  }, { rootMargin:'-80px 0px -60% 0px' });
+  NAV.forEach(([id]) => obs.observe(document.getElementById(id)));
+}
+
+// ---------- VIDEO ----------
+// YouTube no reproduce videos incrustados en páginas abiertas como archivo local (file://).
+// Publicada en la web, el video se carga dentro de la página; abierta como archivo, el enlace lleva a YouTube.
+$('#videoLink').addEventListener('click', e => {
+  if (!/^https?:$/.test(location.protocol)) return;
+  e.preventDefault();
+  $('#videoBox').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/xDfs3BFK7_k?autoplay=1&cc_load_policy=1" title="Video: Cómo hacer un póster científico, de Bibliotecas USIL" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+  $('#videoBox iframe').focus();
+});
+
+// ---------- QUIZZES ----------
+function pintarQuiz(cont, items) {
+  // Muestra una pregunta a la vez: la siguiente aparece al acertar la anterior.
+  cont.innerHTML = `<p class="nota quiz-prog" aria-live="polite"></p>` + items.map((q, i) => `
+    <div class="quiz" data-q="${i}"${i ? ' hidden' : ''}>
+      <p class="quiz-p" id="${cont.id}-p${i}" tabindex="-1">${esc(q.pregunta)}</p>
+      <div class="quiz-ops" role="group" aria-labelledby="${cont.id}-p${i}">
+        ${q.opciones.map((o, j) => `<button type="button" class="opcion" data-o="${j}" aria-pressed="false">${esc(o)}</button>`).join('')}
+      </div>
+      <div class="fb" aria-live="polite"></div>
+    </div>`).join('');
+  const prog = cont.querySelector('.quiz-prog');
+  const mostrar = i => {
+    cont.querySelectorAll('.quiz').forEach((q, k) => { q.hidden = k !== i; });
+    prog.textContent = `Pregunta ${i + 1} de ${items.length}`;
+  };
+  mostrar(0);
+  cont.addEventListener('click', e => {
+    const sig = e.target.closest('[data-sig]');
+    if (sig) {
+      const n = +sig.dataset.sig;
+      if (n >= items.length) {
+        cont.querySelectorAll('.quiz').forEach(q => { q.querySelectorAll('.opcion').forEach(x => { x.setAttribute('aria-pressed','false'); x.classList.remove('ok','no'); }); q.querySelector('.fb').className = 'fb'; q.querySelector('.fb').innerHTML = ''; });
+        mostrar(0);
+      } else mostrar(n);
+      document.getElementById(`${cont.id}-p${n >= items.length ? 0 : n}`).focus();
+      return;
+    }
+    const b = e.target.closest('.opcion'); if (!b) return;
+    const box = b.closest('.quiz'); const i = +box.dataset.q; const q = items[i]; const ok = +b.dataset.o === q.correcta;
+    box.querySelectorAll('.opcion').forEach(x => { x.setAttribute('aria-pressed','false'); x.classList.remove('ok','no'); });
+    b.setAttribute('aria-pressed','true'); b.classList.add(ok ? 'ok' : 'no');
+    const fb = box.querySelector('.fb');
+    fb.className = 'fb ' + (ok ? 'ok' : 'no');
+    const ultima = i === items.length - 1;
+    const boton = ok ? `<button type="button" class="${ultima ? 'ghost-btn' : 'primary-btn'}" data-sig="${i + 1}" style="margin-top:12px">${ultima ? 'Volver a empezar' : 'Siguiente pregunta →'}</button>` : '';
+    fb.innerHTML = ok ? `<strong>✓ Correcto.</strong>${esc(q.explicacion)}${ultima ? `<br><strong style="margin-top:8px">Respondiste las ${items.length} preguntas.</strong>` : ''}${boton}` : `<strong>Revisa otra vez.</strong>${esc(q.pista)}`;
+  });
+}
+
+pintarQuiz($('#quizVideo'), [
+  { pregunta:'Según el video, ¿desde dónde se empieza a armar un póster?',
+    opciones:['Desde una plantilla de Canva','Desde un resumen de la investigación con un mensaje claro','Desde el marco teórico completo'],
+    correcta:1, pista:'Vuelve al inicio del video, en la parte "Cómo empezar".',
+    explicacion:'Se parte de un resumen con un mensaje claro, conciso y con lo más relevante. La plantilla viene después.' },
+  { pregunta:'¿Cómo se recomienda repartir el espacio del póster?',
+    opciones:['50 % gráficos, 25 % texto y 25 % espacio libre','75 % texto y 25 % gráficos','Ocupar todo el espacio para aprovecharlo'],
+    correcta:0, pista:'Fíjate en la parte "Diseño": el espacio libre también cuenta.',
+    explicacion:'La mitad para lo gráfico, un cuarto para el texto y un cuarto libre. El espacio en blanco ayuda a leer.' },
+  { pregunta:'¿Cuántas palabras como máximo debería tener el título?',
+    opciones:['5','15','30'],
+    correcta:1, pista:'Está en la parte "Texto", junto al total de palabras del póster.',
+    explicacion:'Hasta 15 palabras, y el póster completo no debería pasar de unas 500.' },
+  { pregunta:'¿Qué fondo se recomienda?',
+    opciones:['Una fotografía relacionada con el tema','Un degradado de varios colores','Un color sólido o blanco'],
+    correcta:2, pista:'Piensa en qué fondo distrae menos del contenido.',
+    explicacion:'Un fondo sólido o blanco no compite con el texto y permite un buen contraste.' },
+  { pregunta:'Sobre los gráficos y las tablas, ¿qué se debe evitar?',
+    opciones:['Incluir la leyenda y los valores','Repetir los mismos datos en distintas representaciones','Que sean breves y claros'],
+    correcta:1, pista:'Dos de las opciones son recomendaciones del video.',
+    explicacion:'Un mismo dato va en un solo formato. Repetirlo en tabla y gráfico ocupa espacio sin aportar.' },
+  { pregunta:'¿En qué orden se dispone el contenido?',
+    opciones:['De arriba hacia abajo y de izquierda a derecha','Desde el centro hacia los bordes','De abajo hacia arriba'],
+    correcta:0, pista:'Es el mismo orden en que lees una página.',
+    explicacion:'Es el recorrido habitual de la mirada, y por eso el póster se organiza en columnas.' }
+]);
+
+pintarQuiz($('#quizPractica'), [
+  { pregunta:'¿Cuál título funciona mejor en un póster?',
+    opciones:[
+      'Estudio sobre la convivencia escolar',
+      'Análisis de la percepción que tienen los docentes de enseñanza básica y media de dos establecimientos públicos respecto de la alteración de la convivencia escolar dentro del aula y sus formas de abordaje',
+      'Convivencia escolar en el aula: percepción de docentes de enseñanza básica y media en Osorno'],
+    correcta:2, pista:'Busca un título que diga el tema y el foco, y que se pueda leer de una vez a tres metros.',
+    explicacion:'Tiene 15 palabras y dice el tema, a quiénes se estudió y dónde. El primero es tan general que podría ser cualquier estudio, y el segundo supera las 30 palabras.' },
+  { pregunta:'Ya tienes un gráfico de barras con los porcentajes de cada respuesta. ¿Qué texto lo acompaña?',
+    opciones:[
+      'Un párrafo que repite cada porcentaje del gráfico, uno por uno.',
+      'Una o dos frases con la tendencia principal, y el gráfico con título, ejes rotulados y valores sobre las barras.',
+      'Ningún texto, el gráfico se explica solo aunque no tenga título.'],
+    correcta:1, pista:'El texto y el gráfico se complementan, no se repiten.',
+    explicacion:'El texto destaca lo que el gráfico muestra y el gráfico lleva título y valores para leerse solo. Repetir los datos en texto ocupa espacio sin aportar.' },
+  { pregunta:'Tu gráfico compara dos cursos. ¿Cómo los distingues?',
+    opciones:[
+      'Un curso en rojo y el otro en verde, con la leyenda abajo.',
+      'Dos colores de distinta luminosidad, con el nombre de cada curso escrito junto a sus barras.',
+      'Dos tonos parecidos de azul, para que combine con el resto del póster.'],
+    correcta:1, pista:'Piensa en alguien que no distingue el rojo del verde, o en el póster impreso en blanco y negro.',
+    explicacion:'Un color claro y uno oscuro se distinguen incluso en gris, y la etiqueta directa evita ir y volver a la leyenda. Rojo y verde es la combinación que más personas confunden.' }
+]);
+
+// ---------- ESTRUCTURA ----------
+const PASOS = [
+  { n:1, t:'Encabezado', c:'var(--azul)', sale:'Sale de la portada de tu informe', d:'Título breve, nombres de quienes investigaron, carrera y logo de la Universidad de Los Lagos.',
+    va:['Un título de hasta 15 palabras que diga el tema y a quiénes se estudió.','Nombres, carrera y Universidad de Los Lagos.','El logo institucional, descargado del kit gráfico ULagos.'],
+    noVa:['Títulos entre comillas o en mayúsculas sostenidas.','Un título tan general que sirva para cualquier estudio.'] },
+  { n:2, t:'Introducción', c:'var(--azul)', sale:'Sale de tu planteamiento del problema', d:'Por qué el tema importa, tu pregunta de investigación y tu objetivo general.',
+    va:['El problema en dos o tres frases, con uno o dos referentes.','Tu pregunta de investigación, completa y destacada.','El objetivo general.'],
+    noVa:['El marco teórico completo.','Una lista de todos los objetivos específicos, si no hay espacio.'] },
+  { n:3, t:'Metodología', c:'var(--azul)', sale:'Sale de tu capítulo metodológico', d:'Cómo hiciste el estudio, mejor en un diagrama de pasos que en un párrafo.',
+    va:['Enfoque.','Participantes, en una línea.','Instrumento y forma de análisis.','Una frase sobre los resguardos éticos.'],
+    noVa:['La justificación de cada decisión metodológica.','El instrumento completo.'] },
+  { n:4, t:'Resultados', c:'var(--morado)', sale:'Sale de tu capítulo de resultados', d:'El bloque más grande del póster. Organízalo por categorías o dimensiones, con un gráfico, una tabla breve o una cita por cada una.',
+    va:['Los resultados que responden a tu pregunta.','Figuras con título, leyenda y fuente.','Una o dos frases por categoría que digan qué muestra la figura.'],
+    noVa:['Todas las tablas del informe.','El mismo dato en tabla y en gráfico.','Citas largas de entrevistas.'] },
+  { n:5, t:'Discusión', c:'var(--morado)', sale:'Sale de tu capítulo de discusión', d:'Qué significan tus resultados a la luz de tu marco teórico: con qué autores coinciden y en qué se diferencian.',
+    va:['Una o dos interpretaciones de tus hallazgos principales.','Los autores de tu marco teórico con los que coinciden o se diferencian, citados (Autor, año).'],
+    noVa:['Repetir los resultados con otras palabras.','Autores que no están en tu marco teórico.'] },
+  { n:6, t:'Conclusiones', c:'var(--verde-texto)', sale:'Sale de tus conclusiones', d:'Cómo se responde tu pregunta de investigación y qué se desprende de ello.',
+    va:['Si el objetivo general se logró y qué lo muestra.','La respuesta a tu pregunta, en una o dos frases.','Una limitación o una proyección concreta, en una frase.'],
+    noVa:['Opiniones que no salen de tus resultados.','Proyecciones sin detalle, por ejemplo, "seguir investigando el tema".'] },
+  { n:7, t:'Referencias en QR', c:'var(--verde-texto)', sale:'Sale de tu bibliografía', d:'Las referencias van en un documento de Google Drive. En el póster solo aparece el código QR que lo abre. En ese documento también puedes incluir agradecimientos.',
+    va:['Todas las referencias que citaste en el póster, en APA 7.','Si quieres, agradecimientos a establecimientos y participantes, sin datos que los identifiquen.','El QR en el póster, con un texto que diga qué abre.'],
+    noVa:['La lista de referencias impresa en el póster.','Un enlace de Drive sin permiso para que otras personas lo abran.','Nombres de estudiantes o docentes que participaron.'] }
+];
+const lista = a => `<ul>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+$('#pasos').innerHTML = PASOS.map(p => `<div class="paso" style="--c:${p.c}">
+  <span class="num" aria-hidden="true">${p.n}</span><h3>${esc(p.t)}</h3><p class="sale">${esc(p.sale)}</p><p>${esc(p.d)}</p>
+  <details><summary>Qué va y qué no va</summary><div class="vanova"><strong>Va</strong>${lista(p.va)}<strong>No va</strong>${lista(p.noVa)}</div></details></div>`).join('');
+
+// ---------- CRITERIOS DE ACCESIBILIDAD ----------
+const CRITERIOS = [
+  { t:'1 · Contraste suficiente', d:'Todo el texto debe tener una razón de contraste de al menos 4,5:1 con su fondo. En un póster que se lee a distancia conviene acercarse a 7:1. Usa fondo liso y claro con texto oscuro, sin degradados ni fotografías detrás del texto.', f:'WCAG 2.2, criterio 1.4.3; Blanco y Bernardo (2025).' },
+  { t:'2 · No depender solo del color', d:'Si dos grupos, categorías o resultados se distinguen solo por el color, una parte del público no los verá. Agrega etiquetas junto a cada serie, rótulos o formas distintas, y evita rojo con verde. Prueba el póster en escala de grises.', f:'WCAG 2.2, criterio 1.4.1; Blanco y Bernardo (2025).' },
+  { t:'3 · Letra sencilla y sin serifa', d:'Usa Arial, Calibri, Roboto o Tahoma, y como máximo dos tipografías en todo el póster. Son fuentes de letras claras y espaciado parejo, que favorecen la lectura de personas con baja visión o dislexia. Respeta los tamaños de la tabla y evita las mayúsculas sostenidas, el subrayado y las tipografías decorativas.', f:'Adobe Express (2026); Blanco y Bernardo (2025); Corral (s.f.).' },
+  { t:'4 · Figuras que se explican solas', d:'Cada gráfico, tabla, diagrama o imagen lleva un título, una leyenda que diga qué muestra y la fuente. Los ejes van rotulados y los valores, escritos sobre las barras o junto a los puntos.', f:'Maturana et al. (s.f.); Corral (s.f.).' },
+  { t:'5 · QR que se puede escanear', d:'El código va en negro sobre blanco, de al menos 5 × 5 cm, con un texto que diga qué abre. Pruébalo desde otro celular antes de imprimir.', f:'Blanco y Bernardo (2025).' },
+  { t:'6 · Lenguaje claro', d:'Frases cortas, una idea por frase, siglas explicadas la primera vez y títulos de sección que digan lo que contienen. Lo que se entiende rápido se entiende mejor a distancia.', f:'NYU (s.f.); Bibliotecas USIL (2020).' }
+];
+$('#criterios').innerHTML = CRITERIOS.map(c => `<div class="crit"><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p><p class="fuente">Fundamento: ${esc(c.f)}</p></div>`).join('');
+
+// ---------- VERIFICADOR DE CONTRASTE ----------
+const HEX = /^#[0-9a-f]{6}$/i;
+function luminancia(hex) {
+  const c = [1, 3, 5].map(i => parseInt(hex.substr(i, 2), 16) / 255).map(v => v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4));
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+}
+function razon(a, b) { const l1 = luminancia(a), l2 = luminancia(b); return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05); }
+const PRESETS = [
+  ['Azul sobre blanco', '#0055B7', '#FFFFFF'], ['Blanco sobre azul', '#FFFFFF', '#0055B7'], ['Morado sobre blanco', '#9F26B4', '#FFFFFF'],
+  ['Verde sobre blanco', '#3FAE29', '#FFFFFF'], ['Verde oscuro sobre blanco', '#2E7D1F', '#FFFFFF'], ['Gris claro sobre blanco', '#9AA5B1', '#FFFFFF']
+];
+$('#presets').innerHTML = PRESETS.map((p, i) => `<button type="button" class="chipBtn" data-preset="${i}">${esc(p[0])}</button>`).join('');
+function evaluarContraste() {
+  const t = $('#colorTextoHex').value.trim(), f = $('#colorFondoHex').value.trim();
+  if (!HEX.test(t) || !HEX.test(f)) {
+    $('#ratio').textContent = '';
+    $('#veredicto').innerHTML = '<li class="no"><span class="ic" aria-hidden="true">!</span><span>Revisa los códigos: deben tener el formato #RRGGBB.</span></li>';
+    return;
+  }
+  $('#muestra').style.color = t; $('#muestra').style.background = f;
+  const r = razon(t, f);
+  $('#ratio').textContent = `Contraste ${r.toFixed(2).replace('.', ',')}:1`;
+  const filas = [
+    [r >= 4.5, 'Cuerpo del texto y leyendas (mínimo 4,5:1)'],
+    [r >= 3, 'Títulos grandes, íconos y bordes de gráficos (mínimo 3:1)'],
+    [r >= 7, 'Recomendado para leer a distancia (7:1)']
+  ];
+  $('#veredicto').innerHTML = filas.map(([ok, txt]) => `<li class="${ok ? 'ok' : 'no'}"><span class="ic" aria-hidden="true">${ok ? '✓' : '✗'}</span><span><strong>${ok ? 'Cumple' : 'No cumple'}:</strong> ${txt}</span></li>`).join('');
+}
+function sincronizar(origen, destino) { $(destino).value = $(origen).value.toUpperCase(); evaluarContraste(); }
+$('#colorTexto').addEventListener('input', () => sincronizar('#colorTexto', '#colorTextoHex'));
+$('#colorFondo').addEventListener('input', () => sincronizar('#colorFondo', '#colorFondoHex'));
+['Texto', 'Fondo'].forEach(k => $('#color' + k + 'Hex').addEventListener('input', e => {
+  const v = e.target.value.trim(); if (HEX.test(v)) $('#color' + k).value = v.toLowerCase(); evaluarContraste();
+}));
+$('#presets').addEventListener('click', e => {
+  const b = e.target.closest('[data-preset]'); if (!b) return;
+  const [, t, f] = PRESETS[+b.dataset.preset];
+  $('#colorTextoHex').value = t; $('#colorFondoHex').value = f;
+  $('#colorTexto').value = t.toLowerCase(); $('#colorFondo').value = f.toLowerCase();
+  evaluarContraste();
+});
+evaluarContraste();
+
+// ---------- PLANTILLA ----------
+const CLAVE = 'ulagos_poster_borrador_v1';
+const TIPOS_FIG = ['Gráfico de barras','Gráfico circular (hasta 5 categorías)','Tabla breve','Diagrama o esquema','Mapa conceptual','Cita destacada','Fotografía o imagen'];
+const CHIPS = {
+  prob: ['En el contexto de…, se observa que…','Diversos estudios señalan que… (Autor, año).','Sin embargo, aún no se ha estudiado…'],
+  res:  ['La mayoría de los participantes…','En la categoría…, los entrevistados señalan que…','Un …% de los encuestados…','Destaca que…'],
+  disc: ['Estos resultados coinciden con lo planteado por … (Autor, año), quien…','A diferencia de lo señalado por … (Autor, año),…','Esto podría explicarse porque…'],
+  conc: ['El objetivo general se logró, ya que…','La pregunta de investigación se responde así,…'],
+  proy: ['Los resultados describen a … y no se extienden a…','Convendría estudiar…, con…, porque…']
+};
+const vacioHallazgo = () => ({ categoria:'', texto:'' });
+const vacioFigura = () => ({ tipo:'', titulo:'', fuente:'' });
+const base = () => ({ titulo:'', autores:'', afiliacion:'', problema:'', pregunta:'', objetivo:'', enfoque:'', participantes:'', instrumento:'', analisis:'', etica:'',
+  hallazgos:[vacioHallazgo()], figuras:[vacioFigura()], discusion:'', conclusion:'', proyeccion:'', referencias:'', agradecimientos:'', qrTexto:'', qrUrl:'', orientacion:'v', check:{} });
+let datos = base();
+try {
+  const g = JSON.parse(localStorage.getItem(CLAVE) || 'null');
+  if (g && typeof g === 'object') datos = Object.assign(base(), g, {
+    hallazgos: Array.isArray(g.hallazgos) && g.hallazgos.length ? g.hallazgos.map(h => Object.assign(vacioHallazgo(), h)) : [vacioHallazgo()],
+    figuras: Array.isArray(g.figuras) ? g.figuras.map(f => Object.assign(vacioFigura(), f)) : [vacioFigura()],
+    orientacion: g.orientacion === 'h' ? 'h' : 'v',
+    check: g.check && typeof g.check === 'object' ? g.check : {}
+  });
+} catch (e) {}
+let tGuardar;
+function guardar() {
+  clearTimeout(tGuardar);
+  tGuardar = setTimeout(() => {
+    try { localStorage.setItem(CLAVE, JSON.stringify(datos)); $('#estadoGuardado').textContent = 'Guardado en este navegador.'; }
+    catch (e) { $('#estadoGuardado').textContent = 'No se pudo guardar en este navegador. Descarga tu Word.'; }
+  }, 400);
+}
+const palabras = t => (String(t || '').trim().match(/\S+/g) || []).length;
+const chips = (tipo, campoId) => `<div class="chips" role="group" aria-label="Frases de inicio (opcional)">${CHIPS[tipo].map(c => `<button type="button" class="chipBtn" data-insertar="${esc(c)}" data-campo="${campoId}">${esc(c)}</button>`).join('')}</div>`;
+
+// Campo genérico. ruta: "titulo" o "hallazgos.0.texto"
+function campo({ id, ruta, etiqueta, ayuda, valor, area, chip, contar }) {
+  const ay = ayuda ? `<p class="ayuda" id="${id}-ay">${ayuda}</p>` : '';
+  const desc = [ayuda ? id + '-ay' : '', contar ? id + '-cont' : ''].filter(Boolean).join(' ');
+  const attrs = `id="${id}" data-ruta="${ruta}"${desc ? ` aria-describedby="${desc}"` : ''}`;
+  const control = area ? `<textarea ${attrs}>${esc(valor)}</textarea>` : `<input type="text" ${attrs} value="${esc(valor)}">`;
+  const cont = contar ? `<p class="contador" id="${id}-cont" data-contar="${ruta}" data-max="${contar}">${palabras(valor)} palabras · sugerido hasta ${contar}</p>` : '';
+  return `<div class="campo"><label for="${id}">${etiqueta}</label>${ay}${control}${cont}${chip ? chips(chip, id) : ''}</div>`;
+}
+function pintarHallazgos() {
+  $('#listaHallazgos').innerHTML = datos.hallazgos.map((h, i) => `<div class="sub">
+    <div class="sub-head"><h4>Categoría o dimensión ${i + 1}</h4>${datos.hallazgos.length > 1 ? `<button type="button" class="del-btn" data-borrar="hallazgos.${i}">Quitar</button>` : ''}</div>
+    ${campo({ id:`hal${i}-cat`, ruta:`hallazgos.${i}.categoria`, etiqueta:'Nombre de la categoría o dimensión', valor:h.categoria })}
+    ${campo({ id:`hal${i}-txt`, ruta:`hallazgos.${i}.texto`, etiqueta:'Qué muestra', ayuda:'Una o dos frases con el resultado principal de esta categoría. Si va con figura, di lo que la figura destaca sin repetir sus datos.', valor:h.texto, area:true, chip:'res', contar:60 })}
+  </div>`).join('');
+}
+function pintarFiguras() {
+  $('#listaFiguras').innerHTML = datos.figuras.map((f, i) => `<div class="sub">
+    <div class="sub-head"><h4>Figura ${i + 1}</h4><button type="button" class="del-btn" data-borrar="figuras.${i}">Quitar</button></div>
+    <div class="grid-campos">
+      <div class="campo"><label for="fig${i}-tipo">Tipo</label><select id="fig${i}-tipo" data-ruta="figuras.${i}.tipo"><option value="">Elige un tipo</option>${TIPOS_FIG.map(t => `<option ${f.tipo === t ? 'selected' : ''}>${esc(t)}</option>`).join('')}</select></div>
+      ${campo({ id:`fig${i}-fue`, ruta:`figuras.${i}.fuente`, etiqueta:'Fuente', ayuda:'Elaboración propia, o la referencia si la imagen no es tuya.', valor:f.fuente })}
+    </div>
+    ${campo({ id:`fig${i}-tit`, ruta:`figuras.${i}.titulo`, etiqueta:'Título y leyenda', ayuda:'Lo que se escribe bajo la figura. Ej.: Dificultades al leer textos argumentativos, según los estudiantes (n = 28).', valor:f.titulo })}
+  </div>`).join('') || '<p class="nota">Todavía no agregas figuras. Los resultados de un póster casi siempre necesitan al menos una.</p>';
+}
+function pintarPlantilla() {
+  const d = datos;
+  $('#tplCampos').innerHTML = `
+  <div class="tpl" style="--c:var(--azul)">
+    <div class="tpl-head"><h3>1 · Encabezado</h3></div>
+    <p class="tpl-fuente">Sale de la portada de tu informe.</p>
+    ${campo({ id:'f-titulo', ruta:'titulo', etiqueta:'Título del póster', ayuda:'Hasta 15 palabras. Que diga el tema y a quiénes se estudió. Sin comillas ni mayúsculas sostenidas.', valor:d.titulo, contar:15 })}
+    <div class="grid-campos">
+      ${campo({ id:'f-autores', ruta:'autores', etiqueta:'Autoría', ayuda:'Nombres de quienes investigaron, separados por coma.', valor:d.autores })}
+      ${campo({ id:'f-afiliacion', ruta:'afiliacion', etiqueta:'Carrera y universidad', ayuda:'Ej.: Pedagogía en Educación Física · Universidad de Los Lagos', valor:d.afiliacion })}
+    </div>
+  </div>
+  <div class="tpl" style="--c:var(--azul)">
+    <div class="tpl-head"><h3>2 · Introducción</h3></div>
+    <p class="tpl-fuente">Sale de tu planteamiento del problema.</p>
+    ${campo({ id:'f-problema', ruta:'problema', etiqueta:'El problema y por qué importa', ayuda:'Dos o tres frases con uno o dos referentes de tu marco teórico.', valor:d.problema, area:true, chip:'prob', contar:80 })}
+    ${campo({ id:'f-pregunta', ruta:'pregunta', etiqueta:'Pregunta de investigación', ayuda:'Tal como quedó en tu informe.', valor:d.pregunta })}
+    ${campo({ id:'f-objetivo', ruta:'objetivo', etiqueta:'Objetivo general', valor:d.objetivo })}
+  </div>
+  <div class="tpl" style="--c:var(--azul)">
+    <div class="tpl-head"><h3>3 · Metodología</h3></div>
+    <p class="tpl-fuente">Sale de tu capítulo metodológico. Cada campo será un paso del diagrama, así que escribe frases cortas.</p>
+    <div class="grid-campos">
+      ${campo({ id:'f-enfoque', ruta:'enfoque', etiqueta:'Enfoque', ayuda:'Ej.: Enfoque cualitativo.', valor:d.enfoque })}
+      ${campo({ id:'f-participantes', ruta:'participantes', etiqueta:'Participantes', ayuda:'Ej.: 4 docentes de dos establecimientos públicos, muestreo por conveniencia.', valor:d.participantes })}
+      ${campo({ id:'f-instrumento', ruta:'instrumento', etiqueta:'Instrumento', ayuda:'Ej.: Entrevista semiestructurada validada por juicio de expertos.', valor:d.instrumento })}
+      ${campo({ id:'f-analisis', ruta:'analisis', etiqueta:'Análisis', ayuda:'Ej.: Análisis de contenido por categorías, en Atlas.ti.', valor:d.analisis })}
+    </div>
+    ${campo({ id:'f-etica', ruta:'etica', etiqueta:'Resguardos éticos (opcional)', ayuda:'Una frase. Ej.: Consentimiento y asentimiento informado, datos anonimizados.', valor:d.etica })}
+  </div>
+  <div class="tpl" style="--c:var(--morado)">
+    <div class="tpl-head"><h3>4 · Resultados</h3></div>
+    <p class="tpl-fuente">Sale de tu capítulo de resultados. Es el bloque más grande del póster.</p>
+    <div id="listaHallazgos"></div>
+    <button type="button" class="ghost-btn" id="addHallazgo">+ Agregar categoría o dimensión</button>
+    <h4 style="font-size:17px;margin:22px 0 4px">Figuras</h4>
+    <p class="nota" style="margin:0 0 12px">Planifica aquí cada gráfico, tabla o diagrama. La figura la armas después en PowerPoint, Canva o Google Sheets.</p>
+    <div id="listaFiguras"></div>
+    <button type="button" class="ghost-btn" id="addFigura">+ Agregar figura</button>
+  </div>
+  <div class="tpl" style="--c:var(--morado)">
+    <div class="tpl-head"><h3>5 · Discusión</h3></div>
+    <p class="tpl-fuente">Sale de tu capítulo de discusión.</p>
+    ${campo({ id:'f-discusion', ruta:'discusion', etiqueta:'Qué significan tus resultados', ayuda:'Una o dos interpretaciones de tus hallazgos principales, con los autores de tu marco teórico con los que coinciden o se diferencian.', valor:d.discusion, area:true, chip:'disc', contar:80 })}
+  </div>
+  <div class="tpl" style="--c:var(--verde-texto)">
+    <div class="tpl-head"><h3>6 · Conclusiones</h3></div>
+    <p class="tpl-fuente">Sale de tus conclusiones.</p>
+    ${campo({ id:'f-conclusion', ruta:'conclusion', etiqueta:'Respuesta a tu pregunta de investigación', ayuda:'Si el objetivo general se logró, qué resultado lo muestra y cómo se responde la pregunta. Puedes conectar con un autor de tu marco teórico.', valor:d.conclusion, area:true, chip:'conc', contar:80 })}
+    ${campo({ id:'f-proyeccion', ruta:'proyeccion', etiqueta:'Limitación o proyección', ayuda:'Una o dos frases. Si es una proyección, di qué convendría estudiar y con quiénes.', valor:d.proyeccion, area:true, chip:'proy', contar:40 })}
+  </div>
+  <div class="tpl" style="--c:var(--verde-texto)">
+    <div class="tpl-head"><h3>7 · Referencias en QR</h3></div>
+    <p class="tpl-fuente">Esto no se imprime en el póster: va en tu documento de Google Drive. En el póster solo va el QR.</p>
+    ${campo({ id:'f-referencias', ruta:'referencias', etiqueta:'Referencias para el documento de Drive', ayuda:'Todas las que citaste en el póster, en APA 7. Al descargar el Word, aparecen listas para pegarlas en tu documento.', valor:d.referencias, area:true })}
+    ${campo({ id:'f-agradecimientos', ruta:'agradecimientos', etiqueta:'Agradecimientos para el documento de Drive (opcional)', ayuda:'Sin nombres de participantes.', valor:d.agradecimientos, area:true })}
+    <div class="grid-campos">
+      ${campo({ id:'f-qrUrl', ruta:'qrUrl', etiqueta:'Enlace del documento de Drive', ayuda:'El enlace compartido con "Cualquier persona con el enlace". Con él generas el QR en <a href="https://www.qrcode-monkey.com/es/" target="_blank" rel="noopener">QR Code Monkey<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>.', valor:d.qrUrl })}
+      ${campo({ id:'f-qrTexto', ruta:'qrTexto', etiqueta:'Texto junto al QR', ayuda:'Ej.: Escanea para ver las referencias.', valor:d.qrTexto })}
+    </div>
+  </div>`;
+  pintarHallazgos(); pintarFiguras();
+  $('#orientacionOps').innerHTML = [['v','Vertical (90 × 120 cm)'],['h','Horizontal (120 × 90 cm)']].map(([v, t]) => `<label><input type="radio" name="orientacion" value="${v}" data-ruta="orientacion" ${datos.orientacion === v ? 'checked' : ''}>${t}</label>`).join('');
+}
+
+function setRuta(ruta, valor) {
+  const p = ruta.split('.');
+  if (p.length === 3) datos[p[0]][+p[1]][p[2]] = valor; else datos[ruta] = valor;
+  const c = document.querySelector(`[data-contar="${ruta}"]`);
+  if (c) { const n = palabras(valor); c.textContent = `${n} palabras · sugerido hasta ${c.dataset.max}${n > +c.dataset.max ? '. Conviene acortar.' : ''}`; }
+  guardar(); actualizarVista();
+}
+const zona = $('#plantilla');
+zona.addEventListener('input', e => { const r = e.target.dataset.ruta; if (r && e.target.type !== 'radio') setRuta(r, e.target.value); });
+zona.addEventListener('change', e => { const r = e.target.dataset.ruta; if (r && (e.target.type === 'radio' || e.target.tagName === 'SELECT')) setRuta(r, e.target.value); });
+zona.addEventListener('click', e => {
+  const chip = e.target.closest('[data-insertar]');
+  if (chip) {
+    const ta = document.getElementById(chip.dataset.campo);
+    const ins = chip.dataset.insertar;
+    const pos = ta.selectionStart ?? ta.value.length;
+    const antes = ta.value.slice(0, pos); const sep = antes && !/\s$/.test(antes) ? ' ' : '';
+    ta.value = antes + sep + ins + ta.value.slice(pos);
+    setRuta(ta.dataset.ruta, ta.value); ta.focus();
+    const c = ta.value.indexOf('…', pos); if (c > -1) ta.setSelectionRange(c, c + 1);
+    return;
+  }
+  const del = e.target.closest('[data-borrar]');
+  if (del) {
+    const [lista, i] = del.dataset.borrar.split('.'); const o = datos[lista][+i];
+    if (Object.values(o).some(Boolean) && !confirm('¿Quitar este bloque? Se borrará lo que escribiste en él.')) return;
+    datos[lista].splice(+i, 1); guardar();
+    if (lista === 'hallazgos') { pintarHallazgos(); $('#addHallazgo').focus(); } else { pintarFiguras(); $('#addFigura').focus(); }
+    actualizarVista();
+    return;
+  }
+  if (e.target.id === 'addHallazgo') { datos.hallazgos.push(vacioHallazgo()); guardar(); pintarHallazgos(); document.getElementById(`hal${datos.hallazgos.length - 1}-cat`).focus(); }
+  if (e.target.id === 'addFigura') { datos.figuras.push(vacioFigura()); guardar(); pintarFiguras(); document.getElementById(`fig${datos.figuras.length - 1}-tipo`).focus(); }
+});
+$('#borrarBtn').addEventListener('click', () => {
+  if (!confirm('¿Borrar todo lo que escribiste para el póster? Esta acción no se puede deshacer. Si no lo has hecho, descarga antes tu Word.')) return;
+  const check = datos.check; datos = base(); datos.check = check;
+  guardar(); pintarPlantilla(); actualizarVista(); $('#estadoGuardado').textContent = 'Se borró tu borrador.';
+});
+
+// Contenido por sección, compartido por la vista previa, el Word y el PowerPoint
+const limpiar = t => String(t || '').trim();
+const lineas = t => limpiar(t).split('\n').map(limpiar).filter(Boolean);
+const pasosMetodo = () => [['Enfoque', datos.enfoque], ['Participantes', datos.participantes], ['Instrumento', datos.instrumento], ['Análisis', datos.analisis], ['Resguardos éticos', datos.etica]].filter(p => limpiar(p[1]));
+const hallazgosLlenos = () => datos.hallazgos.filter(h => limpiar(h.categoria) || limpiar(h.texto));
+const figurasLlenas = () => datos.figuras.filter(f => f.tipo || limpiar(f.titulo) || limpiar(f.fuente));
+const textoQR = () => limpiar(datos.qrTexto) || 'Escanea para ver las referencias.';
+function secciones() {
+  const intro = [limpiar(datos.problema), limpiar(datos.pregunta) ? 'Pregunta de investigación: ' + limpiar(datos.pregunta) : '', limpiar(datos.objetivo) ? 'Objetivo general: ' + limpiar(datos.objetivo) : ''].filter(Boolean);
+  const metodo = pasosMetodo().map(([k, v], i) => `${i + 1}. ${k}: ${limpiar(v)}`);
+  const res = hallazgosLlenos().map(h => (limpiar(h.categoria) ? limpiar(h.categoria) + ': ' : '') + limpiar(h.texto));
+  const disc = [limpiar(datos.discusion)].filter(Boolean);
+  const conc = [limpiar(datos.conclusion), limpiar(datos.proyeccion)].filter(Boolean);
+  return { intro, metodo, res, disc, conc };
+}
+const leyenda = (f, i) => `Figura ${i + 1}. ${limpiar(f.titulo) || '[título y leyenda]'}${limpiar(f.fuente) ? '. Fuente: ' + limpiar(f.fuente) : ''}`;
+function totalPalabras() {
+  return palabras(datos.titulo) + palabras(datos.problema) + palabras(datos.pregunta) + palabras(datos.objetivo) +
+    pasosMetodo().reduce((n, p) => n + palabras(p[1]), 0) + datos.hallazgos.reduce((n, h) => n + palabras(h.categoria) + palabras(h.texto), 0) +
+    datos.figuras.reduce((n, f) => n + palabras(f.titulo), 0) + palabras(datos.discusion) + palabras(datos.conclusion) + palabras(datos.proyeccion);
+}
+function senales() {
+  const s = [];
+  const nt = palabras(datos.titulo);
+  if (nt > 15) s.push(`El título tiene ${nt} palabras. Intenta dejarlo en 15 o menos.`);
+  if (limpiar(datos.titulo).length > 12 && datos.titulo === datos.titulo.toUpperCase()) s.push('El título está en mayúsculas sostenidas, que se leen más lento. Usa mayúscula solo al inicio y en nombres propios.');
+  if (/["“”«»]/.test(datos.titulo)) s.push('El título lleva comillas. Quítalas.');
+  if (!limpiar(datos.pregunta)) s.push('Falta la pregunta de investigación en la introducción.');
+  if (hallazgosLlenos().length && !limpiar(datos.discusion)) s.push('Falta la discusión: qué significan tus resultados según tu marco teórico.');
+  const total = totalPalabras();
+  if (total > 800) s.push(`El póster suma ${total} palabras. Lo sugerido es entre 300 y 800. Revisa qué puede pasar a una figura.`);
+  if (!figurasLlenas().length) s.push('No hay figuras planificadas. Los resultados se comprenden mejor con al menos un gráfico, tabla o diagrama.');
+  figurasLlenas().forEach((f, i) => { if (!limpiar(f.titulo)) s.push(`La figura ${i + 1} no tiene título ni leyenda.`); });
+  if (lineas(datos.referencias).length && !limpiar(datos.qrUrl)) s.push('Aún falta el enlace del documento de Drive para generar el QR de tus referencias.');
+  if (/seguir investigando/i.test(datos.proyeccion + ' ' + datos.conclusion)) s.push('"Seguir investigando" es una proyección sin detalle. Di qué convendría estudiar y con quiénes.');
+  return s;
+}
+
+function bloqueHTML(titulo, cuerpo) { return `<div class="pp-sec"><h4>${esc(titulo)}</h4>${cuerpo}</div>`; }
+function actualizarVista() {
+  if ($('#vistaWrap').hidden) return;
+  const s = secciones(); const vacio = '<p class="pp-vacio">Todavía vacío.</p>';
+  const intro = bloqueHTML('Introducción', s.intro.length ? s.intro.map(p => {
+    const k = p.indexOf(':'); return /^(Pregunta|Objetivo)/.test(p) ? `<p><strong>${esc(p.slice(0, k))}:</strong>${esc(p.slice(k + 1))}</p>` : `<p>${esc(p)}</p>`;
+  }).join('') : vacio);
+  const metodo = bloqueHTML('Metodología', pasosMetodo().length ? `<ol>${pasosMetodo().map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(limpiar(v))}</li>`).join('')}</ol>` : vacio);
+  const figs = figurasLlenas().map((f, i) => `<div><div class="pp-fig">${esc(f.tipo || 'Figura')}</div><p class="pp-cap">${esc(leyenda(f, i))}</p></div>`).join('');
+  const textoRes = hallazgosLlenos().map(h => `<p>${limpiar(h.categoria) ? `<strong>${esc(limpiar(h.categoria))}.</strong> ` : ''}${esc(limpiar(h.texto))}</p>`).join('');
+  const res = bloqueHTML('Resultados', (textoRes + (figs ? `<div class="pp-figs">${figs}</div>` : '')) || vacio);
+  const disc = bloqueHTML('Discusión', s.disc.length ? s.disc.map(p => `<p>${esc(p)}</p>`).join('') : vacio);
+  const conc = bloqueHTML('Conclusiones', s.conc.length ? s.conc.map(p => `<p>${esc(p)}</p>`).join('') : vacio);
+  const qr = `<div class="pp-sec"><div class="pp-qr"><span class="cuadro" aria-hidden="true">QR</span><p>${esc(textoQR())}</p></div></div>`;
+  const o = datos.orientacion;
+  $('#vistaPoster').innerHTML = `<div class="pp ${o}" id="pp" role="region" aria-label="Vista previa de tu póster ${o === 'h' ? 'horizontal' : 'vertical'}">
+    <div class="pp-cab"><div><h3>${esc(limpiar(datos.titulo)) || '<span style="font-style:italic">Título del póster</span>'}</h3>
+      <p>${esc(limpiar(datos.autores)) || 'Autoría'}</p><p>${esc(limpiar(datos.afiliacion)) || 'Carrera · Universidad de Los Lagos'}</p></div>
+      <img src="logoula.png" alt="Logo Universidad de Los Lagos" width="916" height="398"></div>
+    <div class="pp-cuerpo ${o}">${[[intro, metodo], [res], [disc, conc, qr]].map(c => `<div class="pp-col">${c.join('')}</div>`).join('')}</div></div>`;
+  if ($('#grisBtn').getAttribute('aria-pressed') === 'true') $('#pp').classList.add('gris');
+  const ext = [
+    ['Título', palabras(datos.titulo), 'hasta 15'],
+    ['Introducción', palabras(datos.problema) + palabras(datos.pregunta) + palabras(datos.objetivo), '80 a 130'],
+    ['Metodología', pasosMetodo().reduce((n, p) => n + palabras(p[1]), 0), '40 a 100'],
+    ['Resultados (texto y leyendas)', datos.hallazgos.reduce((n, h) => n + palabras(h.categoria) + palabras(h.texto), 0) + datos.figuras.reduce((n, f) => n + palabras(f.titulo), 0), '100 a 250'],
+    ['Discusión', palabras(datos.discusion), '50 a 100'],
+    ['Conclusiones', palabras(datos.conclusion) + palabras(datos.proyeccion), '60 a 120'],
+    ['Total del póster', totalPalabras(), '300 a 800']
+  ];
+  $('#tablaExtension').innerHTML = ext.map(([a, n, b], i) => `<tr><td>${i === ext.length - 1 ? `<strong>${a}</strong>` : a}</td><td>${n}</td><td>${b}</td></tr>`).join('');
+  const sn = senales();
+  $('#senales').hidden = !sn.length;
+  $('#senales').innerHTML = sn.length ? `<strong>Señales para revisar.</strong> Miran la forma y la extensión, no la calidad de tu investigación.<ul>${sn.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+}
+$('#verPosterBtn').addEventListener('click', () => {
+  const v = $('#vistaWrap'); v.hidden = !v.hidden;
+  $('#verPosterBtn').setAttribute('aria-expanded', String(!v.hidden));
+  $('#verPosterBtn').textContent = v.hidden ? 'Ver mi póster' : 'Ocultar mi póster';
+  actualizarVista();
+});
+$('#grisBtn').addEventListener('click', () => {
+  const on = $('#grisBtn').getAttribute('aria-pressed') !== 'true';
+  $('#grisBtn').setAttribute('aria-pressed', String(on));
+  const pp = $('#pp'); if (pp) pp.classList.toggle('gris', on);
+});
+
+// Word: contenido del póster y, aparte, lo que va en el documento de Drive
+$('#wordBtn').addEventListener('click', async () => {
+  const est = $('#estadoGuardado');
+  if (typeof docx === 'undefined') { est.textContent = 'No se pudo cargar la herramienta de Word. Revisa tu conexión y recarga la página.'; return; }
+  const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, PageBreak } = docx;
+  const s = secciones();
+  const par = (t, run = {}) => new Paragraph({ children:[new TextRun(Object.assign({ text:t, font:'Arial', size:24 }, run))], alignment: AlignmentType.LEFT, spacing:{ after:160, line:320 } });
+  const h = (t, nivel) => new Paragraph({ text:t, heading: nivel, spacing:{ before:240, after:120 } });
+  const hijos = [
+    h(limpiar(datos.titulo) || 'Título del póster', HeadingLevel.TITLE),
+    par(limpiar(datos.autores) || '[Autoría]'), par(limpiar(datos.afiliacion) || '[Carrera · Universidad de Los Lagos]'),
+    h('Introducción', HeadingLevel.HEADING_1), ...s.intro.map(t => par(t)),
+    h('Metodología', HeadingLevel.HEADING_1), ...s.metodo.map(t => par(t)),
+    h('Resultados', HeadingLevel.HEADING_1), ...s.res.map(t => par(t))
+  ];
+  if (figurasLlenas().length) {
+    hijos.push(h('Figuras planificadas', HeadingLevel.HEADING_2));
+    figurasLlenas().forEach((f, i) => { hijos.push(par(leyenda(f, i), { bold:true })); hijos.push(par('Tipo: ' + (f.tipo || 'sin definir'))); });
+  }
+  hijos.push(h('Discusión', HeadingLevel.HEADING_1), ...s.disc.map(t => par(t)));
+  hijos.push(h('Conclusiones', HeadingLevel.HEADING_1), ...s.conc.map(t => par(t)));
+  hijos.push(h('Código QR', HeadingLevel.HEADING_1), par('Texto junto al QR: ' + textoQR()), par('Enlace: ' + (limpiar(datos.qrUrl) || '[pendiente]')));
+  hijos.push(par(`Extensión total aproximada del póster: ${totalPalabras()} palabras.`, { italics:true, size:20 }));
+  // Segunda página: se copia tal cual al documento de Google Drive
+  hijos.push(new Paragraph({ children:[new PageBreak()] }));
+  hijos.push(h('Para tu documento de Google Drive', HeadingLevel.HEADING_1));
+  hijos.push(par(limpiar(datos.titulo) || '[Título del póster]', { bold:true }));
+  hijos.push(h('Referencias', HeadingLevel.HEADING_2), ...(lineas(datos.referencias).length ? lineas(datos.referencias).map(t => par(t)) : [par('[Escribe aquí tus referencias en APA 7]')]));
+  if (limpiar(datos.agradecimientos)) hijos.push(h('Agradecimientos', HeadingLevel.HEADING_2), par(limpiar(datos.agradecimientos)));
+  try {
+    const blob = await Packer.toBlob(new Document({ sections:[{ children: hijos }] }));
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'poster-contenido.docx'; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    est.textContent = 'Documento de Word descargado. La segunda página es para tu documento de Drive.';
+  } catch (e) { est.textContent = 'No se pudo generar el archivo de Word. Vuelve a intentarlo en unos segundos.'; }
+});
+
+// PowerPoint: base de 90 × 120 cm (vertical) o 120 × 90 cm (horizontal) con el contenido ubicado
+function cargarPptx() {
+  if (window.PptxGenJS) return Promise.resolve();
+  return new Promise((res, rej) => { const sc = document.createElement('script'); sc.src = 'https://unpkg.com/pptxgenjs@3.12.0/dist/pptxgen.bundle.js'; sc.onload = res; sc.onerror = rej; document.head.appendChild(sc); });
+}
+async function logoDataURL() {
+  // Funciona cuando la página está publicada en la web; abierta como archivo local, el navegador lo impide
+  try {
+    const r = await fetch('logoula.png'); if (!r.ok) return null;
+    const b = await r.blob();
+    return await new Promise(res => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = () => res(null); fr.readAsDataURL(b); });
+  } catch (e) { return null; }
+}
+$('#pptBtn').addEventListener('click', async () => {
+  const est = $('#estadoGuardado');
+  est.textContent = 'Preparando el PowerPoint…';
+  try { await cargarPptx(); } catch (e) { est.textContent = 'No se pudo cargar la herramienta de PowerPoint. Revisa tu conexión y vuelve a intentarlo.'; return; }
+  try {
+    const horizontal = datos.orientacion === 'h';
+    const W = horizontal ? 47.24 : 35.43, H = horizontal ? 35.43 : 47.24, M = 1.2, GAP = 0.8; // pulgadas
+    const HC = horizontal ? 6.4 : 7.2; // alto del encabezado
+    const p = new PptxGenJS();
+    p.defineLayout({ name:'POSTER', width:W, height:H }); p.layout = 'POSTER';
+    p.title = limpiar(datos.titulo) || 'Póster';
+    const sl = p.addSlide(); sl.background = { color:'FFFFFF' };
+    const F = 'Arial', anchoTit = W - M * 2 - 8;
+    sl.addShape(p.ShapeType.rect, { x:0, y:0, w:W, h:HC, fill:{ color:'0055B7' }, line:{ color:'0055B7' } });
+    sl.addText(limpiar(datos.titulo) || 'Título del póster', { x:M, y:0.5, w:anchoTit, h:HC - 3.2, fontFace:F, fontSize:80, bold:true, color:'FFFFFF', valign:'middle', fit:'shrink' });
+    sl.addText(limpiar(datos.autores) || 'Autoría', { x:M, y:HC - 2.6, w:anchoTit, h:1.2, fontFace:F, fontSize:40, color:'FFFFFF' });
+    sl.addText(limpiar(datos.afiliacion) || 'Carrera · Universidad de Los Lagos', { x:M, y:HC - 1.4, w:anchoTit, h:1, fontFace:F, fontSize:30, color:'E9F2FB' });
+    const logo = await logoDataURL();
+    const lw = 7, lh = lw * 398 / 916;
+    if (logo) sl.addImage({ data:logo, x:W - M - lw, y:(HC - lh) / 2, w:lw, h:lh, altText:'Logo Universidad de Los Lagos' });
+    else sl.addText('[Logo ULagos: descárgalo en icorporativa.ulagos.cl]', { x:W - M - lw, y:(HC - lh) / 2, w:lw, h:lh, fontFace:F, fontSize:20, color:'FFFFFF', align:'center', valign:'middle', line:{ color:'FFFFFF', width:1, dashType:'dash' } });
+
+    const s = secciones();
+    const bloques = {
+      intro: { t:'Introducción', cuerpo: s.intro },
+      metodo: { t:'Metodología', cuerpo: s.metodo },
+      res: { t:'Resultados', cuerpo: s.res, figs: figurasLlenas() },
+      disc: { t:'Discusión', cuerpo: s.disc },
+      conc: { t:'Conclusiones', cuerpo: s.conc },
+      qr: { qr:true }
+    };
+    const orden = [['intro','metodo'], ['res'], ['disc','conc','qr']];
+    const pesos = horizontal ? [1, 2, 1] : [1, 1, 1];
+    const util = W - M * 2 - GAP * 2, sumaP = pesos.reduce((a, b) => a + b, 0);
+    let x = M;
+    orden.forEach((col, ci) => {
+      const colW = util * pesos[ci] / sumaP; let y = HC + 1;
+      const altoTexto = (ls, pt) => { const cpl = colW * 72 / (pt * 0.52); return Math.max(1, ls.reduce((n, l) => n + Math.ceil(Math.max(l.length, 1) / cpl), 0)) * pt * 1.35 / 72 + 0.3; };
+      col.forEach(k => {
+        const b = bloques[k];
+        if (b.qr) {
+          sl.addText('[QR]', { x, y, w:3.5, h:3.5, fontFace:F, fontSize:24, color:'1A232B', align:'center', valign:'middle', line:{ color:'1A232B', width:2 } });
+          sl.addText(textoQR(), { x:x + 4, y, w:colW - 4, h:3.5, fontFace:F, fontSize:22, color:'1A232B', valign:'middle' });
+          y += 4.1; return;
+        }
+        sl.addText(b.t, { x, y, w:colW, h:1.1, fontFace:F, fontSize:44, bold:true, color:'0055B7', valign:'bottom' });
+        sl.addShape(p.ShapeType.line, { x, y:y + 1.15, w:colW, h:0, line:{ color:'0055B7', width:3 } });
+        y += 1.4;
+        if (b.cuerpo.length) {
+          const hh = altoTexto(b.cuerpo, 26);
+          sl.addText(b.cuerpo.map(t => ({ text:t, options:{ breakLine:true, paraSpaceAfter:13 } })), { x, y, w:colW, h:hh, fontFace:F, fontSize:26, color:'1A232B', valign:'top', align:'left', fit:'shrink' });
+          y += hh + 0.4;
+        }
+        // En la columna ancha (horizontal) las figuras van de a dos
+        const porFila = pesos[ci] > 1 ? 2 : 1, fw = (colW - (porFila - 1) * 0.6) / porFila, fh = 7;
+        (b.figs || []).forEach((f, i) => {
+          const fx = x + (i % porFila) * (fw + 0.6);
+          sl.addText(`[Inserta aquí: ${f.tipo || 'figura'}]`, { x:fx, y, w:fw, h:fh, fontFace:F, fontSize:24, color:'3A4551', align:'center', valign:'middle', fill:{ color:'F4F6F8' }, line:{ color:'8A96A3', width:1.5, dashType:'dash' } });
+          sl.addText(leyenda(f, i), { x:fx, y:y + fh + 0.15, w:fw, h:1.4, fontFace:F, fontSize:20, color:'3A4551', valign:'top' });
+          if (i % porFila === porFila - 1 || i === b.figs.length - 1) y += fh + 1.8;
+        });
+        y += 0.6;
+      });
+      x += colW + GAP;
+    });
+    await p.writeFile({ fileName:'poster-base.pptx' });
+    est.textContent = logo ? 'PowerPoint descargado. Ajusta tamaños, ubica tus figuras y pega tu QR.' : 'PowerPoint descargado. Agrega el logo desde el kit gráfico ULagos, ubica tus figuras y pega tu QR.';
+  } catch (e) { est.textContent = 'No se pudo generar el PowerPoint. Vuelve a intentarlo en unos segundos.'; }
+});
+pintarPlantilla();
+
+// ---------- ERRORES ----------
+const ERRORES = [
+  { t:'Copiar el informe al póster', mal:'Párrafos completos del planteamiento y del marco teórico, en letra de 16 pt, ocupando dos columnas.',
+    bien:'Selecciona: el problema en dos o tres frases, la pregunta, un diagrama del método y los resultados que la responden. Lo demás lo cuentas en voz alta.' },
+  { t:'Título largo o demasiado general', mal:'"Estudio sobre la convivencia escolar", o un título de 30 palabras que copia el objetivo general.',
+    bien:'Hasta 15 palabras, con el tema, a quiénes se estudió y dónde. Si necesitas más precisión, usa un subtítulo.' },
+  { t:'Letra que no se lee a distancia', mal:'Cuerpo del texto en 14 pt, en una tipografía manuscrita o decorativa, y títulos de sección en mayúsculas.',
+    bien:'Usa Arial, Calibri, Roboto o Tahoma, con el cuerpo entre 24 y 30 pt y mayúscula solo al inicio. Imprime un trozo al 25 % y léelo con el brazo estirado.' },
+  { t:'Poco contraste', mal:'Texto gris claro sobre fondo celeste, o texto sobre una fotografía del establecimiento.',
+    bien:'Fondo liso y claro con texto oscuro. Verifica la razón de contraste: 4,5:1 como mínimo y cerca de 7:1 para leer a distancia.' },
+  { t:'Información que depende solo del color', mal:'Gráfico con un curso en rojo y otro en verde, y la leyenda al pie.',
+    bien:'Dos colores de distinta luminosidad y el nombre escrito junto a cada serie. Comprueba en escala de grises que todo se distingue.' },
+  { t:'Figuras sin título ni leyenda', mal:'Un gráfico de barras sin título, sin rótulos en los ejes y con los mismos datos repetidos en una tabla al lado.',
+    bien:'Cada figura con título, leyenda, valores y fuente, y cada dato en un solo formato.' },
+  { t:'Imágenes decorativas o sin derechos', mal:'Imágenes de internet de baja resolución, que no muestran nada del estudio, o fotos donde se reconoce a estudiantes.',
+    bien:'Usa imágenes propias o libres de derechos, en buena resolución y relacionadas con el contenido. Nunca rostros de estudiantes sin autorización.' }
+];
+$('#listaErrores').innerHTML = ERRORES.map((e, i) => `<div class="err"><span class="n" aria-hidden="true">${i + 1}</span><h3>${esc(e.t)}</h3>
+  <p class="mal">${esc(e.mal)}</p><details><summary>Cómo se arregla</summary><p class="bien">${esc(e.bien)}</p></details></div>`).join('');
+
+// ---------- LISTA DE VERIFICACIÓN ----------
+const CHECK = [
+  { g:'Contenido', items:[
+    'El título tiene 15 palabras o menos y dice el tema y a quiénes se estudió.',
+    'Aparecen la autoría, la carrera, la universidad y el logo ULagos descargado del kit gráfico.',
+    'La pregunta de investigación es la misma que en el informe y se ve destacada.',
+    'La metodología está en un diagrama o en pasos numerados.',
+    'Los resultados responden a la pregunta y están organizados por categorías o dimensiones.',
+    'La discusión interpreta los resultados con autores de mi marco teórico.',
+    'Las conclusiones dicen cómo se responde la pregunta, sin opiniones que no salgan de los resultados.',
+    'El QR abre un documento de Drive con todas las referencias citadas, en APA 7.',
+    'Revisé la ortografía y no hay nombres de participantes.'] },
+  { g:'Diseño', items:[
+    'El contenido se lee de arriba hacia abajo y de izquierda a derecha, en columnas.',
+    'El total está entre 300 y 800 palabras y hay espacio en blanco entre los bloques.',
+    'Usé como máximo tres colores.',
+    'Los tamaños de letra siguen la tabla y el título se lee a tres metros.',
+    'Cada dato aparece en un solo formato, sin repetir tabla y gráfico.'] },
+  { g:'Accesibilidad', items:[
+    'Todo el texto tiene un contraste de 4,5:1 o más con su fondo.',
+    'Revisé el póster en escala de grises y todo se distingue.',
+    'Ningún resultado se distingue solo por el color: hay etiquetas o rótulos.',
+    'Usé Arial, Calibri, Roboto o Tahoma, como máximo dos tipografías en todo el póster.',
+    'No hay mayúsculas sostenidas ni subrayado en el texto.',
+    'Cada figura tiene título, leyenda y fuente.',
+    'El QR es negro sobre blanco, dice qué abre y lo probé desde otro celular.'] }
+];
+const totalCheck = CHECK.reduce((n, g) => n + g.items.length, 0);
+const contar = () => { $('#contadorCheck').textContent = `${Object.values(datos.check).filter(Boolean).length} de ${totalCheck} revisados.`; };
+let k = 0;
+$('#listaCheck').innerHTML = CHECK.map(g => `<h3 class="h3" style="margin:18px 0 10px">${esc(g.g)}</h3><div style="display:grid;gap:10px">${g.items.map(c => { const i = k++; return `<label class="check"><input type="checkbox" data-check="${i}" ${datos.check[i] ? 'checked' : ''}><span>${esc(c)}</span></label>`; }).join('')}</div>`).join('');
+$('#listaCheck').addEventListener('change', e => {
+  const i = e.target.dataset.check; if (i == null) return;
+  datos.check[i] = e.target.checked; guardar(); contar();
+});
+contar();
+</script>
+</body>
+</html>
