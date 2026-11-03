@@ -271,6 +271,8 @@
   .pp-sec h4{font:700 15px 'Roboto Condensed',sans-serif;color:var(--azul);border-bottom:2px solid var(--azul);padding-bottom:3px;margin:0 0 6px}
   .pp-sec ol{margin:0;padding-left:18px}
   .pp-fig{border:1px dashed #8a96a3;background:#f4f6f8;border-radius:4px;padding:18px 10px;margin:6px 0 0;font-size:12.5px;color:var(--texto-2);text-align:center;font-weight:700}
+  .card .pp-sec p.pp-dest{border:2px solid var(--azul);border-radius:6px;padding:6px 8px;font-weight:700}
+  .card .pp-sec p.pp-idea{font:700 16px/1.25 'Roboto Condensed',sans-serif;color:var(--verde-texto)}
   .pp-vacio{color:var(--texto-3);font-style:italic}
   .pp-qr{display:flex;gap:10px;align-items:center}
   .pp-qr .cuadro{flex:none;width:56px;height:56px;border:2px solid var(--tinta);border-radius:3px;display:flex;align-items:center;justify-content:center;font:700 12px 'Open Sans',sans-serif}
@@ -326,15 +328,15 @@
   <div>
     <span class="eyebrow ey-ambar">Fase 1 · Algunas distinciones</span>
     <h2 class="h2">Un póster no es el informe en tamaño grande</h2>
-    <p class="lead">El póster académico comunica una investigación terminada combinando texto breve con gráficos, tablas, diagramas e imágenes. Se diseña para que alguien que pasa frente a él entienda en pocos minutos qué estudiaste, cómo lo hiciste y qué encontraste, y para que luego converse contigo. Por eso, no se escribe desde cero, sale de tus informes, pero seleccionando y resumiendo.</p>
+    <p class="lead">El póster académico comunica una investigación terminada combinando texto breve con gráficos, tablas, diagramas e imágenes. Se diseña para que alguien que pasa frente a él entienda en pocos minutos qué estudiaste, cómo lo hiciste y qué encontraste, y para que luego converse contigo. Por eso, no se escribe desde cero: se desprende de tus informes, pero seleccionando y resumiendo.</p>
     <div class="grid2 antes-grid">
       <div class="card">
         <h3 class="h3">Lo que necesitas tener a mano</h3>
         <ul class="lista-simple">
-          <li><strong>Tu pregunta de investigación y tus objetivos</strong>, en su versión final.</li>
+          <li><strong>Tu objetivo general y tus objetivos específicos</strong>, en su versión final.</li>
           <li><strong>Tu capítulo metodológico</strong>: enfoque, participantes, instrumento y forma de análisis.</li>
           <li><strong>Tus resultados</strong>, con las tablas, gráficos o citas que mejor muestran cada categoría o dimensión.</li>
-          <li><strong>Tu discusión</strong>, con los autores que usaste para interpretar tus resultados.</li>
+          <li><strong>Tu discusión</strong>, con las referencias teóricas, normativas y empíricas que usaste para interpretar tus resultados.</li>
           <li><strong>Tus conclusiones</strong> y las referencias que vas a citar en el póster.</li>
         </ul>
       </div>
@@ -378,6 +380,10 @@
     <h2 class="h2">Las partes de un póster científico</h2>
     <p class="lead">Cada parte de un póster se desprende de lo que ya has escrito en tus informes. Abre cada tarjeta para ver más detalles.</p>
     <div class="pasos" id="pasos"></div>
+    <div class="aviso" style="margin-top:22px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:2px"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      <p><strong>Mira pósteres de ejemplo.</strong> En esta <a href="https://drive.google.com/drive/folders/1GTH0PeKFsPkjKK8anh5I1n8yAaIRyBcL?usp=sharing" target="_blank" rel="noopener">carpeta de ejemplos<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a> encontrarás pósteres armados con estas siete partes. Fíjate en cómo destacan el objetivo general, cuánto texto usan y cómo sintetizan las conclusiones.</p>
+    </div>
     <details class="plegable">
       <summary>Paso a paso: arma la carpeta de Drive y crea su QR</summary>
       <p style="margin:0 0 10px;font-size:15.5px;line-height:1.65;color:var(--texto-2)">El QR del póster abre una carpeta de Google Drive con los anexos de tu investigación. La carpeta se comparte solo con tus docentes, para que puedan revisar tu proceso. Crea las carpetas con estos nombres exactos, numeradas para que se mantengan en orden, y sube <strong>todos los archivos en PDF</strong>:</p>
@@ -413,7 +419,7 @@
           </div>
           <div class="cols">
             <div class="col">
-              <div class="blq s"><b>2</b><span>Introducción y pregunta</span></div>
+              <div class="blq s"><b>2</b><span>Introducción y objetivo</span></div>
               <div class="blq s"><b>3</b><span>Metodología en diagrama</span></div>
             </div>
             <div class="col">
@@ -437,7 +443,7 @@
           </div>
           <div class="cols">
             <div class="col">
-              <div class="blq s"><b>2</b><span>Introducción y pregunta</span></div>
+              <div class="blq s"><b>2</b><span>Introducción y objetivo</span></div>
               <div class="blq s"><b>3</b><span>Metodología en diagrama</span></div>
             </div>
             <div class="col">
@@ -765,7 +771,7 @@ const CIFRAS = [
   { p:'¿Cuántas palabras lleva el póster en total?', n:'300 a 800', d:'palabras en total', x:'Cuentan todos los textos, también las leyendas de las figuras. El resto lo explicas tú en voz alta.' },
   { p:'¿Cuántas palabras como máximo tiene el título?', n:'15', d:'palabras como máximo en el título', x:'Que diga el tema, a quiénes se estudió y dónde.' },
   { p:'¿Cuánto espacio se dedica a lo visual?', n:'40 a 50 %', d:'del espacio para gráficos, tablas e imágenes', x:'Además, deja espacio en blanco entre los bloques: ayuda a leer sin esfuerzo.' },
-  { p:'¿Cuántas preguntas de investigación aparecen?', n:'1', d:'pregunta de investigación, destacada', x:'La misma de del inicio.' }
+  { p:'¿Cuántos objetivos generales aparecen?', n:'1', d:'objetivo general, destacado', x:'El mismo de tu informe, en la introducción. En las conclusiones, una frase dice si se logró.' }
 ];
 const COLORES_CIFRA = ['var(--azul)', 'var(--morado)', 'var(--verde-texto)'];
 const icoGirar = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>';
@@ -801,25 +807,25 @@ $('#cifrasTodas').addEventListener('click', () => {
 
 // ---------- ESTRUCTURA ----------
 const PASOS = [
-  { n:1, t:'Encabezado', c:'var(--azul)', sale:'Sale de la portada de tu informe', d:'Título breve, nombres de quienes investigaron, carrera y logo de la Universidad de Los Lagos.',
+  { n:1, t:'Encabezado', c:'var(--azul)', sale:'Lo tomas de la portada de tu informe', d:'Título breve, nombres de quienes investigaron, carrera y logo de la Universidad de Los Lagos.',
     va:['Un título de hasta 15 palabras que diga el tema y a quiénes se estudió.','Nombres, carrera y Universidad de Los Lagos.','El logo institucional, descargado del kit gráfico ULagos.'],
     noVa:['Títulos entre comillas o en mayúsculas sostenidas.','Un título tan general que sirva para cualquier estudio.'] },
-  { n:2, t:'Introducción', c:'var(--azul)', sale:'Sale de tu planteamiento del problema', d:'Por qué el tema importa, tu pregunta de investigación y tu objetivo general.',
-    va:['El problema en dos o tres frases, con uno o dos referentes.','Tu pregunta de investigación, completa y destacada.','El objetivo general.'],
-    noVa:['El marco teórico completo.','Una lista de todos los objetivos específicos, si no hay espacio.'] },
-  { n:3, t:'Metodología', c:'var(--azul)', sale:'Sale de tu capítulo metodológico', d:'Cómo hiciste el estudio, mejor en un diagrama de pasos que en un párrafo.',
+  { n:2, t:'Introducción', c:'var(--azul)', sale:'Se desprende de tu planteamiento del problema', d:'Por qué el tema importa y tus objetivos.',
+    va:['El problema en dos o tres frases, con uno o dos referentes.','El objetivo general, completo y destacado.','Los objetivos específicos (teórico, metodológico y empírico), en una o dos líneas cada uno.'],
+    noVa:['El marco teórico completo.','La pregunta de investigación: en el póster la reemplaza el objetivo general.'] },
+  { n:3, t:'Metodología', c:'var(--azul)', sale:'Se desprende de tu capítulo metodológico', d:'Cómo hiciste el estudio, mejor en un diagrama de pasos que en un párrafo.',
     va:['Enfoque.','Participantes, en una línea.','Instrumento y forma de análisis.','Una frase sobre los resguardos éticos.'],
     noVa:['La justificación de cada decisión metodológica.','El instrumento completo.'] },
-  { n:4, t:'Resultados', c:'var(--morado)', sale:'Sale de tu capítulo de resultados', d:'El bloque más grande del póster. Organízalo por categorías o dimensiones, con un gráfico, una tabla breve o una cita por cada una.',
-    va:['Los resultados que responden a tu pregunta.','Figuras con título, leyenda y fuente.','Una o dos frases por categoría que digan qué muestra la figura.'],
+  { n:4, t:'Resultados', c:'var(--morado)', sale:'Lo tomas de tu capítulo de resultados', d:'El bloque más grande del póster. Organízalo por categorías o dimensiones, con un gráfico, una tabla breve o una cita por cada una.',
+    va:['Los resultados que dan cuenta de tu objetivo general.','Figuras con título, leyenda y fuente.','Una o dos frases por categoría que digan qué muestra la figura.'],
     noVa:['Todas las tablas del informe.','El mismo dato en tabla y en gráfico.','Citas largas de entrevistas.'] },
-  { n:5, t:'Discusión', c:'var(--morado)', sale:'Sale de tu capítulo de discusión', d:'Qué significan tus resultados a la luz de tu marco teórico: con qué autores coinciden y en qué se diferencian.',
+  { n:5, t:'Discusión', c:'var(--morado)', sale:'Para este apartado, recurre a tu apartado de discusión', d:'Qué significan tus resultados a la luz de tu marco teórico: con qué autores coinciden y en qué se diferencian.',
     va:['Una o dos interpretaciones de tus hallazgos principales.','Los autores de tu marco teórico con los que coinciden o se diferencian, citados (Autor, año).'],
     noVa:['Repetir los resultados con otras palabras.','Autores que no están en tu marco teórico.'] },
-  { n:6, t:'Conclusiones', c:'var(--verde-texto)', sale:'Sale de tus conclusiones', d:'Cómo se responde tu pregunta de investigación y qué se desprende de ello.',
-    va:['Si el objetivo general se logró y qué lo muestra.','La respuesta a tu pregunta, en una o dos frases.','Una limitación o una proyección concreta, en una frase.'],
-    noVa:['Opiniones que no salen de tus resultados.','Proyecciones sin detalle, por ejemplo, "seguir investigando el tema".'] },
-  { n:7, t:'QR a la carpeta de Drive', c:'var(--verde-texto)', sale:'Sale de tus anexos y tu bibliografía', d:'En el póster solo aparece un código QR. Abre una carpeta de Google Drive, compartida solo con tus docentes, con los consentimientos y asentimientos, los instrumentos, el informe de resultados, discusión y conclusión, y las referencias. Todo en PDF.',
+  { n:6, t:'Conclusiones', c:'var(--verde-texto)', sale:'Se desprende de tus conclusiones', d:'La idea principal de tu estudio y el logro de tus objetivos, en forma sintética.',
+    va:['La idea principal, en una frase destacada.','El logro de los objetivos, en una frase. Ej.: Se lograron el objetivo general y los objetivos teórico, metodológico y empírico.','Una limitación y una proyección concretas, en una o dos frases.'],
+    noVa:['Opiniones que no se desprenden de tus resultados.','Explicar objetivo por objetivo cómo se logró: eso lo cuentas en voz alta.','Proyecciones sin detalle, por ejemplo, "seguir investigando el tema".'] },
+  { n:7, t:'QR a la carpeta de Drive', c:'var(--verde-texto)', sale:'Lo tomas de tus anexos y tu bibliografía', d:'En el póster solo aparece un código QR. Abre una carpeta de Google Drive, compartida solo con tus docentes, con los consentimientos y asentimientos, los instrumentos, el informe de resultados, discusión y conclusión, y las referencias. Todo en PDF.',
     va:['Una subcarpeta por cada anexo, con el nombre que indica el esquema del paso a paso.','Todos los archivos en PDF.','Las referencias en APA 7 en un documento, y los PDF de los textos citados en otra subcarpeta.','Si quieres, agradecimientos en el documento de referencias, sin datos que identifiquen a nadie.','El QR en el póster, con un texto que diga qué abre.'],
     noVa:['La lista de referencias impresa en el póster.','Archivos en Word, Excel u otro formato que no sea PDF.','Instrumentos con las respuestas de los participantes: va solo el formato.','Una carpeta abierta a cualquier persona con el enlace: debe quedar compartida solo con tus docentes.'] }
 ];
@@ -903,15 +909,15 @@ const CHIPS = {
   prob: ['En el contexto de…, se observa que…','Diversos estudios señalan que… (Autor, año).','Sin embargo, aún no se ha estudiado…'],
   res:  ['La mayoría de los participantes…','En la categoría…, los entrevistados señalan que…','Un …% de los encuestados…','Destaca que…'],
   disc: ['Estos resultados coinciden con lo planteado por … (Autor, año), quien…','A diferencia de lo señalado por … (Autor, año),…','Esto podría explicarse porque…'],
-  conc: ['El objetivo general se logró, ya que…','La pregunta de investigación se responde así,…'],
+  logro: ['Se lograron el objetivo general y los objetivos teórico, metodológico y empírico.','Se logró el objetivo general; el objetivo … se logró parcialmente, porque…'],
   proy: ['Los resultados describen a … y no se extienden a…','Convendría estudiar…, con…, porque…']
 };
 const vacioHallazgo = () => ({ categoria:'', texto:'' });
 const nuevoId = () => 'f' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 // "imagen" guarda solo el nombre del archivo; la imagen misma va en IndexedDB, nunca en localStorage
 const vacioFigura = () => ({ id:nuevoId(), tipo:'', titulo:'', fuente:'', imagen:'' });
-const base = () => ({ titulo:'', autores:'', afiliacion:'', problema:'', pregunta:'', objetivo:'', enfoque:'', participantes:'', instrumento:'', analisis:'', etica:'',
-  hallazgos:[vacioHallazgo()], figuras:[vacioFigura()], discusion:'', conclusion:'', proyeccion:'', referencias:'', agradecimientos:'', qrTexto:'', qrUrl:'', orientacion:'v', check:{} });
+const base = () => ({ titulo:'', autores:'', afiliacion:'', problema:'', pregunta:'', objetivo:'', objTeorico:'', objMetodologico:'', objEmpirico:'', enfoque:'', participantes:'', instrumento:'', analisis:'', etica:'',
+  hallazgos:[vacioHallazgo()], figuras:[vacioFigura()], discusion:'', conclusion:'', logro:'', proyeccion:'', referencias:'', agradecimientos:'', qrTexto:'', qrUrl:'', orientacion:'v', check:{} });
 let datos = base();
 try {
   const g = JSON.parse(localStorage.getItem(CLAVE) || 'null');
@@ -1071,7 +1077,7 @@ function pintarPlantilla() {
   $('#tplCampos').innerHTML = `
   <div class="tpl" style="--c:var(--azul)">
     <div class="tpl-head"><h3>1 · Encabezado</h3></div>
-    <p class="tpl-fuente">Sale de la portada de tu informe.</p>
+    <p class="tpl-fuente">Lo tomas de la portada de tu informe.</p>
     ${campo({ id:'f-titulo', ruta:'titulo', etiqueta:'Título del póster', ayuda:'Hasta 15 palabras. Que diga el tema y a quiénes se estudió. Sin comillas ni mayúsculas sostenidas.', valor:d.titulo, contar:15 })}
     <div class="grid-campos">
       ${campo({ id:'f-autores', ruta:'autores', etiqueta:'Autoría', ayuda:'Nombres de quienes investigaron, separados por coma.', valor:d.autores })}
@@ -1080,14 +1086,16 @@ function pintarPlantilla() {
   </div>
   <div class="tpl" style="--c:var(--azul)">
     <div class="tpl-head"><h3>2 · Introducción</h3></div>
-    <p class="tpl-fuente">Sale de tu planteamiento del problema.</p>
+    <p class="tpl-fuente">Se desprende de tu planteamiento del problema.</p>
     ${campo({ id:'f-problema', ruta:'problema', etiqueta:'El problema y por qué importa', ayuda:'Dos o tres frases con uno o dos referentes de tu marco teórico.', valor:d.problema, area:true, chip:'prob', contar:80 })}
-    ${campo({ id:'f-pregunta', ruta:'pregunta', etiqueta:'Pregunta de investigación', ayuda:'Tal como quedó en tu informe.', valor:d.pregunta })}
-    ${campo({ id:'f-objetivo', ruta:'objetivo', etiqueta:'Objetivo general', valor:d.objetivo })}
+    ${campo({ id:'f-objetivo', ruta:'objetivo', etiqueta:'Objetivo general', ayuda:'Tal como quedó en tu informe. En el póster va destacado.', valor:d.objetivo })}
+    ${campo({ id:'f-objTeorico', ruta:'objTeorico', etiqueta:'Objetivo teórico', valor:d.objTeorico })}
+    ${campo({ id:'f-objMetodologico', ruta:'objMetodologico', etiqueta:'Objetivo metodológico', valor:d.objMetodologico })}
+    ${campo({ id:'f-objEmpirico', ruta:'objEmpirico', etiqueta:'Objetivo empírico', valor:d.objEmpirico })}
   </div>
   <div class="tpl" style="--c:var(--azul)">
     <div class="tpl-head"><h3>3 · Metodología</h3></div>
-    <p class="tpl-fuente">Sale de tu capítulo metodológico. Cada campo será un paso del diagrama, así que escribe frases cortas.</p>
+    <p class="tpl-fuente">Se desprende de tu capítulo metodológico. Cada campo será un paso del diagrama, así que escribe frases cortas.</p>
     <div class="grid-campos">
       ${campo({ id:'f-enfoque', ruta:'enfoque', etiqueta:'Enfoque', ayuda:'Ej.: Enfoque cualitativo.', valor:d.enfoque })}
       ${campo({ id:'f-participantes', ruta:'participantes', etiqueta:'Participantes', ayuda:'Ej.: 4 docentes de dos establecimientos públicos, muestreo por conveniencia.', valor:d.participantes })}
@@ -1097,7 +1105,7 @@ function pintarPlantilla() {
   </div>
   <div class="tpl" style="--c:var(--morado)">
     <div class="tpl-head"><h3>4 · Resultados</h3></div>
-    <p class="tpl-fuente">La tomas de tu capítulo de resultados. Es el bloque más grande del póster.</p>
+    <p class="tpl-fuente">Lo tomas de tu capítulo de resultados. Es el bloque más grande del póster.</p>
     <div id="listaHallazgos"></div>
     <button type="button" class="ghost-btn" id="addHallazgo">+ Agregar categoría o dimensión</button>
     <h4 style="font-size:17px;margin:22px 0 4px">Figuras</h4>
@@ -1107,14 +1115,15 @@ function pintarPlantilla() {
   </div>
   <div class="tpl" style="--c:var(--morado)">
     <div class="tpl-head"><h3>5 · Discusión</h3></div>
-    <p class="tpl-fuente">La tomas de tu capítulo de discusión.</p>
-    ${campo({ id:'f-discusion', ruta:'discusion', etiqueta:'Qué significan tus resultados', ayuda:'Una o dos interpretaciones de tus hallazgos principales, con los autores de tu marco teórico con los que coinciden o se diferencian.', valor:d.discusion, area:true, chip:'disc', contar:80 })}
+    <p class="tpl-fuente">Para este apartado, recurre a tu apartado de discusión.</p>
+    ${campo({ id:'f-discusion', ruta:'discusion', etiqueta:'Qué significan tus resultados', ayuda:'Una o dos interpretaciones de tus hallazgos principales, con las referencias teóricas/normativas/empíricas de tu marco teórico con los que coinciden o se diferencian.', valor:d.discusion, area:true, chip:'disc', contar:80 })}
   </div>
   <div class="tpl" style="--c:var(--verde-texto)">
     <div class="tpl-head"><h3>6 · Conclusiones</h3></div>
-    <p class="tpl-fuente">Sale de tus conclusiones.</p>
-    ${campo({ id:'f-conclusion', ruta:'conclusion', etiqueta:'Respuesta a tu pregunta de investigación', ayuda:'Si el objetivo general se logró, qué resultado lo muestra y cómo se responde la pregunta. Puedes conectar con un autor de tu marco teórico.', valor:d.conclusion, area:true, chip:'conc', contar:80 })}
-    ${campo({ id:'f-proyeccion', ruta:'proyeccion', etiqueta:'Limitación o proyección', ayuda:'Una o dos frases. Si es una proyección, di qué convendría estudiar y con quiénes.', valor:d.proyeccion, area:true, chip:'proy', contar:40 })}
+    <p class="tpl-fuente">Se desprende de tus conclusiones. Va en forma sintética: el detalle lo cuentas en voz alta.</p>
+    ${campo({ id:'f-conclusion', ruta:'conclusion', etiqueta:'Idea principal', ayuda:'Una frase breve y destacada con lo más importante que se desprende de tus resultados. Ej.: Más horas de smartphone se asocian con notas más bajas.', valor:d.conclusion, contar:15 })}
+    ${campo({ id:'f-logro', ruta:'logro', etiqueta:'Logro de los objetivos', ayuda:'Una frase que diga si se lograron el objetivo general y los específicos.', valor:d.logro, area:true, chip:'logro', contar:30 })}
+    ${campo({ id:'f-proyeccion', ruta:'proyeccion', etiqueta:'Limitación y proyección', ayuda:'Una o dos frases: qué limita tus resultados y qué convendría estudiar, y con quiénes.', valor:d.proyeccion, area:true, chip:'proy', contar:40 })}
   </div>
   <div class="tpl" style="--c:var(--verde-texto)">
     <div class="tpl-head"><h3>7 · QR a la carpeta de Drive</h3></div>
@@ -1198,19 +1207,22 @@ const pasosMetodo = () => [['Enfoque', datos.enfoque], ['Participantes', datos.p
 const hallazgosLlenos = () => datos.hallazgos.filter(h => limpiar(h.categoria) || limpiar(h.texto));
 const figurasLlenas = () => datos.figuras.filter(f => f.tipo || limpiar(f.titulo) || limpiar(f.fuente) || IMGS.has(f.id));
 const textoQR = () => limpiar(datos.qrTexto) || 'Anexos y referencias (acceso para docentes).';
+const OBJETIVOS = [['objetivo', 'Objetivo general'], ['objTeorico', 'Objetivo teórico'], ['objMetodologico', 'Objetivo metodológico'], ['objEmpirico', 'Objetivo empírico']];
+const palabrasIntro = () => palabras(datos.problema) + OBJETIVOS.reduce((n, [k]) => n + palabras(datos[k]), 0);
+const palabrasConc = () => palabras(datos.conclusion) + palabras(datos.logro) + palabras(datos.proyeccion);
 function secciones() {
-  const intro = [limpiar(datos.problema), limpiar(datos.pregunta) ? 'Pregunta de investigación: ' + limpiar(datos.pregunta) : '', limpiar(datos.objetivo) ? 'Objetivo general: ' + limpiar(datos.objetivo) : ''].filter(Boolean);
+  const intro = [limpiar(datos.problema), ...OBJETIVOS.map(([k, t]) => limpiar(datos[k]) ? t + ': ' + limpiar(datos[k]) : '')].filter(Boolean);
   const metodo = pasosMetodo().map(([k, v], i) => `${i + 1}. ${k}: ${limpiar(v)}`);
   const res = hallazgosLlenos().map(h => (limpiar(h.categoria) ? limpiar(h.categoria) + ': ' : '') + limpiar(h.texto));
   const disc = [limpiar(datos.discusion)].filter(Boolean);
-  const conc = [limpiar(datos.conclusion), limpiar(datos.proyeccion)].filter(Boolean);
+  const conc = [limpiar(datos.conclusion), limpiar(datos.logro), limpiar(datos.proyeccion) ? 'Limitación y proyección: ' + limpiar(datos.proyeccion) : ''].filter(Boolean);
   return { intro, metodo, res, disc, conc };
 }
 const leyenda = (f, i) => `Figura ${i + 1}. ${limpiar(f.titulo) || '[título y leyenda]'}${limpiar(f.fuente) ? '. Fuente: ' + limpiar(f.fuente) : ''}`;
 function totalPalabras() {
-  return palabras(datos.titulo) + palabras(datos.problema) + palabras(datos.pregunta) + palabras(datos.objetivo) +
+  return palabras(datos.titulo) + palabrasIntro() +
     pasosMetodo().reduce((n, p) => n + palabras(p[1]), 0) + datos.hallazgos.reduce((n, h) => n + palabras(h.categoria) + palabras(h.texto), 0) +
-    datos.figuras.reduce((n, f) => n + palabras(f.titulo), 0) + palabras(datos.discusion) + palabras(datos.conclusion) + palabras(datos.proyeccion);
+    datos.figuras.reduce((n, f) => n + palabras(f.titulo), 0) + palabras(datos.discusion) + palabrasConc();
 }
 function senales() {
   const s = [];
@@ -1218,7 +1230,8 @@ function senales() {
   if (nt > 15) s.push(`El título tiene ${nt} palabras. Intenta dejarlo en 15 o menos.`);
   if (limpiar(datos.titulo).length > 12 && datos.titulo === datos.titulo.toUpperCase()) s.push('El título está en mayúsculas sostenidas, que se leen más lento. Usa mayúscula solo al inicio y en nombres propios.');
   if (/["“”«»]/.test(datos.titulo)) s.push('El título lleva comillas. Quítalas.');
-  if (!limpiar(datos.pregunta)) s.push('Falta la pregunta de investigación en la introducción.');
+  if (!limpiar(datos.objetivo)) s.push('Falta el objetivo general en la introducción.');
+  if (palabras(datos.conclusion) > 15) s.push('La idea principal de las conclusiones tiene más de 15 palabras. Déjala en una frase breve.');
   if (hallazgosLlenos().length && !limpiar(datos.discusion)) s.push('Falta la discusión: qué significan tus resultados según tu marco teórico.');
   const total = totalPalabras();
   if (total > 800) s.push(`El póster suma ${total} palabras. Lo sugerido es entre 300 y 800. Revisa qué puede pasar a una figura.`);
@@ -1234,7 +1247,7 @@ function actualizarVista() {
   if ($('#vistaWrap').hidden) return;
   const s = secciones(); const vacio = '<p class="pp-vacio">Todavía vacío.</p>';
   const intro = bloqueHTML('Introducción', s.intro.length ? s.intro.map(p => {
-    const k = p.indexOf(':'); return /^(Pregunta|Objetivo)/.test(p) ? `<p><strong>${esc(p.slice(0, k))}:</strong>${esc(p.slice(k + 1))}</p>` : `<p>${esc(p)}</p>`;
+    const k = p.indexOf(':'); return /^Objetivo general/.test(p) ? `<p class="pp-dest"><strong>${esc(p.slice(0, k))}:</strong>${esc(p.slice(k + 1))}</p>` : /^Objetivo/.test(p) ? `<p><strong>${esc(p.slice(0, k))}:</strong>${esc(p.slice(k + 1))}</p>` : `<p>${esc(p)}</p>`;
   }).join('') : vacio);
   const metodo = bloqueHTML('Metodología', pasosMetodo().length ? `<ol>${pasosMetodo().map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(limpiar(v))}</li>`).join('')}</ol>` : vacio);
   const figs = figurasLlenas().map((f, i) => { const im = IMGS.get(f.id);
@@ -1242,7 +1255,10 @@ function actualizarVista() {
   const textoRes = hallazgosLlenos().map(h => `<p>${limpiar(h.categoria) ? `<strong>${esc(limpiar(h.categoria))}.</strong> ` : ''}${esc(limpiar(h.texto))}</p>`).join('');
   const res = bloqueHTML('Resultados', (textoRes + (figs ? `<div class="pp-figs">${figs}</div>` : '')) || vacio);
   const disc = bloqueHTML('Discusión', s.disc.length ? s.disc.map(p => `<p>${esc(p)}</p>`).join('') : vacio);
-  const conc = bloqueHTML('Conclusiones', s.conc.length ? s.conc.map(p => `<p>${esc(p)}</p>`).join('') : vacio);
+  const conc = bloqueHTML('Conclusiones', s.conc.length ? [
+    limpiar(datos.conclusion) ? `<p class="pp-idea">${esc(limpiar(datos.conclusion))}</p>` : '',
+    limpiar(datos.logro) ? `<p><strong>${esc(limpiar(datos.logro))}</strong></p>` : '',
+    limpiar(datos.proyeccion) ? `<p><strong>Limitación y proyección:</strong> ${esc(limpiar(datos.proyeccion))}</p>` : ''].join('') : vacio);
   const qr = `<div class="pp-sec"><div class="pp-qr"><span class="cuadro" aria-hidden="true">QR</span><p>${esc(textoQR())}</p></div></div>`;
   const o = datos.orientacion;
   $('#vistaPoster').innerHTML = `<div class="pp ${o}" id="pp" role="region" aria-label="Vista previa de tu póster ${o === 'h' ? 'horizontal' : 'vertical'}">
@@ -1253,11 +1269,11 @@ function actualizarVista() {
   if ($('#grisBtn').getAttribute('aria-pressed') === 'true') $('#pp').classList.add('gris');
   const ext = [
     ['Título', palabras(datos.titulo), 'hasta 15'],
-    ['Introducción', palabras(datos.problema) + palabras(datos.pregunta) + palabras(datos.objetivo), '80 a 130'],
+    ['Introducción', palabrasIntro(), '80 a 130'],
     ['Metodología', pasosMetodo().reduce((n, p) => n + palabras(p[1]), 0), '40 a 100'],
     ['Resultados (texto y leyendas)', datos.hallazgos.reduce((n, h) => n + palabras(h.categoria) + palabras(h.texto), 0) + datos.figuras.reduce((n, f) => n + palabras(f.titulo), 0), '100 a 250'],
     ['Discusión', palabras(datos.discusion), '50 a 100'],
-    ['Conclusiones', palabras(datos.conclusion) + palabras(datos.proyeccion), '60 a 120'],
+    ['Conclusiones', palabrasConc(), '30 a 80'],
     ['Total del póster', totalPalabras(), '300 a 800']
   ];
   $('#tablaExtension').innerHTML = ext.map(([a, n, b], i) => `<tr><td>${i === ext.length - 1 ? `<strong>${a}</strong>` : a}</td><td>${n}</td><td>${b}</td></tr>`).join('');
@@ -1429,7 +1445,7 @@ recuperarImagenes();
 // ---------- ERRORES ----------
 const ERRORES = [
   { t:'Copiar el informe al póster', mal:'Párrafos completos del planteamiento y del marco teórico, en letra de 16 pt, ocupando dos columnas.',
-    bien:'Selecciona: el problema en dos o tres frases, la pregunta, un diagrama del método y los resultados que la responden. Lo demás lo cuentas en voz alta.' },
+    bien:'Selecciona: el problema en dos o tres frases, el objetivo general, un diagrama del método y los resultados que dan cuenta de él. Lo demás lo cuentas en voz alta.' },
   { t:'Título largo o demasiado general', mal:'"Estudio sobre la convivencia escolar", o un título de 30 palabras que copia el objetivo general.',
     bien:'Hasta 15 palabras, con el tema, a quiénes se estudió y dónde. Si necesitas más precisión, usa un subtítulo.' },
   { t:'Letra que no se lee a distancia', mal:'Cuerpo del texto en 14 pt, en una tipografía manuscrita o decorativa, y títulos de sección en mayúsculas.',
@@ -1451,11 +1467,11 @@ const CHECK = [
   { g:'Contenido', items:[
     'El título tiene 15 palabras o menos y dice el tema y a quiénes se estudió.',
     'Aparecen la autoría, la carrera, la universidad y el logo ULagos descargado del kit gráfico.',
-    'La pregunta de investigación es la misma que en el informe y se ve destacada.',
+    'El objetivo general es el mismo que en el informe y se ve destacado.',
     'La metodología está en un diagrama o en pasos numerados.',
-    'Los resultados responden a la pregunta y están organizados por categorías o dimensiones.',
+    'Los resultados dan cuenta del objetivo general y están organizados por categorías o dimensiones.',
     'La discusión interpreta los resultados con autores de mi marco teórico.',
-    'Las conclusiones dicen cómo se responde la pregunta, sin opiniones que no salgan de los resultados.',
+    'Las conclusiones dicen, en forma sintética, si se lograron los objetivos, sin opiniones que no se desprendan de los resultados.',
     'El QR abre la carpeta de Drive con sus cuatro subcarpetas, cada una con el nombre indicado.',
     ['qr2', 'La carpeta 4 tiene el documento con las referencias en APA 7 y la subcarpeta con los PDF.'],
     ['qr4', 'Todos los archivos de la carpeta están en PDF.'],
