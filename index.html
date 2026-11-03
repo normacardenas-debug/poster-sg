@@ -36,7 +36,7 @@
   .ey-verde{background:var(--verde-claro);color:var(--verde-texto)}
   .h2{font-size:clamp(26px,3.2vw,36px);margin-bottom:10px}
   .h3{font-size:20px;margin:0 0 8px}
-  .lead{font-size:17px;line-height:1.7;color:var(--texto-3);margin:0 0 26px;max-width:78ch}
+  .lead{font-size:17px;line-height:1.7;color:var(--texto-3);margin:0 0 26px}
   .card{background:#fff;border:1px solid var(--borde);border-radius:14px;padding:22px 24px;box-shadow:var(--sombra)}
 
   .card p{font-size:16px;line-height:1.65;color:var(--texto-2);margin:0}
@@ -119,6 +119,15 @@
   .vanova li{margin-bottom:4px}
   .aviso{display:flex;gap:14px;align-items:flex-start;background:var(--azul-claro);border-left:5px solid var(--azul);border-radius:0 10px 10px 0;padding:18px 20px}
   .aviso p{margin:0;font-size:16px;line-height:1.65;color:var(--tinta)}
+  /* Panel del paso 7: junto a la tarjeta 7 cuando hay tres columnas; debajo de ella en pantallas más angostas */
+  .guia7{grid-column:1 / -1;background:var(--verde-claro);border:1px solid #cfe9c8;border-top:5px solid var(--verde-texto);border-radius:14px;padding:22px 24px;box-shadow:var(--sombra)}
+  @media(min-width:1050px){.guia7{grid-column:span 2}}
+  .guia7-head{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+  .guia7 .num{flex:none;display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--verde-texto);color:#fff;font:700 15px 'Roboto Condensed',sans-serif}
+  .guia7 h3{font-size:19px;color:var(--verde-texto)}
+  .guia7-intro{margin:0 0 14px;font-size:15.5px;line-height:1.65;color:var(--texto-2)}
+  .guia7-cuerpo{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));align-items:start}
+  .guia7 .arbol-caja{background:#fff;border-color:#cfe9c8;margin:0}
   .pasos-qr{margin:0;padding-left:22px;font-size:15.5px;line-height:1.7;color:var(--texto-2)}
   .pasos-qr li{margin-bottom:8px}
   /* Árbol de la carpeta de Drive */
@@ -379,25 +388,28 @@
     <span class="eyebrow ey-azul">Fase 2 · El modelo</span>
     <h2 class="h2">Las partes de un póster científico</h2>
     <p class="lead">Cada parte de un póster se desprende de lo que ya has escrito en tus informes. Abre cada tarjeta para ver más detalles.</p>
-    <div class="pasos" id="pasos"></div>
+    <div class="pasos" id="pasos">
+      <!-- Las tarjetas 1 a 7 se agregan antes de este panel desde el script; el panel queda junto a la tarjeta 7 -->
+      <div class="guia7" id="guia7" role="region" aria-labelledby="guia7-tit">
+        <div class="guia7-head"><span class="num" aria-hidden="true">7</span><h3 id="guia7-tit">Paso a paso: arma la carpeta de Drive y crea su QR</h3></div>
+        <p class="guia7-intro">Todo en <strong>PDF</strong>. La carpeta se abre con el enlace; solo <strong>1. Consentimientos y asentimientos</strong> queda restringida a tus docentes.</p>
+        <div class="guia7-cuerpo">
+          <div class="arbol-caja" id="arbolFase2"></div>
+          <ol class="pasos-qr">
+            <li>Crea la carpeta y sus subcarpetas con estos nombres.</li>
+            <li>Sube cada archivo en PDF. En Word: <strong>Archivo &gt; Guardar como &gt; PDF</strong>.</li>
+            <li>En la carpeta principal, presiona <strong>Compartir</strong> y deja el acceso general en <strong>Cualquier persona con el enlace</strong>. Copia el vínculo.</li>
+            <li>En la carpeta <strong>1. Consentimientos y asentimientos</strong>, presiona <strong>Compartir</strong>, cambia el acceso general a <strong>Restringido</strong> y agrega a tus docentes.</li>
+            <li>Crea el QR en <a href="https://www.qrcode-monkey.com/es/" target="_blank" rel="noopener">QR Code Monkey<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>, en negro sobre blanco. Pruébalo: la carpeta debe abrirse, pero la de consentimientos debe pedir permiso.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
     <div class="aviso" style="margin-top:22px">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:2px"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
       <p><strong>Mira pósteres de ejemplo.</strong> En esta <a href="https://drive.google.com/drive/folders/1GTH0PeKFsPkjKK8anh5I1n8yAaIRyBcL?usp=sharing" target="_blank" rel="noopener">carpeta de ejemplos<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a> encontrarás pósteres armados con estas siete partes. Fíjate en cómo destacan el objetivo general, cuánto texto usan y cómo sintetizan las conclusiones.</p>
     </div>
-    <details class="plegable">
-      <summary>Paso a paso: arma la carpeta de Drive y crea su QR</summary>
-      <p style="margin:0 0 10px;font-size:15.5px;line-height:1.65;color:var(--texto-2)">El QR del póster abre una carpeta de Google Drive con los anexos de tu investigación. La carpeta se comparte solo con tus docentes, para que puedan revisar tu proceso. Crea las carpetas con estos nombres exactos, numeradas para que se mantengan en orden, y sube <strong>todos los archivos en PDF</strong>:</p>
-      <div class="arbol-caja" id="arbolFase2"></div>
-      <ol class="pasos-qr">
-        <li>En Google Drive, crea la carpeta principal y, dentro de ella, las subcarpetas del esquema con sus nombres. Sube a cada una lo que corresponde.</li>
-        <li>Convierte cada archivo a PDF antes de subirlo. En Word: <strong>Archivo &gt; Guardar como &gt; PDF</strong>. En Google Docs: <strong>Archivo &gt; Descargar &gt; Documento PDF</strong>. Los consentimientos y asentimientos firmados se escanean en PDF.</li>
-        <li>Sobre la carpeta principal, presiona <strong>Compartir</strong> y agrega los correos de tus docentes. Deja el "Acceso general" en <strong>Restringido</strong>: la carpeta tiene datos de participantes y no debe abrirla cualquier persona que escanee el QR. Luego copia el enlace con <strong>Copiar vínculo</strong>.</li>
-        <li>Pega el enlace en <a href="https://www.qrcode-monkey.com/es/" target="_blank" rel="noopener">QR Code Monkey<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>, un generador gratuito de códigos QR, y descarga la imagen en PNG. No le cambies los colores ni le agregues un logo al centro: en negro sobre blanco se escanea mejor.</li>
-        <li>Inserta el QR en el póster en negro sobre blanco, de al menos 5 × 5 cm, con un texto que diga qué abre, por ejemplo "Anexos y referencias (acceso para docentes)".</li>
-        <li>Antes de imprimir, escanéalo con tu celular para comprobar que abre la carpeta. Si lo escanea alguien que no invitaste, Drive debe pedirle permiso: así sabes que está protegida.</li>
-      </ol>
-    </details>
-    <div class="aviso">
+    <div class="aviso" style="margin-top:14px">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;margin-top:2px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
       <p><strong>Antes de diseñar, responde tres preguntas.</strong> ¿Cuál es el hallazgo más importante de tu investigación? ¿Qué gráfico, tabla o diagrama lo muestra mejor? ¿Qué vas a contar en voz alta que no necesita estar escrito en el póster? Lo que respondas en la primera pregunta debe verse desde lejos.</p>
     </div>
@@ -825,27 +837,27 @@ const PASOS = [
   { n:6, t:'Conclusiones', c:'var(--verde-texto)', sale:'Se desprende de tus conclusiones', d:'La idea principal de tu estudio y el logro de tus objetivos, en forma sintética.',
     va:['La idea principal, en una frase destacada.','El logro de los objetivos, en una frase. Ej.: Se lograron el objetivo general y los objetivos teórico, metodológico y empírico.','Una limitación y una proyección concretas, en una o dos frases.'],
     noVa:['Opiniones que no se desprenden de tus resultados.','Explicar objetivo por objetivo cómo se logró: eso lo cuentas en voz alta.','Proyecciones sin detalle, por ejemplo, "seguir investigando el tema".'] },
-  { n:7, t:'QR a la carpeta de Drive', c:'var(--verde-texto)', sale:'Lo tomas de tus anexos y tu bibliografía', d:'En el póster solo aparece un código QR. Abre una carpeta de Google Drive, compartida solo con tus docentes, con los consentimientos y asentimientos, los instrumentos, el informe de resultados, discusión y conclusión, y las referencias. Todo en PDF.',
+  { n:7, t:'QR a la carpeta de Drive', c:'var(--verde-texto)', sale:'Lo tomas de tus anexos y tu bibliografía', d:'En el póster solo va un QR. Abre tu carpeta de Drive con los anexos y las referencias.',
     va:['Una subcarpeta por cada anexo, con el nombre que indica el esquema del paso a paso.','Todos los archivos en PDF.','Las referencias en APA 7 en un documento, y los PDF de los textos citados en otra subcarpeta.','Si quieres, agradecimientos en el documento de referencias, sin datos que identifiquen a nadie.','El QR en el póster, con un texto que diga qué abre.'],
-    noVa:['La lista de referencias impresa en el póster.','Archivos en Word, Excel u otro formato que no sea PDF.','Instrumentos con las respuestas de los participantes: va solo el formato.','Una carpeta abierta a cualquier persona con el enlace: debe quedar compartida solo con tus docentes.'] }
+    noVa:['La lista de referencias impresa en el póster.','Archivos en Word, Excel u otro formato que no sea PDF.','Instrumentos con las respuestas de los participantes: va solo el formato.','Consentimientos y asentimientos abiertos a cualquiera: esa subcarpeta queda restringida a tus docentes.'] }
 ];
 // Carpeta de Drive que abre el QR: una sola definición para la Fase 2, la plantilla y el Word
 const CARPETA = { n:'Póster · Apellidos de quienes investigaron', hijos:[
-  { n:'1. Consentimientos y asentimientos', q:'Los consentimientos y asentimientos informados firmados, escaneados en PDF.' },
-  { n:'2. Instrumentos', q:'El formato de cada instrumento que aplicaste (pauta de entrevista, cuestionario u otro), en PDF y sin respuestas.' },
-  { n:'3. Informe de resultados, discusión y conclusión', q:'El informe en PDF, de acuerdo con el formato del taller de recurso digital de la plataforma.' },
+  { n:'1. Consentimientos y asentimientos', q:'Firmados y escaneados. Acceso restringido: solo tus docentes.' },
+  { n:'2. Instrumentos', q:'Solo el formato, sin respuestas.' },
+  { n:'3. Informe de resultados, discusión y conclusión', q:'Según el formato del taller de recurso digital.' },
   { n:'4. Referencias bibliográficas', hijos:[
-    { n:'4.1 Lista de referencias', q:'Un documento en PDF con todas las referencias que citaste, en APA 7. Si quieres, agrega tus agradecimientos.', doc:true },
-    { n:'4.2 Textos en PDF', q:'Los PDF de los textos que citaste.' } ] }
+    { n:'4.1 Lista de referencias', q:'Tus referencias en APA 7 y, si quieres, agradecimientos.', doc:true },
+    { n:'4.2 Textos en PDF', q:'Los textos que citaste.' } ] }
 ] };
 const icoCarpeta = '<svg width="20" height="20" viewBox="0 0 24 24" fill="#f3c74f" stroke="#a37d12" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6l2 2.2h8.4A1.5 1.5 0 0 1 21 8.7v9.8a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5z"/></svg>';
 const arbolHTML = (c = CARPETA) => `<li><span class="carp">${icoCarpeta}${esc(c.n)}</span>${c.q ? `<span class="que">${esc(c.q)}</span>` : ''}${c.hijos ? `<ul>${c.hijos.map(x => arbolHTML(x)).join('')}</ul>` : ''}</li>`;
 const arbolCarpeta = () => `<ul class="arbol" aria-label="Estructura de la carpeta de Drive">${arbolHTML()}</ul>`;
 $('#arbolFase2').innerHTML = arbolCarpeta();
 const lista = a => `<ul>${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
-$('#pasos').innerHTML = PASOS.map(p => `<div class="paso" style="--c:${p.c}">
+$('#pasos').insertAdjacentHTML('afterbegin', PASOS.map(p => `<div class="paso" style="--c:${p.c}${p.n === 7 ? ';align-self:start' : ''}">
   <span class="num" aria-hidden="true">${p.n}</span><h3>${esc(p.t)}</h3><p class="sale">${esc(p.sale)}</p><p>${esc(p.d)}</p>
-  <details><summary>Qué va y qué no va</summary><div class="vanova"><strong>Va</strong>${lista(p.va)}<strong>No va</strong>${lista(p.noVa)}</div></details></div>`).join('');
+  <details><summary>Qué va y qué no va</summary><div class="vanova"><strong>Va</strong>${lista(p.va)}<strong>No va</strong>${lista(p.noVa)}</div></details></div>`).join(''));
 
 // ---------- CRITERIOS DE ACCESIBILIDAD ----------
 const CRITERIOS = [
@@ -1127,13 +1139,13 @@ function pintarPlantilla() {
   </div>
   <div class="tpl" style="--c:var(--verde-texto)">
     <div class="tpl-head"><h3>7 · QR a la carpeta de Drive</h3></div>
-    <p class="tpl-fuente">Esto no se imprime en el póster: va en una carpeta de Google Drive. En el póster solo va el QR que la abre. Arma la carpeta con estos nombres, sube todo en PDF y compártela solo con tus docentes:</p>
+    <p class="tpl-fuente">Esto no se imprime en el póster: va en una carpeta de Google Drive. En el póster solo va el QR que la abre. Arma la carpeta con estos nombres, sube todo en PDF. La carpeta se abre con el enlace; solo la de consentimientos y asentimientos queda restringida a tus docentes:</p>
     <div class="arbol-caja">${arbolCarpeta()}</div>
     ${campo({ id:'f-referencias', ruta:'referencias', etiqueta:'Referencias para la carpeta 4.1 Lista de referencias', ayuda:'Todas las que citaste en el póster, en APA 7. Al descargar el Word, aparecen listas para pegarlas en ese documento.', valor:d.referencias, area:true })}
     ${campo({ id:'f-agradecimientos', ruta:'agradecimientos', etiqueta:'Agradecimientos para el documento de referencias (opcional)', ayuda:'Sin nombres de participantes.', valor:d.agradecimientos, area:true })}
     <div class="grid-campos">
-      ${campo({ id:'f-qrUrl', ruta:'qrUrl', etiqueta:'Enlace de la carpeta de Drive', ayuda:'El enlace de la carpeta compartida con tus docentes, con el acceso general en "Restringido". Con él generas el QR en <a href="https://www.qrcode-monkey.com/es/" target="_blank" rel="noopener">QR Code Monkey<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>.', valor:d.qrUrl })}
-      ${campo({ id:'f-qrTexto', ruta:'qrTexto', etiqueta:'Texto junto al QR', ayuda:'Ej.: Anexos y referencias (acceso para docentes).', valor:d.qrTexto })}
+      ${campo({ id:'f-qrUrl', ruta:'qrUrl', etiqueta:'Enlace de la carpeta de Drive', ayuda:'El enlace de la carpeta principal, con acceso para cualquier persona con el enlace. Con él generas el QR en <a href="https://www.qrcode-monkey.com/es/" target="_blank" rel="noopener">QR Code Monkey<span class="visually-hidden"> (se abre en una pestaña nueva)</span></a>.', valor:d.qrUrl })}
+      ${campo({ id:'f-qrTexto', ruta:'qrTexto', etiqueta:'Texto junto al QR', ayuda:'Ej.: Anexos y referencias.', valor:d.qrTexto })}
     </div>
   </div>`;
   pintarHallazgos(); pintarFiguras();
@@ -1206,7 +1218,7 @@ const lineas = t => limpiar(t).split('\n').map(limpiar).filter(Boolean);
 const pasosMetodo = () => [['Enfoque', datos.enfoque], ['Participantes', datos.participantes], ['Instrumento', datos.instrumento], ['Análisis', datos.analisis]].filter(p => limpiar(p[1]));
 const hallazgosLlenos = () => datos.hallazgos.filter(h => limpiar(h.categoria) || limpiar(h.texto));
 const figurasLlenas = () => datos.figuras.filter(f => f.tipo || limpiar(f.titulo) || limpiar(f.fuente) || IMGS.has(f.id));
-const textoQR = () => limpiar(datos.qrTexto) || 'Anexos y referencias (acceso para docentes).';
+const textoQR = () => limpiar(datos.qrTexto) || 'Anexos y referencias.';
 const OBJETIVOS = [['objetivo', 'Objetivo general'], ['objTeorico', 'Objetivo teórico'], ['objMetodologico', 'Objetivo metodológico'], ['objEmpirico', 'Objetivo empírico']];
 const palabrasIntro = () => palabras(datos.problema) + OBJETIVOS.reduce((n, [k]) => n + palabras(datos[k]), 0);
 const palabrasConc = () => palabras(datos.conclusion) + palabras(datos.logro) + palabras(datos.proyeccion);
@@ -1328,7 +1340,7 @@ $('#wordBtn').addEventListener('click', async () => {
   // Segunda página: estructura de la carpeta de Drive y el documento de referencias, listo para copiar
   hijos.push(new Paragraph({ children:[new PageBreak()] }));
   hijos.push(h('Para tu carpeta de Google Drive', HeadingLevel.HEADING_1));
-  hijos.push(par('Crea estas carpetas con estos nombres y sube todos los archivos en PDF. Comparte la carpeta solo con tus docentes y deja el acceso general en "Restringido".', { italics:true }));
+  hijos.push(par('Crea estas carpetas con estos nombres y sube todos los archivos en PDF. Deja la carpeta principal con acceso para "Cualquier persona con el enlace" y solo la carpeta 1. Consentimientos y asentimientos en "Restringido", compartida con tus docentes.', { italics:true }));
   const arbolWord = (c, nivel) => { hijos.push(new Paragraph({ children:[new TextRun({ text:c.n, bold:true, font:'Arial', size:22 }), ...(c.q ? [new TextRun({ text:' · ' + c.q, font:'Arial', size:22 })] : [])], indent:{ left: nivel * 400 }, spacing:{ after:80 } })); (c.hijos || []).forEach(x => arbolWord(x, nivel + 1)); };
   arbolWord(CARPETA, 0);
   hijos.push(h('Documento para la carpeta 4.1 Lista de referencias', HeadingLevel.HEADING_2));
@@ -1475,7 +1487,7 @@ const CHECK = [
     'El QR abre la carpeta de Drive con sus cuatro subcarpetas, cada una con el nombre indicado.',
     ['qr2', 'La carpeta 4 tiene el documento con las referencias en APA 7 y la subcarpeta con los PDF.'],
     ['qr4', 'Todos los archivos de la carpeta están en PDF.'],
-    ['qr5', 'La carpeta está compartida solo con mis docentes, con el acceso general en "Restringido".'],
+    ['qr6', 'La carpeta se abre con el enlace, y la de consentimientos y asentimientos está en "Restringido", solo para mis docentes.'],
     'Revisé la ortografía y no hay nombres de participantes.'] },
   { g:'Diseño', items:[
     'El contenido se lee de arriba hacia abajo y de izquierda a derecha, en columnas.',
