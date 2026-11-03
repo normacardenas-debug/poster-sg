@@ -12,7 +12,9 @@
     --azul:#0055B7;--azul-osc:#003d85;--azul-claro:#e9f2fb;--celeste:#8FC6E8;
     --morado:#9F26B4;--morado-claro:#f6ebf8;--verde:#3FAE29;--verde-texto:#2E7D1F;--verde-claro:#eafbe6;
     --rojo:#b0392b;--rojo-claro:#fdeeee;--ambar-texto:#7a5d12;--ambar-claro:#fff8e6;
-    --tinta:#0d1b2a;--texto:#1a232b;--texto-2:#3a4551;--texto-3:#55606b;--borde:#e2e6ea;--fondo-alt:#f9fafb;
+    --tinta:#0d1b2a;--texto:#1a232b;--texto-2:#3a4551;--texto-3:#55606b;--borde:#e2e6ea;--fondo-alt:#f6f8fa;
+    --sombra:0 1px 2px rgba(13,27,42,.04),0 6px 18px rgba(13,27,42,.06);
+    --sombra-2:0 2px 4px rgba(13,27,42,.06),0 14px 30px rgba(13,27,42,.12);
   }
   *{box-sizing:border-box}
   body{margin:0;background:#fff;font-family:'Open Sans',sans-serif;color:var(--texto);line-height:1.6;overflow-x:hidden}
@@ -34,8 +36,9 @@
   .ey-verde{background:var(--verde-claro);color:var(--verde-texto)}
   .h2{font-size:clamp(26px,3.2vw,36px);margin-bottom:10px}
   .h3{font-size:20px;margin:0 0 8px}
-  .lead{font-size:17px;line-height:1.7;color:var(--texto-3);margin:0 0 26px}
-  .card{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 22px}
+  .lead{font-size:17px;line-height:1.7;color:var(--texto-3);margin:0 0 26px;max-width:78ch}
+  .card{background:#fff;border:1px solid var(--borde);border-radius:14px;padding:22px 24px;box-shadow:var(--sombra)}
+
   .card p{font-size:16px;line-height:1.65;color:var(--texto-2);margin:0}
   .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
   .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}
@@ -43,9 +46,10 @@
   .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
   /* Botones */
-  .primary-btn{cursor:pointer;border:none;background:var(--azul);color:#fff;font:700 14px 'Open Sans',sans-serif;padding:12px 20px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;min-height:44px}
+  .primary-btn,.sec-btn,.ghost-btn,.del-btn,.opcion,.chipBtn,.navLink{transition:background-color .15s,border-color .15s,color .15s,box-shadow .15s}
+  .primary-btn{cursor:pointer;border:none;background:var(--azul);color:#fff;font:700 14px 'Open Sans',sans-serif;padding:12px 20px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;min-height:44px;box-shadow:0 2px 6px rgba(0,85,183,.25)}
   .primary-btn:hover{background:var(--azul-osc)}
-  .sec-btn{cursor:pointer;border:1.5px solid var(--azul);background:#fff;color:var(--azul);font:700 14px 'Open Sans',sans-serif;padding:11px 18px;border-radius:8px;min-height:44px}
+  .sec-btn{cursor:pointer;border:1.5px solid var(--azul);background:#fff;color:var(--azul);font:700 14px 'Open Sans',sans-serif;padding:11px 18px;border-radius:8px;min-height:44px;display:inline-flex;align-items:center;gap:8px}
   .sec-btn:hover{background:var(--azul-claro)}
   .sec-btn[aria-pressed="true"]{background:var(--azul-claro)}
   .ghost-btn{cursor:pointer;border:1.5px dashed #b7c2cc;background:transparent;color:var(--texto-3);font:700 13px 'Open Sans',sans-serif;padding:11px 18px;border-radius:8px;min-height:44px}
@@ -54,8 +58,8 @@
   .del-btn:hover{background:var(--rojo-claro)}
 
   /* Navegación */
-  .nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--borde);box-shadow:0 2px 8px rgba(0,0,0,.04)}
-  .nav-row{display:flex;gap:4px;overflow-x:auto;padding:0 clamp(20px,6vw,56px)}
+  .nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);-webkit-backdrop-filter:saturate(1.4) blur(8px);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--borde);box-shadow:0 2px 12px rgba(13,27,42,.06)}
+  .nav-row{display:flex;gap:4px;overflow-x:auto;padding:0 clamp(20px,6vw,56px);scrollbar-width:thin}
   .navLink{flex:none;padding:14px 13px;font:600 13.5px 'Open Sans',sans-serif;color:var(--texto);text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap}
   .navLink:hover{color:var(--azul)}
   .navLink[aria-current="true"]{color:var(--azul);border-bottom-color:var(--azul)}
@@ -68,18 +72,29 @@
   .lista-simple{margin:0;padding-left:20px;font-size:16px;line-height:1.7;color:var(--texto-2)}
   .lista-simple li{margin-bottom:6px}
 
-  /* El póster en cifras */
-  .cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:12px}
+  /* El póster en cifras: láminas que se dan vuelta al presionarlas */
   .antes-grid{grid-template-columns:1fr}
   .antes-grid .lista-simple{columns:2 300px;column-gap:36px}
   .antes-grid .lista-simple li{break-inside:avoid}
-  .antes-grid .cifras{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:12px}
-  @media(min-width:600px){.antes-grid .cifras{grid-template-columns:repeat(3,minmax(0,1fr))}}
-  @media(min-width:1000px){.antes-grid .cifras{grid-template-columns:repeat(6,minmax(0,1fr))}}
-  .antes-grid .cifra{background:var(--fondo-alt)}
-  .cifra{background:#fff;border:1px solid var(--borde);border-bottom:4px solid var(--azul);border-radius:10px;padding:16px 16px 14px;text-align:center}
-  .cifra .n{display:block;font:700 34px/1.05 'Roboto Condensed',sans-serif;color:var(--azul);margin-bottom:6px}
-  .cifra .d{font-size:14.5px;line-height:1.45;color:var(--texto-2)}
+  .cifras-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+  .cifras-head .h3{margin:0}
+  .cifras{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin-top:16px}
+  @media(min-width:900px){.cifras{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  .lamina{all:unset;box-sizing:border-box;display:grid;cursor:pointer;perspective:1400px;min-height:196px;border-radius:14px;-webkit-tap-highlight-color:transparent;font-family:'Open Sans',sans-serif}
+  .lamina:focus-visible{outline:3px solid var(--azul);outline-offset:3px}
+  .lamina .cara{grid-area:1 / 1;display:flex;flex-direction:column;gap:8px;border-radius:14px;padding:18px 20px 16px;-webkit-backface-visibility:hidden;backface-visibility:hidden;transition:transform .6s cubic-bezier(.2,.7,.2,1),box-shadow .2s}
+  .lamina .frente{background:#fff;border:1px solid var(--borde);border-top:6px solid var(--c);box-shadow:var(--sombra)}
+  .lamina:hover .frente{box-shadow:var(--sombra-2)}
+  .lamina .reverso{background:var(--c);color:#fff;transform:rotateY(180deg);box-shadow:var(--sombra-2)}
+  .lamina[aria-expanded="true"] .frente{transform:rotateY(-180deg)}
+  .lamina[aria-expanded="true"] .reverso{transform:rotateY(0)}
+  .lamina .idx{font:700 13px 'Roboto Condensed',sans-serif;letter-spacing:.08em;color:var(--c)}
+  .lamina .preg{font:700 19px/1.3 'Roboto Condensed',sans-serif;color:var(--tinta)}
+  .lamina .pista{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font:700 13px 'Open Sans',sans-serif;color:var(--c)}
+  .lamina .n{font:700 40px/1 'Roboto Condensed',sans-serif;color:#fff}
+  .lamina .d{font:600 15px/1.45 'Open Sans',sans-serif;color:#fff}
+  .lamina .x{font-size:14px;line-height:1.5;color:#fff;border-top:1px solid rgba(255,255,255,.35);padding-top:8px;margin-top:2px}
+  .lamina .volver{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font:700 12.5px 'Open Sans',sans-serif;color:#fff;opacity:.9}
 
   /* Video */
   .video{position:relative;aspect-ratio:16/9;width:100%;border-radius:10px;overflow:hidden;background:var(--tinta)}
@@ -91,7 +106,7 @@
 
   /* Estructura */
   .pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;margin-bottom:24px}
-  .paso{border-radius:12px;padding:22px 24px;background:#fff;border:1px solid var(--borde);border-top:5px solid var(--c);display:flex;flex-direction:column}
+  .paso{border-radius:14px;padding:22px 24px;background:#fff;border:1px solid var(--borde);border-top:5px solid var(--c);display:flex;flex-direction:column;box-shadow:var(--sombra)}
   .paso .num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:var(--c);color:#fff;font:700 15px 'Roboto Condensed',sans-serif;margin-bottom:12px}
   .paso h3{font-size:19px;margin-bottom:6px;color:var(--c)}
   .paso .sale{font:600 13px 'Open Sans',sans-serif;color:var(--texto-3);margin:0 0 10px}
@@ -151,7 +166,7 @@
   details.plegable[open]{padding-bottom:16px}
 
   /* Criterios de accesibilidad */
-  .crit{background:#fff;border:1px solid var(--borde);border-left:5px solid var(--azul);border-radius:0 10px 10px 0;padding:16px 18px}
+  .crit{background:#fff;border:1px solid var(--borde);border-left:5px solid var(--azul);border-radius:4px 14px 14px 4px;padding:18px 20px;box-shadow:var(--sombra)}
   .crit h3{font-size:17.5px;margin:0 0 6px}
   .crit p{font-size:15px;line-height:1.6;color:var(--texto-2);margin:0 0 6px}
   .crit .fuente{font-size:13px;color:var(--texto-3);margin:6px 0 0}
@@ -177,11 +192,11 @@
   /* Quiz */
   .quiz-prog{margin:0 0 8px;font-weight:600}
   .quiz-p:focus{outline:none}
-  .quiz{background:#fff;border:1px solid var(--borde);border-radius:10px;padding:20px 22px;margin-bottom:14px}
+  .quiz{background:#fff;border:1px solid var(--borde);border-radius:14px;padding:22px 24px;margin-bottom:14px;box-shadow:var(--sombra)}
   .quiz-p{font:700 16px 'Roboto Condensed',sans-serif;color:var(--tinta);margin:0 0 12px;line-height:1.4}
   .quiz-ops{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:8px}
   .opcion{min-height:44px;padding:11px 14px;border-radius:8px;font:600 14px 'Open Sans',sans-serif;cursor:pointer;text-align:left;background:#fff;border:1.5px solid #d7dee5;color:var(--texto)}
-  .opcion:hover{border-color:var(--azul)}
+  .opcion:hover{border-color:var(--azul);background:#f7fbff}
   .opcion[aria-pressed="true"].ok{border-color:var(--verde-texto);background:var(--verde-claro)}
   .opcion[aria-pressed="true"].no{border-color:var(--rojo);background:var(--rojo-claro)}
   .fb{margin-top:14px;padding:14px 16px;border-radius:8px;font-size:14.5px;line-height:1.6;color:var(--texto-2)}
@@ -190,7 +205,7 @@
   .fb strong{display:block;margin-bottom:2px;color:var(--tinta)}
 
   /* Plantilla */
-  .tpl{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:22px 24px;margin-bottom:18px;border-left:5px solid var(--c)}
+  .tpl{background:#fff;border:1px solid var(--borde);border-radius:4px 14px 14px 4px;padding:24px 26px;margin-bottom:18px;border-left:5px solid var(--c);box-shadow:var(--sombra)}
   .tpl-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
   .tpl-head h3{font-size:20px;color:var(--c)}
   .tpl-fuente{font-size:14px;color:var(--texto-3);margin:0 0 16px}
@@ -198,7 +213,7 @@
   .sub-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
   .sub-head h4{font-size:16px;color:var(--tinta)}
   .campo{margin-bottom:16px}
-  .campo > label,.campo > legend{display:block;font:700 13px 'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;color:var(--tinta);padding:0}
+  .campo > label,.campo > legend,.campo .campo-et{display:block;font:700 13px 'Open Sans',sans-serif;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;color:var(--tinta);padding:0}
   .campo .ayuda{font-size:14px;color:var(--texto-3);margin:0 0 8px}
   .campo textarea,.campo input[type=text],.campo select{width:100%;border-radius:8px;border:1.5px solid #d7dee5;padding:12px 14px;font:15px/1.55 'Open Sans',sans-serif;color:var(--texto);background:#fff}
   .campo select{min-height:48px}
@@ -218,6 +233,20 @@
   .senales ul{margin:6px 0 0;padding-left:18px}
   .nota{font-size:14px;color:var(--texto-3)}
   .acciones{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:8px}
+  /* Carga de la imagen de cada figura */
+  .fig-carga{border:2px dashed #b6c6d6;border-radius:12px;background:#fff;padding:18px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;transition:border-color .15s,background-color .15s}
+  .fig-carga.sobre{border-color:var(--azul);background:var(--azul-claro)}
+  .fig-carga p{margin:0}
+  .fig-carga .nota{max-width:52ch}
+  .fig-carga.con{flex-direction:row;align-items:center;text-align:left;border-style:solid;border-color:var(--borde);flex-wrap:wrap}
+  .fig-mini{width:140px;max-height:120px;object-fit:contain;background:repeating-conic-gradient(#eef1f4 0 25%,#fff 0 50%) 0 0/16px 16px;border:1px solid var(--borde);border-radius:8px;flex:none}
+  .fig-info{flex:1;min-width:200px}
+  .fig-nom{font-weight:700;color:var(--tinta);overflow-wrap:anywhere}
+  .file-in{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+  .file-in:focus-visible + label{outline:3px solid var(--azul);outline-offset:2px}
+  .fig-msg{margin:8px 0 0;font-size:14px;line-height:1.5;padding:10px 12px;border-radius:8px;color:var(--tinta)}
+  .fig-msg.ok{background:var(--verde-claro)} .fig-msg.no{background:var(--ambar-claro);border:1px solid #f0dca6}
+  .pp-img{display:block;width:100%;height:auto;margin:6px 0 0;border:1px solid var(--borde);border-radius:4px;background:#fff}
   .aviso-guardado{background:var(--ambar-claro);border:1px solid #f0dca6;border-radius:10px;padding:14px 18px;font-size:15px;line-height:1.6;color:var(--tinta);margin:0 0 22px}
 
   /* Vista previa del póster */
@@ -249,7 +278,7 @@
   .errores{display:grid;grid-template-columns:1fr;gap:14px;align-items:start}
   @media(min-width:600px){.errores{grid-template-columns:repeat(2,1fr)} .errores .err:last-child:nth-child(odd){grid-column:1 / -1}}
   @media(min-width:960px){.errores{grid-template-columns:repeat(4,1fr)} .errores .err:last-child:nth-child(odd){grid-column:auto}}
-  .err{background:#fff;border:1px solid var(--borde);border-top:4px solid var(--rojo);border-radius:10px;padding:16px 18px}
+  .err{background:#fff;border:1px solid var(--borde);border-top:4px solid var(--rojo);border-radius:14px;padding:18px 20px;box-shadow:var(--sombra)}
   .err .n{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--rojo-claro);color:var(--rojo);align-items:center;justify-content:center;font:700 13px 'Roboto Condensed',sans-serif;margin-bottom:8px}
   .err h3{font-size:17px;margin:0 0 8px}
   .err .mal{font-size:14.5px;line-height:1.55;color:var(--texto-2);font-style:italic;margin:0}
@@ -261,7 +290,7 @@
   .refs p{font-size:14.5px;line-height:1.6;color:var(--texto-2);margin:0 0 10px;padding-left:28px;text-indent:-28px;overflow-wrap:anywhere}
 
   @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
-  @media print{.nav,.acciones,.chips,.del-btn,.ghost-btn,.skip-link,.video,#contrasteCard{display:none!important} details.plegable{border:0} main > section{padding:24px 0}}
+  @media print{.nav,.acciones,.chips,.del-btn,.ghost-btn,.skip-link,.video,#contrasteCard,#cifrasTodas,.fig-carga:not(.con),.lamina .frente,.lamina .volver{display:none!important} details.plegable{border:0} main > section{padding:24px 0} .lamina .reverso{transform:none!important} .card,.paso,.crit,.err,.tpl,.quiz{box-shadow:none}}
 </style>
 </head>
 <body>
@@ -287,9 +316,9 @@
 <!-- FASE 1 · ACTIVA -->
 <section id="antes" style="background:var(--ambar-claro)">
   <div>
-    <span class="eyebrow ey-ambar">Fase 1 · Activa lo que sabes</span>
+    <span class="eyebrow ey-ambar">Fase 1 · Algunas distinciones</span>
     <h2 class="h2">Un póster no es el informe en tamaño grande</h2>
-    <p class="lead">El póster académico comunica una investigación terminada combinando texto breve con gráficos, tablas, diagramas e imágenes. Se diseña para que alguien que pasa frente a él entienda en pocos minutos qué estudiaste, cómo lo hiciste y qué encontraste, y para que luego converse contigo. Por eso no se escribe desde cero: sale de tus informes, pero seleccionando y resumiendo.</p>
+    <p class="lead">El póster académico comunica una investigación terminada combinando texto breve con gráficos, tablas, diagramas e imágenes. Se diseña para que alguien que pasa frente a él entienda en pocos minutos qué estudiaste, cómo lo hiciste y qué encontraste, y para que luego converse contigo. Por eso, no se escribe desde cero, sale de tus informes, pero seleccionando y resumiendo.</p>
     <div class="grid2 antes-grid">
       <div class="card">
         <h3 class="h3">Lo que necesitas tener a mano</h3>
@@ -302,15 +331,13 @@
         </ul>
       </div>
       <div class="card">
-        <h3 class="h3">El póster en cifras</h3>
-        <div class="cifras">
-          <div class="cifra"><span class="n">10 min</span><span class="d">o menos para recorrerlo completo</span></div>
-          <div class="cifra"><span class="n">2 a 3 m</span><span class="d">distancia desde la que se lee el título</span></div>
-          <div class="cifra"><span class="n">300 a 800</span><span class="d">palabras en total</span></div>
-          <div class="cifra"><span class="n">15</span><span class="d">palabras como máximo en el título</span></div>
-          <div class="cifra"><span class="n">40 a 50&nbsp;%</span><span class="d">del espacio para gráficos, tablas e imágenes</span></div>
-          <div class="cifra"><span class="n">1</span><span class="d">pregunta de investigación, bien destacada</span></div>
+        <div class="cifras-head">
+          <h3 class="h3">El póster en cifras</h3>
+          <button type="button" class="sec-btn" id="cifrasTodas" aria-pressed="false">Dar vuelta todas</button>
         </div>
+        <p class="small" style="margin:8px 0 0">Antes de dar vuelta cada lámina, intenta adivinar la cifra. Presiónala para ver la respuesta y vuelve a presionarla para cerrarla.</p>
+        <div class="cifras" id="cifras"></div>
+        <p class="visually-hidden" aria-live="polite" id="cifrasAnuncio"></p>
       </div>
     </div>
   </div>
@@ -318,7 +345,7 @@
 
 <section id="video" style="background:var(--ambar-claro);padding-top:0">
   <div>
-    <h2 class="h2">Mira el video y responde</h2>
+    <h2 class="h2">Mira el video y responde las preguntas</h2>
     <p class="lead">Dura cuatro minutos y explica qué textos lleva un póster, cuánto espacio dar a cada cosa y cómo cuidar el color, las imágenes y los gráficos. Tiene subtítulos que puedes activar en el reproductor. Después responde las preguntas: si te equivocas, recibes una pista y puedes intentarlo otra vez.</p>
     <div class="grid2" style="align-items:start">
       <div>
@@ -521,7 +548,11 @@
     <span class="eyebrow ey-azul">Fase 4 · Escribe y descarga</span>
     <h2 class="h2">Prepara el contenido de tu póster</h2>
     <p class="lead">Completa cada parte resumiendo lo que ya está en tus informes. Con "Ver mi póster" revisas cómo se distribuye el contenido y cuántas palabras lleva cada sección. Al terminar, descarga el contenido en Word (incluye tus referencias para el documento de Drive) o una base en PowerPoint con tu texto ya ubicado, para terminar el diseño ahí o en Canva.</p>
-    <p class="aviso-guardado"><strong>Lo que escribas se guarda solo en este navegador y en este computador.</strong> Si cambias de equipo o borras el historial, se pierde. Descarga el Word cada vez que termines.</p>
+    <div class="aviso-guardado"><p style="margin:0"><strong>Lo que escribas y las imágenes de tus figuras se guardan solo en este navegador y en este computador.</strong> Si cambias de equipo o de navegador, usas una ventana privada o un computador que borra el historial al cerrar sesión (como los de laboratorio), se pierden. Por eso:</p>
+    <ul style="margin:8px 0 0;padding-left:22px">
+      <li><strong>Guarda los PNG de tus figuras</strong> en una carpeta de tu póster, en tu computador o en Drive. Si la página pierde una imagen, vuelves a cargar el mismo archivo.</li>
+      <li><strong>Descarga el Word cada vez que termines</strong>: incluye tu texto y tus figuras.</li>
+    </ul></div>
 
     <div id="tplCampos"></div>
 
@@ -716,6 +747,47 @@ pintarQuiz($('#quizPractica'), [
     explicacion:'Un color claro y uno oscuro se distinguen incluso en gris, y la etiqueta directa evita ir y volver a la leyenda. Rojo y verde es la combinación que más personas confunden.' }
 ]);
 
+// ---------- EL PÓSTER EN CIFRAS (láminas) ----------
+const CIFRAS = [
+  { p:'¿Cuánto tiempo debería tomar recorrerlo completo?', n:'10 min', d:'o menos para recorrerlo completo', x:'Quien pasa frente al póster decide en segundos si se detiene. Si se queda, debe entender lo central en ese tiempo.' },
+  { p:'¿Desde qué distancia se debe leer el título?', n:'2 a 3 m', d:'distancia desde la que se lee el título', x:'Por eso el título va entre 72 y 96 pt, en negrita.' },
+  { p:'¿Cuántas palabras lleva el póster en total?', n:'300 a 800', d:'palabras en total', x:'Cuentan todos los textos, también las leyendas de las figuras. El resto lo explicas tú en voz alta.' },
+  { p:'¿Cuántas palabras como máximo tiene el título?', n:'15', d:'palabras como máximo en el título', x:'Que diga el tema, a quiénes se estudió y dónde.' },
+  { p:'¿Cuánto espacio se dedica a lo visual?', n:'40 a 50 %', d:'del espacio para gráficos, tablas e imágenes', x:'Además, deja espacio en blanco entre los bloques: ayuda a leer sin esfuerzo.' },
+  { p:'¿Cuántas preguntas de investigación aparecen?', n:'1', d:'pregunta de investigación, destacada', x:'La misma de del inicio.' }
+];
+const COLORES_CIFRA = ['var(--azul)', 'var(--morado)', 'var(--verde-texto)'];
+const icoGirar = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>';
+$('#cifras').innerHTML = CIFRAS.map((c, i) => `<button type="button" class="lamina" aria-expanded="false" data-lamina="${i}" style="--c:${COLORES_CIFRA[i % 3]}">
+  <span class="cara frente" aria-hidden="false"><span class="idx" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><span class="preg">${esc(c.p)}</span><span class="pista" aria-hidden="true">${icoGirar}Presiona para ver la cifra</span></span>
+  <span class="cara reverso" aria-hidden="true"><span class="n">${esc(c.n)}</span><span class="d">${esc(c.d)}</span><span class="x">${esc(c.x)}</span><span class="volver" aria-hidden="true">${icoGirar}Presiona para cerrar</span></span>
+</button>`).join('');
+const laminas = [...document.querySelectorAll('.lamina')];
+function voltear(b, abrir) {
+  b.setAttribute('aria-expanded', String(abrir));
+  b.querySelector('.frente').setAttribute('aria-hidden', String(abrir));
+  b.querySelector('.reverso').setAttribute('aria-hidden', String(!abrir));
+}
+function syncTodas() {
+  const todas = laminas.every(b => b.getAttribute('aria-expanded') === 'true');
+  $('#cifrasTodas').setAttribute('aria-pressed', String(todas));
+  $('#cifrasTodas').textContent = todas ? 'Cerrar todas' : 'Dar vuelta todas';
+}
+$('#cifras').addEventListener('click', e => {
+  const b = e.target.closest('.lamina'); if (!b) return;
+  const abrir = b.getAttribute('aria-expanded') !== 'true';
+  voltear(b, abrir);
+  const c = CIFRAS[+b.dataset.lamina];
+  $('#cifrasAnuncio').textContent = abrir ? `${c.n}: ${c.d}. ${c.x}` : '';
+  syncTodas();
+});
+$('#cifrasTodas').addEventListener('click', () => {
+  const abrir = $('#cifrasTodas').getAttribute('aria-pressed') !== 'true';
+  laminas.forEach(b => voltear(b, abrir));
+  $('#cifrasAnuncio').textContent = abrir ? 'Se dieron vuelta las seis láminas.' : 'Se cerraron las seis láminas.';
+  syncTodas();
+});
+
 // ---------- ESTRUCTURA ----------
 const PASOS = [
   { n:1, t:'Encabezado', c:'var(--azul)', sale:'Sale de la portada de tu informe', d:'Título breve, nombres de quienes investigaron, carrera y logo de la Universidad de Los Lagos.',
@@ -811,7 +883,9 @@ const CHIPS = {
   proy: ['Los resultados describen a … y no se extienden a…','Convendría estudiar…, con…, porque…']
 };
 const vacioHallazgo = () => ({ categoria:'', texto:'' });
-const vacioFigura = () => ({ tipo:'', titulo:'', fuente:'' });
+const nuevoId = () => 'f' + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+// "imagen" guarda solo el nombre del archivo; la imagen misma va en IndexedDB, nunca en localStorage
+const vacioFigura = () => ({ id:nuevoId(), tipo:'', titulo:'', fuente:'', imagen:'' });
 const base = () => ({ titulo:'', autores:'', afiliacion:'', problema:'', pregunta:'', objetivo:'', enfoque:'', participantes:'', instrumento:'', analisis:'', etica:'',
   hallazgos:[vacioHallazgo()], figuras:[vacioFigura()], discusion:'', conclusion:'', proyeccion:'', referencias:'', agradecimientos:'', qrTexto:'', qrUrl:'', orientacion:'v', check:{} });
 let datos = base();
@@ -824,16 +898,122 @@ try {
     check: g.check && typeof g.check === 'object' ? g.check : {}
   });
 } catch (e) {}
-let tGuardar;
-function guardar() {
-  clearTimeout(tGuardar);
-  tGuardar = setTimeout(() => {
-    try { localStorage.setItem(CLAVE, JSON.stringify(datos)); $('#estadoGuardado').textContent = 'Guardado en este navegador.'; }
-    catch (e) { $('#estadoGuardado').textContent = 'No se pudo guardar en este navegador. Descarga tu Word.'; }
-  }, 400);
+let tGuardar = null;
+function guardarYa() {
+  clearTimeout(tGuardar); tGuardar = null;
+  try { localStorage.setItem(CLAVE, JSON.stringify(datos)); $('#estadoGuardado').textContent = 'Guardado en este navegador.'; }
+  catch (e) { $('#estadoGuardado').textContent = 'No se pudo guardar en este navegador. Descarga tu Word.'; }
 }
+function guardar() { clearTimeout(tGuardar); tGuardar = setTimeout(guardarYa, 400); }
+// Si se cierra la pestaña justo después de escribir, se guarda lo pendiente
+window.addEventListener('pagehide', () => { if (tGuardar) guardarYa(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden' && tGuardar) guardarYa(); });
+// Los borradores anteriores no tenían identificador por figura: se guarda una vez para fijarlo
+try { const g0 = JSON.parse(localStorage.getItem(CLAVE) || 'null'); if (g0 && Array.isArray(g0.figuras) && g0.figuras.some(f => !f || !f.id)) guardarYa(); } catch (e) {}
+// ---------- IMÁGENES DE LAS FIGURAS ----------
+// localStorage admite unos 5 MB y una sola imagen podría impedir que se guarde el borrador completo.
+// Por eso las imágenes se guardan aparte, en IndexedDB, que admite mucho más espacio.
+const idb = (() => {
+  let abierta;
+  const abrir = () => abierta || (abierta = new Promise((res, rej) => {
+    if (!window.indexedDB) return rej(new Error('Sin IndexedDB'));
+    const r = indexedDB.open('ulagos_poster_imagenes', 1);
+    r.onupgradeneeded = () => r.result.createObjectStore('img');
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+    r.onblocked = () => rej(new Error('Bloqueada'));
+  }));
+  const op = (modo, fn) => abrir().then(db => new Promise((res, rej) => {
+    const t = db.transaction('img', modo); const q = fn(t.objectStore('img'));
+    t.oncomplete = () => res(q.result); t.onerror = () => rej(t.error); t.onabort = () => rej(t.error);
+  }));
+  return {
+    get: k => op('readonly', s => s.get(k)),
+    keys: () => op('readonly', s => s.getAllKeys()),
+    set: (k, v) => op('readwrite', s => s.put(v, k)),
+    del: k => op('readwrite', s => s.delete(k)).catch(() => {}),
+    clear: () => op('readwrite', s => s.clear()).catch(() => {})
+  };
+})();
+const IMGS = new Map();     // id de figura → { buf, tipo, w, h, nombre, url }
+const MSG_IMG = new Map();  // id de figura → { t, ok }
+const MAX_MB = 15;
+function ponerImagen(id, reg) {
+  const prev = IMGS.get(id); if (prev) URL.revokeObjectURL(prev.url);
+  reg.url = URL.createObjectURL(new Blob([reg.buf], { type: reg.tipo }));
+  IMGS.set(id, reg);
+}
+function sacarImagen(id) {
+  const prev = IMGS.get(id); if (prev) URL.revokeObjectURL(prev.url);
+  IMGS.delete(id); MSG_IMG.delete(id); idb.del(id);
+}
+const medirImagen = file => new Promise((res, rej) => {
+  const u = URL.createObjectURL(file); const im = new Image();
+  im.onload = () => { res({ w: im.naturalWidth, h: im.naturalHeight }); URL.revokeObjectURL(u); };
+  im.onerror = () => { URL.revokeObjectURL(u); rej(new Error('Imagen ilegible')); };
+  im.src = u;
+});
+function repintarFigurasConFoco() {
+  const foco = document.activeElement && document.activeElement.id;
+  pintarFiguras(); actualizarVista();
+  if (foco && document.getElementById(foco)) document.getElementById(foco).focus();
+}
+async function cargarImagen(i, file) {
+  const f = datos.figuras[i]; if (!f || !file) return;
+  const aviso = (t, ok) => { MSG_IMG.set(f.id, { t, ok }); repintarFigurasConFoco(); };
+  if (!/^image\/(png|jpeg)$/.test(file.type)) return aviso('El archivo debe ser una imagen PNG (también se acepta JPG). Si tu gráfico está en Excel, Sheets o Canva, expórtalo o descárgalo como PNG.', false);
+  if (file.size > MAX_MB * 1024 * 1024) return aviso(`La imagen pesa ${(file.size / 1048576).toFixed(1).replace('.', ',')} MB. El máximo es ${MAX_MB} MB: expórtala de nuevo con menor tamaño.`, false);
+  let dim, buf;
+  try { dim = await medirImagen(file); buf = await file.arrayBuffer(); }
+  catch (e) { return aviso('No se pudo leer la imagen. Prueba exportarla de nuevo como PNG.', false); }
+  if (datos.figuras.indexOf(f) < 0) return; // la figura se quitó mientras se leía el archivo
+  const reg = { buf, tipo: file.type, w: dim.w, h: dim.h, nombre: file.name };
+  let guardada = true;
+  try { await idb.set(f.id, { buf, tipo: reg.tipo, w: reg.w, h: reg.h, nombre: reg.nombre }); }
+  catch (e) { guardada = false; }
+  if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
+  ponerImagen(f.id, reg);
+  f.imagen = file.name; guardarYa();
+  aviso(guardada ? 'Imagen cargada y guardada en este navegador.' : 'La imagen se cargó, pero este navegador no permitió guardarla (por ejemplo, en una ventana privada o sin espacio). Se mantendrá mientras no cierres la página: descarga tu Word o PowerPoint antes de salir.', guardada);
+}
+// Al abrir la página: recupera las imágenes guardadas y borra las que ya no pertenecen a ninguna figura
+async function recuperarImagenes() {
+  try {
+    const ids = new Set(datos.figuras.map(f => f.id));
+    const claves = await idb.keys();
+    let alguna = false;
+    for (const k of claves) {
+      if (!ids.has(k)) { idb.del(k); continue; }
+      const r = await idb.get(k);
+      if (r && r.buf) { ponerImagen(k, { buf: r.buf, tipo: r.tipo || 'image/png', w: r.w, h: r.h, nombre: r.nombre || 'imagen.png' }); alguna = true; }
+    }
+    if (alguna) repintarFigurasConFoco();
+  } catch (e) {}
+}
+function bloqueImagen(f, i) {
+  const im = IMGS.get(f.id), id = `fig${i}-img`, m = MSG_IMG.get(f.id);
+  const msg = m ? `<p class="fig-msg ${m.ok ? 'ok' : 'no'}" role="status">${esc(m.t)}</p>` : '';
+  const input = (txt, desc) => `<input type="file" accept="image/png,image/jpeg" id="${id}" class="file-in" data-img="${i}"${desc ? ` aria-describedby="${id}-ay"` : ''}><label for="${id}" class="sec-btn">${txt}</label>`;
+  if (im) {
+    const chica = im.w < 1200 ? ' · Es pequeña: puede verse pixelada al imprimir. Si puedes, expórtala de nuevo con 1500 px de ancho o más.' : '';
+    return `<div class="campo"><span class="campo-et">Imagen de la figura</span>
+      <div class="fig-carga con"><img src="${im.url}" alt="" class="fig-mini">
+        <div class="fig-info"><p class="fig-nom">${esc(im.nombre)}</p><p class="nota" style="margin:2px 0 0">${im.w} × ${im.h} px${chica}</p>
+          <div class="acciones">${input('Cambiar imagen')}<button type="button" class="del-btn" data-quitar-img="${i}">Quitar imagen</button></div></div>
+      </div>${msg}</div>`;
+  }
+  const otraVez = f.imagen && !m ? `<p class="fig-msg no">Habías cargado «${esc(f.imagen)}», pero no está en este navegador (quizás la cargaste en otro equipo o se borró el historial). Vuelve a cargarla.</p>` : '';
+  return `<div class="campo"><span class="campo-et">Imagen de la figura (opcional)</span>
+    <div class="fig-carga" data-soltar="${i}">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="var(--azul)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+      <p class="nota" style="color:var(--texto-2)">Arrastra aquí tu figura o</p>
+      ${input('Elegir imagen PNG', true)}
+      <p class="nota" id="${id}-ay">PNG o JPG de hasta ${MAX_MB} MB. Para que se vea nítida al imprimir, de al menos 1500 px de ancho. Se guarda solo en este navegador.</p>
+    </div>${otraVez}${msg}</div>`;
+}
+
 const palabras = t => (String(t || '').trim().match(/\S+/g) || []).length;
-const chips = (tipo, campoId) => `<div class="chips" role="group" aria-label="Frases de inicio (opcional)">${CHIPS[tipo].map(c => `<button type="button" class="chipBtn" data-insertar="${esc(c)}" data-campo="${campoId}">${esc(c)}</button>`).join('')}</div>`;
+const chips =(tipo, campoId) => `<div class="chips" role="group" aria-label="Frases de inicio (opcional)">${CHIPS[tipo].map(c => `<button type="button" class="chipBtn" data-insertar="${esc(c)}" data-campo="${campoId}">${esc(c)}</button>`).join('')}</div>`;
 
 // Campo genérico. ruta: "titulo" o "hallazgos.0.texto"
 function campo({ id, ruta, etiqueta, ayuda, valor, area, chip, contar }) {
@@ -859,6 +1039,7 @@ function pintarFiguras() {
       ${campo({ id:`fig${i}-fue`, ruta:`figuras.${i}.fuente`, etiqueta:'Fuente', ayuda:'Elaboración propia, o la referencia si la imagen no es tuya.', valor:f.fuente })}
     </div>
     ${campo({ id:`fig${i}-tit`, ruta:`figuras.${i}.titulo`, etiqueta:'Título y leyenda', ayuda:'Lo que se escribe bajo la figura. Ej.: Dificultades al leer textos argumentativos, según los estudiantes (n = 28).', valor:f.titulo })}
+    ${bloqueImagen(f, i)}
   </div>`).join('') || '<p class="nota">Todavía no agregas figuras. Los resultados de un póster casi siempre necesitan al menos una.</p>';
 }
 function pintarPlantilla() {
@@ -897,7 +1078,7 @@ function pintarPlantilla() {
     <div id="listaHallazgos"></div>
     <button type="button" class="ghost-btn" id="addHallazgo">+ Agregar categoría o dimensión</button>
     <h4 style="font-size:17px;margin:22px 0 4px">Figuras</h4>
-    <p class="nota" style="margin:0 0 12px">Planifica aquí cada gráfico, tabla o diagrama. La figura la armas después en PowerPoint, Canva o Google Sheets.</p>
+    <p class="nota" style="margin:0 0 12px">Planifica aquí cada gráfico, tabla o diagrama. Si ya lo tienes listo (por ejemplo, exportado desde Excel, Google Sheets o Canva), carga la imagen en PNG: aparecerá en la vista previa, en el Word y en el PowerPoint. Conserva siempre el archivo original: la página guarda una copia solo en este navegador.</p>
     <div id="listaFiguras"></div>
     <button type="button" class="ghost-btn" id="addFigura">+ Agregar figura</button>
   </div>
@@ -935,6 +1116,14 @@ function setRuta(ruta, valor) {
 }
 const zona = $('#plantilla');
 zona.addEventListener('input', e => { const r = e.target.dataset.ruta; if (r && e.target.type !== 'radio') setRuta(r, e.target.value); });
+zona.addEventListener('change', e => {
+  if (e.target.dataset.img != null) { const file = e.target.files && e.target.files[0]; e.target.value = ''; cargarImagen(+e.target.dataset.img, file); }
+});
+zona.addEventListener('dragover', e => { const z = e.target.closest('[data-soltar]'); if (!z) return; e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; z.classList.add('sobre'); });
+zona.addEventListener('dragleave', e => { const z = e.target.closest('[data-soltar]'); if (z && !z.contains(e.relatedTarget)) z.classList.remove('sobre'); });
+zona.addEventListener('drop', e => { const z = e.target.closest('[data-soltar]'); if (!z) return; e.preventDefault(); z.classList.remove('sobre'); cargarImagen(+z.dataset.soltar, e.dataTransfer.files[0]); });
+// Si una imagen se suelta fuera de la zona, el navegador no la abre (y no se sale de la página)
+['dragover', 'drop'].forEach(t => window.addEventListener(t, e => { if (e.dataTransfer && [...e.dataTransfer.types].includes('Files') && !e.target.closest('[data-soltar]')) e.preventDefault(); }));
 zona.addEventListener('change', e => { const r = e.target.dataset.ruta; if (r && (e.target.type === 'radio' || e.target.tagName === 'SELECT')) setRuta(r, e.target.value); });
 zona.addEventListener('click', e => {
   const chip = e.target.closest('[data-insertar]');
@@ -951,17 +1140,29 @@ zona.addEventListener('click', e => {
   const del = e.target.closest('[data-borrar]');
   if (del) {
     const [lista, i] = del.dataset.borrar.split('.'); const o = datos[lista][+i];
-    if (Object.values(o).some(Boolean) && !confirm('¿Quitar este bloque? Se borrará lo que escribiste en él.')) return;
+    const conDatos = Object.entries(o).some(([k, v]) => k !== 'id' && v) || IMGS.has(o.id);
+    if (conDatos && !confirm('¿Quitar este bloque? Se borrará lo que escribiste en él' + (IMGS.has(o.id) ? ' y su imagen.' : '.'))) return;
+    if (lista === 'figuras') sacarImagen(o.id);
     datos[lista].splice(+i, 1); guardar();
     if (lista === 'hallazgos') { pintarHallazgos(); $('#addHallazgo').focus(); } else { pintarFiguras(); $('#addFigura').focus(); }
     actualizarVista();
     return;
   }
+  const qi = e.target.closest('[data-quitar-img]');
+  if (qi) {
+    const f = datos.figuras[+qi.dataset.quitarImg]; if (!f) return;
+    sacarImagen(f.id); f.imagen = ''; guardar();
+    MSG_IMG.set(f.id, { t:'Se quitó la imagen.', ok:true });
+    pintarFiguras(); actualizarVista();
+    const btn = document.getElementById(`fig${qi.dataset.quitarImg}-img`); if (btn) btn.focus();
+    return;
+  }
   if (e.target.id === 'addHallazgo') { datos.hallazgos.push(vacioHallazgo()); guardar(); pintarHallazgos(); document.getElementById(`hal${datos.hallazgos.length - 1}-cat`).focus(); }
-  if (e.target.id === 'addFigura') { datos.figuras.push(vacioFigura()); guardar(); pintarFiguras(); document.getElementById(`fig${datos.figuras.length - 1}-tipo`).focus(); }
+  if (e.target.id === 'addFigura') { datos.figuras.push(vacioFigura()); guardarYa(); pintarFiguras(); document.getElementById(`fig${datos.figuras.length - 1}-tipo`).focus(); }
 });
 $('#borrarBtn').addEventListener('click', () => {
   if (!confirm('¿Borrar todo lo que escribiste para el póster? Esta acción no se puede deshacer. Si no lo has hecho, descarga antes tu Word.')) return;
+  [...IMGS.keys()].forEach(k => URL.revokeObjectURL(IMGS.get(k).url)); IMGS.clear(); MSG_IMG.clear(); idb.clear();
   const check = datos.check; datos = base(); datos.check = check;
   guardar(); pintarPlantilla(); actualizarVista(); $('#estadoGuardado').textContent = 'Se borró tu borrador.';
 });
@@ -971,7 +1172,7 @@ const limpiar = t => String(t || '').trim();
 const lineas = t => limpiar(t).split('\n').map(limpiar).filter(Boolean);
 const pasosMetodo = () => [['Enfoque', datos.enfoque], ['Participantes', datos.participantes], ['Instrumento', datos.instrumento], ['Análisis', datos.analisis], ['Resguardos éticos', datos.etica]].filter(p => limpiar(p[1]));
 const hallazgosLlenos = () => datos.hallazgos.filter(h => limpiar(h.categoria) || limpiar(h.texto));
-const figurasLlenas = () => datos.figuras.filter(f => f.tipo || limpiar(f.titulo) || limpiar(f.fuente));
+const figurasLlenas = () => datos.figuras.filter(f => f.tipo || limpiar(f.titulo) || limpiar(f.fuente) || IMGS.has(f.id));
 const textoQR = () => limpiar(datos.qrTexto) || 'Escanea para ver las referencias.';
 function secciones() {
   const intro = [limpiar(datos.problema), limpiar(datos.pregunta) ? 'Pregunta de investigación: ' + limpiar(datos.pregunta) : '', limpiar(datos.objetivo) ? 'Objetivo general: ' + limpiar(datos.objetivo) : ''].filter(Boolean);
@@ -1012,7 +1213,8 @@ function actualizarVista() {
     const k = p.indexOf(':'); return /^(Pregunta|Objetivo)/.test(p) ? `<p><strong>${esc(p.slice(0, k))}:</strong>${esc(p.slice(k + 1))}</p>` : `<p>${esc(p)}</p>`;
   }).join('') : vacio);
   const metodo = bloqueHTML('Metodología', pasosMetodo().length ? `<ol>${pasosMetodo().map(([k, v]) => `<li><strong>${esc(k)}:</strong> ${esc(limpiar(v))}</li>`).join('')}</ol>` : vacio);
-  const figs = figurasLlenas().map((f, i) => `<div><div class="pp-fig">${esc(f.tipo || 'Figura')}</div><p class="pp-cap">${esc(leyenda(f, i))}</p></div>`).join('');
+  const figs = figurasLlenas().map((f, i) => { const im = IMGS.get(f.id);
+    return `<div>${im ? `<img class="pp-img" src="${im.url}" alt="${esc(f.tipo || 'Figura ' + (i + 1))}">` : `<div class="pp-fig">${esc(f.tipo || 'Figura')}</div>`}<p class="pp-cap">${esc(leyenda(f, i))}</p></div>`; }).join('');
   const textoRes = hallazgosLlenos().map(h => `<p>${limpiar(h.categoria) ? `<strong>${esc(limpiar(h.categoria))}.</strong> ` : ''}${esc(limpiar(h.texto))}</p>`).join('');
   const res = bloqueHTML('Resultados', (textoRes + (figs ? `<div class="pp-figs">${figs}</div>` : '')) || vacio);
   const disc = bloqueHTML('Discusión', s.disc.length ? s.disc.map(p => `<p>${esc(p)}</p>`).join('') : vacio);
@@ -1055,7 +1257,7 @@ $('#grisBtn').addEventListener('click', () => {
 $('#wordBtn').addEventListener('click', async () => {
   const est = $('#estadoGuardado');
   if (typeof docx === 'undefined') { est.textContent = 'No se pudo cargar la herramienta de Word. Revisa tu conexión y recarga la página.'; return; }
-  const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, PageBreak } = docx;
+  const { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, PageBreak, ImageRun } = docx;
   const s = secciones();
   const par = (t, run = {}) => new Paragraph({ children:[new TextRun(Object.assign({ text:t, font:'Arial', size:24 }, run))], alignment: AlignmentType.LEFT, spacing:{ after:160, line:320 } });
   const h = (t, nivel) => new Paragraph({ text:t, heading: nivel, spacing:{ before:240, after:120 } });
@@ -1068,7 +1270,16 @@ $('#wordBtn').addEventListener('click', async () => {
   ];
   if (figurasLlenas().length) {
     hijos.push(h('Figuras planificadas', HeadingLevel.HEADING_2));
-    figurasLlenas().forEach((f, i) => { hijos.push(par(leyenda(f, i), { bold:true })); hijos.push(par('Tipo: ' + (f.tipo || 'sin definir'))); });
+    figurasLlenas().forEach((f, i) => {
+      const im = IMGS.get(f.id);
+      if (im && ImageRun) {
+        // Ancho máximo de 600 px (unos 16 cm) y alto máximo de 700 px, sin deformar
+        let w = Math.min(600, im.w), h = w * im.h / im.w; if (h > 700) { h = 700; w = h * im.w / im.h; }
+        try { hijos.push(new Paragraph({ children:[new ImageRun({ data:new Uint8Array(im.buf), transformation:{ width:Math.round(w), height:Math.round(h) }, altText:{ name:`Figura ${i + 1}`, title:`Figura ${i + 1}`, description:leyenda(f, i) } })], spacing:{ before:120, after:80 } })); }
+        catch (e) { hijos.push(par('[No se pudo incluir la imagen de esta figura]', { italics:true })); }
+      }
+      hijos.push(par(leyenda(f, i), { bold:true })); hijos.push(par('Tipo: ' + (f.tipo || 'sin definir')));
+    });
   }
   hijos.push(h('Discusión', HeadingLevel.HEADING_1), ...s.disc.map(t => par(t)));
   hijos.push(h('Conclusiones', HeadingLevel.HEADING_1), ...s.conc.map(t => par(t)));
@@ -1084,7 +1295,7 @@ $('#wordBtn').addEventListener('click', async () => {
     const blob = await Packer.toBlob(new Document({ sections:[{ children: hijos }] }));
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'poster-contenido.docx'; a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-    est.textContent = 'Documento de Word descargado. La segunda página es para tu documento de Drive.';
+    est.textContent = 'Documento de Word descargado' + (figurasLlenas().some(f => IMGS.has(f.id)) ? ', con las imágenes de tus figuras' : '') + '. La segunda página es para tu documento de Drive.';
   } catch (e) { est.textContent = 'No se pudo generar el archivo de Word. Vuelve a intentarlo en unos segundos.'; }
 });
 
@@ -1093,6 +1304,7 @@ function cargarPptx() {
   if (window.PptxGenJS) return Promise.resolve();
   return new Promise((res, rej) => { const sc = document.createElement('script'); sc.src = 'https://unpkg.com/pptxgenjs@3.12.0/dist/pptxgen.bundle.js'; sc.onload = res; sc.onerror = rej; document.head.appendChild(sc); });
 }
+const aDataURL = (buf, tipo) => new Promise(res => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.onerror = () => res(null); fr.readAsDataURL(new Blob([buf], { type: tipo })); });
 async function logoDataURL() {
   // Funciona cuando la página está publicada en la web; abierta como archivo local, el navegador lo impide
   try {
@@ -1124,6 +1336,8 @@ $('#pptBtn').addEventListener('click', async () => {
     else sl.addText('[Logo ULagos: descárgalo en icorporativa.ulagos.cl]', { x:W - M - lw, y:(HC - lh) / 2, w:lw, h:lh, fontFace:F, fontSize:20, color:'FFFFFF', align:'center', valign:'middle', line:{ color:'FFFFFF', width:1, dashType:'dash' } });
 
     const s = secciones();
+    const urlsFig = {};
+    for (const f of figurasLlenas()) { const im = IMGS.get(f.id); if (im) urlsFig[f.id] = await aDataURL(im.buf, im.tipo); }
     const bloques = {
       intro: { t:'Introducción', cuerpo: s.intro },
       metodo: { t:'Metodología', cuerpo: s.metodo },
@@ -1155,13 +1369,24 @@ $('#pptBtn').addEventListener('click', async () => {
           y += hh + 0.4;
         }
         // En la columna ancha (horizontal) las figuras van de a dos
-        const porFila = pesos[ci] > 1 ? 2 : 1, fw = (colW - (porFila - 1) * 0.6) / porFila, fh = 7;
-        (b.figs || []).forEach((f, i) => {
-          const fx = x + (i % porFila) * (fw + 0.6);
-          sl.addText(`[Inserta aquí: ${f.tipo || 'figura'}]`, { x:fx, y, w:fw, h:fh, fontFace:F, fontSize:24, color:'3A4551', align:'center', valign:'middle', fill:{ color:'F4F6F8' }, line:{ color:'8A96A3', width:1.5, dashType:'dash' } });
-          sl.addText(leyenda(f, i), { x:fx, y:y + fh + 0.15, w:fw, h:1.4, fontFace:F, fontSize:20, color:'3A4551', valign:'top' });
-          if (i % porFila === porFila - 1 || i === b.figs.length - 1) y += fh + 1.8;
-        });
+        const porFila = pesos[ci] > 1 ? 2 : 1, fw = (colW - (porFila - 1) * 0.6) / porFila;
+        const figs = b.figs || [];
+        // Si hay imagen, el alto se ajusta a su proporción (entre 3 y 14 pulgadas); si no, queda un recuadro para insertarla
+        const altoFig = f => { const im = IMGS.get(f.id); return im && urlsFig[f.id] ? Math.min(14, Math.max(3, fw * im.h / im.w)) : 7; };
+        for (let r = 0; r < figs.length; r += porFila) {
+          const fila = figs.slice(r, r + porFila), fh = Math.max(...fila.map(altoFig));
+          fila.forEach((f, j) => {
+            const i = r + j, fx = x + j * (fw + 0.6), im = IMGS.get(f.id), data = urlsFig[f.id];
+            if (im && data) {
+              let iw = fw, ih = fw * im.h / im.w; if (ih > fh) { ih = fh; iw = fh * im.w / im.h; }
+              sl.addImage({ data, x:fx + (fw - iw) / 2, y:y + (fh - ih) / 2, w:iw, h:ih, altText:leyenda(f, i) });
+            } else {
+              sl.addText(`[Inserta aquí: ${f.tipo || 'figura'}]`, { x:fx, y, w:fw, h:fh, fontFace:F, fontSize:24, color:'3A4551', align:'center', valign:'middle', fill:{ color:'F4F6F8' }, line:{ color:'8A96A3', width:1.5, dashType:'dash' } });
+            }
+            sl.addText(leyenda(f, i), { x:fx, y:y + fh + 0.15, w:fw, h:1.4, fontFace:F, fontSize:20, color:'3A4551', valign:'top' });
+          });
+          y += fh + 1.8;
+        }
         y += 0.6;
       });
       x += colW + GAP;
@@ -1171,6 +1396,7 @@ $('#pptBtn').addEventListener('click', async () => {
   } catch (e) { est.textContent = 'No se pudo generar el PowerPoint. Vuelve a intentarlo en unos segundos.'; }
 });
 pintarPlantilla();
+recuperarImagenes();
 
 // ---------- ERRORES ----------
 const ERRORES = [
